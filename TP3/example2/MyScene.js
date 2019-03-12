@@ -39,14 +39,14 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayNormals = false;
         this.objectComplexity = 0.5;
-        this.scaleFactor = 2.0;
+        this.scaleFactor = 1.0;
 
     }
     initLights() {
         this.illumination = 1.0;
         this.setGlobalAmbientLight(this.illumination, this.illumination, this.illumination, 1.0);
 
-        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
+        this.lights[0].setPosition(0, 1.2, 1.6, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].disable();
@@ -110,6 +110,7 @@ class MyScene extends CGFscene {
         this.material1.setSpecular(0, 0, 0, 1.0);
         this.material1.setShininess(10.0);
 
+    
         // Red Diffuse (no ambient, no specular)
         this.material2 = new CGFappearance(this);
         this.material2.setAmbient(0.0, 0.0, 0.0, 1.0);
@@ -124,6 +125,16 @@ class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
+        // Wood Specular (low specular, high diffuse)
+        var ambFact = 10.0;
+        var specFact = 5.0;
+        var diffFact = 1.0;
+        this.material4 = new CGFappearance(this);
+        this.material4.setAmbient(0.75 / ambFact, 0.53 / ambFact, 0.53 / ambFact, 1.0);
+        this.material4.setDiffuse(0.75 / diffFact, 0.53 / diffFact, 0.25 / diffFact, 1.0);
+        this.material4.setSpecular(0.75 / specFact, 0.53 / specFact, 0.53 / specFact, 1.0);
+        this.material4.setShininess(10.0);
+
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -137,10 +148,10 @@ class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.material4, this.customMaterial];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wooden':3, 'Custom': 4 };
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
