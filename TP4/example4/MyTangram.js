@@ -6,14 +6,14 @@
 class MyTangram extends CGFobject {
 	constructor(scene) {
 		super(scene);
-		this.blue = new MyTriangle(scene);
-        this.orange = new MyTriangle(scene);
+		this.blue = new MyTriangle(scene,0);
+        this.orange = new MyTriangle(scene,4);
         this.yellow = new MyParallelogram(scene);
 
-        this.purple = new MyTriangle(scene);
-        this.red = new MyTriangle(scene);
+        this.purple = new MyTriangle(scene,2);
+        this.red = new MyTriangle(scene,3);
 
-        this.pink = new MyTriangle(scene);
+        this.pink = new MyTriangle(scene,1);
 		this.green = new MyDiamond(scene);
 
         var ambFact = 5.0;
@@ -62,31 +62,31 @@ class MyTangram extends CGFobject {
         this.coolMaterial.setSpecular(1 / specFact, 1 / specFact, 1 / specFact, 1.0);
 		this.coolMaterial.setShininess(10.0);
 		
-		this.coolTexture = new CGFtexture(this.scene, 'images/tangram.png')
+		this.coolTexture = new CGFtexture(this.scene, 'images/tangram-pattern.jpg')
 		this.coolMaterial.setTexture(this.coolTexture);
 
 	}
 	display() {
 		//var oldMaterial = this.scene.materials[this.scene.selectedMaterial];
-
+		this.coolMaterial.apply();
 		this.scene.pushMatrix();
 		this.scene.translate(-3, -2, 0);
 		this.scene.rotate(Math.PI / 2, 0, 0, 1);
 		this.scene.scale(3,3,3);
-		this.blueMaterial.apply();
+		//this.blueMaterial.apply();
 		this.blue.display();
 		this.scene.popMatrix();
 
 		this.scene.pushMatrix();
 		this.scene.translate(-3, -2, 0);
 		this.scene.scale(3,3,3);
-		this.orangeMaterial.apply();
+		//this.orangeMaterial.apply();
 		this.orange.display();
 		this.scene.popMatrix();
 
 		this.scene.pushMatrix();
 		this.scene.translate(-1, -1, 0);
-		this.yellowMaterial.apply();
+		//this.yellowMaterial.apply();
 		this.yellow.display();
 		this.scene.popMatrix();
 	  
@@ -94,21 +94,21 @@ class MyTangram extends CGFobject {
 		this.scene.translate(-1, 1, 0);
 		this.scene.rotate(- 3 * Math.PI / 4, 0, 0, 1);
 		this.scene.scale(Math.sqrt(2), Math.sqrt(2), Math.sqrt(2));
-		this.purpleMaterial.apply();
+		//this.purpleMaterial.apply();
 		this.purple.display();
 		this.scene.popMatrix();
 
 		this.scene.pushMatrix();
 		this.scene.scale(Math.sqrt(2), Math.sqrt(2), Math.sqrt(2));
 		this.scene.rotate(-Math.PI / 4, 0, 0, 1);
-		this.redMaterial.apply();
+		//this.redMaterial.apply();
 		this.red.display();
 		this.scene.popMatrix();
 
 		this.scene.pushMatrix();
 		this.scene.translate(1, -1, 0);
 		this.scene.scale(2, 2, 2);
-		this.pinkMaterial.apply();
+		//this.pinkMaterial.apply();
 		this.pink.display();
 		this.scene.popMatrix();
 
@@ -120,7 +120,7 @@ class MyTangram extends CGFobject {
 			0, 1, 0, 1
 		];
 		this.scene.multMatrix(this.translateMatrix);
-		this.coolMaterial.apply();
+		//this.coolMaterial.apply();
 		this.green.display();
 		this.scene.popMatrix();
 
