@@ -26,14 +26,15 @@ class MyCGFobject extends CGFobject {
         //var oldMaterial = this.scene.materials[this.scene.selectedMaterial];
 
         this.scene.pushMatrix()
-        for (var i = 0; i < this.transformations.length; i++) {
+        for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
             if (transformation instanceof Translation)
                 this.scene.translate(transformation.x, transformation.y, transformation.z);
             else if (transformation instanceof Rotation)
                 this.scene.rotate(transformation.angle, transformation.x, transformation.y, transformation.z);
-            else if (transformation instanceof Scaling)
+            else if (transformation instanceof Scaling) {
                 this.scene.scale(transformation.x, transformation.y, transformation.z);
+            }
             else this.is.how.we.crash.js = 40;
         }
         if (this.material != null) {
@@ -41,6 +42,7 @@ class MyCGFobject extends CGFobject {
                 this.material.setTexture(this.texture);
             this.material.apply();
         }
+     
         super.display();
         this.scene.popMatrix();
         

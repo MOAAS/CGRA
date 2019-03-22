@@ -24,6 +24,16 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.cube = new MyUnitCube(this);
+        this.cube2 = new MyUnitCube(this);
+        this.cube3 = new MyUnitCube(this);
+        this.cube4 = new MyUnitCube(this);
+        
+        this.objects = [this.cube, this.cube2, this.cube3, this.cube4];
+        
+        this.cube2.translate(2,0,0);
+        this.cube3.translate(2,0,2);
+        this.cube4.scale(2,2,2);
+        this.cube4.translate(-1,2,-1);
 
         //Objects connected to MyInterface
     }
@@ -62,7 +72,9 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.cube.display();
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].display();
+        }
 
         // ---- END Primitive drawing section
     }

@@ -3,12 +3,10 @@
  * @constructor
  * @param scene - Reference to MyScene object
  */
-class MyUnitCube extends MyCGFobject {
+class MyUnitCube extends ShapeGroup {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
-
-		this.position = 0;
 
 		this.front = new MySquare(scene);
 		this.back = new MySquare(scene);
@@ -28,13 +26,13 @@ class MyUnitCube extends MyCGFobject {
 		this.textureSide = new CGFtexture(this.scene, 'images/mineSide.png')
 		this.textureBot = new CGFtexture(this.scene, 'images/mineBottom.png')
 
-		this.top.translate(0,0.5,0);
 		this.top.rotate(-Math.PI / 2, 1, 0, 0);
+		this.top.translate(0,0.5,0);
 		this.top.setMaterial(this.material);
 		this.top.setTexture(this.textureTop);
 
-		this.bot.translate(0,-0.5,0);
 		this.bot.rotate(Math.PI / 2, 1, 0, 0);
+		this.bot.translate(0,-0.5,0);
 		this.bot.setMaterial(this.material);
 		this.bot.setTexture(this.textureBot);
 
@@ -42,36 +40,27 @@ class MyUnitCube extends MyCGFobject {
 		this.front.setMaterial(this.material);
 		this.front.setTexture(this.textureSide);
 
-		this.back.rotate(Math.PI, 0, 1, 0);
 		this.back.translate(0,0,0.5);
+		this.back.rotate(Math.PI, 0, 1, 0);
 		this.back.setMaterial(this.material);
 		this.back.setTexture(this.textureSide);
 
-		this.left.rotate(- Math.PI / 2, 0, 1, 0);
 		this.left.translate(0,0,0.5);
+		this.left.rotate(- Math.PI / 2, 0, 1, 0);
 		this.left.setMaterial(this.material);
 		this.left.setTexture(this.textureSide);
 	
-		this.right.rotate(Math.PI / 2, 0, 1, 0);
 		this.right.translate(0,0,0.5);
+		this.right.rotate(Math.PI / 2, 0, 1, 0);
 		this.right.setMaterial(this.material);
 		this.right.setTexture(this.textureSide);
-	}
 
-	updateBuffers(complexity){
-		
+		this.polygons = [this.top,this.bot,this.front,this.back,this.left,this.right]
 	}
 	
-	display() {
-		
+	display() {		
 		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-
-		this.top.display();
-		this.bot.display();
-		this.front.display();
-		this.back.display();
-		this.left.display();
-		this.right.display();	
+		super.display();
 	}
 	
 }

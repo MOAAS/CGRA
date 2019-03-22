@@ -7,6 +7,7 @@ class MySquare extends MyCGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
+
 		//if (coords != undefined)
 		//	this.updateTexCoords(coords);
 	}
@@ -80,5 +81,6 @@ class MySquare extends MyCGFobject {
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();
 	}
+	
 }
 
