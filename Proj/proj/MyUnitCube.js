@@ -71,11 +71,7 @@ class MyUnitCube extends MyCGFobject {
 		this.front.display();
 		this.back.display();
 		this.left.display();
-		this.right.display();
-
-		this.scene.popMatrix();
-
-	
+		this.right.display();	
 	}
 	
 }

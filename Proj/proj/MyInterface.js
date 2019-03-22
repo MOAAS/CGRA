@@ -16,7 +16,6 @@ class MyInterface extends CGFinterface {
         
         var obj = this;
 
-        this.gui.add(this.scene.cube, 'position', -5, 5).name('Cube Pos');
 
         return true;
     }
