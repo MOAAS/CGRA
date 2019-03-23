@@ -19,9 +19,8 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
+        this.initTextures();
         
-
-        this.defaultMaterial = new MyCGFappearance(this, 1, 1, 1, 1);
         this.axis = new CGFaxis(this);
         this.initObjects();
 
@@ -43,28 +42,33 @@ class MyScene extends CGFscene {
         this.cube2 = new MyUnitCube(this);
         this.cube3 = new MyUnitCube(this);
 
-        this.cube1.scale(3,3,3);
-        this.cube2.scale(2,2,2);
+        this.cube1.scale(2,2,2);
+        this.cube2.scale(1.5,1.5,1.5);
         this.cube3.scale(1,1,1);
         this.cube1.translate(0,0,0);
-        this.cube2.translate(0,2,0);
-        this.cube3.translate(0,3,0);
+        this.cube2.translate(0,1,0);
+        this.cube3.translate(0,2,0);
         
-        this.prism = new MyPrism(this, 6);
-        
-        this.joyTexture = new CGFtexture(this, 'images/emoji.jpg')
-        this.prism.setMaterial(this.defaultMaterial);
+        this.prism = new MyPrism(this, 8);        
         this.prism.setTexture(this.joyTexture);
-        this.prism.translate(0,3.5,0);
+        this.prism.translate(0,2.5,0);
+        
+        this.cilinder = new MyCilinder(this, 25);
+        this.cilinder.setTexture(this.joyTexture);
+        this.cilinder.scale(2,2,2);
+        this.cilinder.translate(0,-2,0);
 
-        this.objects = [this.cube1, this.cube2, this.cube3, this.prism];
+        this.objects = [this.cube1, this.cube2, this.cube3, this.prism, this.cilinder];
         
 
 
     }
+    initTextures() {
+        this.joyTexture = new CGFtexture(this, 'images/emoji.jpg');
+    }
 
     setDefaultAppearance() {
-        this.setAmbient(0.3, 0.5, 0.8, 1.0);
+        this.setAmbient(0, 0, 0, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);

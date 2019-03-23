@@ -1,20 +1,19 @@
-class MyPrism extends MyCGFobject {
+class MyCilinder extends MyCGFobject {
     constructor(scene, slices) {
         super(scene);
         this.slices = slices;
         this.initBuffers();
     }
 
-
     initBuffers() {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.texCoords = [];
-        
+
         var angDiff = 2*Math.PI/this.slices;
 
-        // as bases e que sao complicadas
+        // as bases e que sao complicadas (igual ao prisma)
 
         for(var i = 0, ang = 0; i < this.slices; i++, ang += angDiff) {
             this.vertices.push(Math.cos(ang), 1, Math.sin(ang));
@@ -36,36 +35,21 @@ class MyPrism extends MyCGFobject {
             this.indices.push(1 * this.slices , 1 * this.slices + i, 1 * this.slices + i + 1)
         }  
         
-        for(var i = 0, ang = 0; i < this.slices; i++, ang += angDiff) {
-            // Add vertices
-            this.vertices.push(Math.cos(ang), 0, Math.sin(ang)); // 0 + 4 * i
-            this.vertices.push(Math.cos(ang), 1, Math.sin(ang)); // 1 + 4 * i
 
-            this.vertices.push(Math.cos(ang + angDiff), 0, Math.sin(ang + angDiff)); // 2 + 4 * i
-            this.vertices.push(Math.cos(ang + angDiff), 1, Math.sin(ang + angDiff)); // 3 + 4 * i
+        for(var i = 0, ang = 0; i <= this.slices; i++, ang += angDiff) {
+            // Add vertices
+            this.vertices.push(Math.cos(ang), 0, Math.sin(ang)); // 0 + 2 * i
+            this.vertices.push(Math.cos(ang), 1, Math.sin(ang)); // 1 + 2 * i
 
             this.texCoords.push(ang / (2*Math.PI), 1);
             this.texCoords.push(ang / (2*Math.PI), 0);
-            this.texCoords.push((ang + angDiff) / (2*Math.PI), 1);
-            this.texCoords.push((ang + angDiff) / (2*Math.PI), 0);
 
-
-            this.indices.push(4 * i + 2 * this.slices + 0, 4 * i + 2 * this.slices + 1, 4 * i + 2 * this.slices + 2)
-            this.indices.push(4 * i + 2 * this.slices + 3, 4 * i + 2 * this.slices + 2, 4 * i + 2 * this.slices + 1)
-
-            var normal = [Math.sin(ang + angDiff) - Math.sin(ang), 0, Math.cos(ang) - Math.cos(ang + angDiff)]
-            // normalization
-            var normalLength=Math.sqrt(normal[0]*normal[0] + normal[1]*normal[1] + normal[2]*normal[2])
-            normal[0] /= normalLength;
-            normal[1] /= normalLength;
-            normal[2] /= normalLength;          
+            this.indices.push(2 * (i + this.slices) + 0, 2 * (i + this.slices) + 1, 2 * (i + this.slices) + 2)
+            this.indices.push(2 * (i + this.slices) + 3, 2 * (i + this.slices) + 2, 2 * (i + this.slices) + 1)
             
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
+            this.normals.push(Math.cos(ang), 0, Math.sin(ang));
+            this.normals.push(Math.cos(ang), 0, Math.sin(ang));
         }
-
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }

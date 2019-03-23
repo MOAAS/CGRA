@@ -13,7 +13,7 @@ serialInclude(['../lib/CGF.js',
                 'MyTriangle.js',
                 'MyParallelogram.js',
                 'MyDiamond.js',
-
+                
 main=function()
 {
     var app = new CGFapplication(document.body);

@@ -6,8 +6,9 @@ class MyCGFobject extends CGFobject {
     constructor(scene) {
         super(scene);
         this.transformations = []
-        this.material = null;
+        this.material = new MyCGFappearance(scene, 0.6, 0.9, 0.5, 1);
         this.texture = null;
+        this.textureFilter = null;
     }
 
     translate(x, y, z) {
@@ -23,8 +24,6 @@ class MyCGFobject extends CGFobject {
     }
 
     display() {
-        //var oldMaterial = this.scene.materials[this.scene.selectedMaterial];
-
         this.scene.pushMatrix()
         for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
@@ -39,37 +38,54 @@ class MyCGFobject extends CGFobject {
         }
 
         if (this.material != null) {
-            if (this.texture != null) {
-                this.material.setTexture(this.texture);
-            }
-
+            this.material.setTexture(this.texture);
             this.material.apply();
+            if (this.textureFilterType != null) {
+                this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.textureFilterType);
+            }
         }
+        else console.log("NULL MATERIAL!");
      
         super.display();
-        this.scene.popMatrix();
-        
-        //oldMaterial.apply();
+        this.scene.popMatrix();        
     }
 
     setMaterial(material) {
-        console.log("set material!");
         this.material = material;
     }
 
     removeMaterial() {
-        console.log("rtyyurt material!");
         this.material = null;
     }
 
     setTexture(texture) {
-        console.log("set text!");
         this.texture = texture;
+        this.textureFilter = null;
+    }
+
+    setTexture(texture, filterType) {
+        this.texture = texture;
+        this.textureFilterType = filterType;
     }
 
     removeTexture() {
-        console.log("uyioiuy text!");
         this.texture = null;
+        this.textureFilterType = null;
+    }
+    
+    setObjAmbient(R, G, B, a) {
+        this.material.setAmbient(R, G, B, a);
     }
 
+    setObjDiffuse(R, G, B, a) {
+        this.material.setDiffuse(R, G, B, a);
+    }
+
+    setObjSpecular(R, G, B, a) {
+        this.material.setSpecular(R, G, B, a);
+    }
+
+    setObjShininess(shininess) {
+        this.material.setShininess(shininess);
+    }
 }
