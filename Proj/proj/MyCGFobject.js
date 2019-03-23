@@ -37,9 +37,12 @@ class MyCGFobject extends CGFobject {
             }
             else this.is.how.we.crash.js = 40;
         }
+
         if (this.material != null) {
-            if (this.texture != null)
+            if (this.texture != null) {
                 this.material.setTexture(this.texture);
+            }
+
             this.material.apply();
         }
      
@@ -50,18 +53,22 @@ class MyCGFobject extends CGFobject {
     }
 
     setMaterial(material) {
+        console.log("set material!");
         this.material = material;
     }
 
     removeMaterial() {
+        console.log("rtyyurt material!");
         this.material = null;
     }
 
     setTexture(texture) {
+        console.log("set text!");
         this.texture = texture;
     }
 
-    removeMaterial() {
+    removeTexture() {
+        console.log("uyioiuy text!");
         this.texture = null;
     }
 

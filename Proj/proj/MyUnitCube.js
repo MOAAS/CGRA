@@ -6,7 +6,6 @@
 class MyUnitCube extends ShapeGroup {
 	constructor(scene) {
 		super(scene);
-		this.initBuffers();
 
 		this.front = new MySquare(scene);
 		this.back = new MySquare(scene);
@@ -55,7 +54,7 @@ class MyUnitCube extends ShapeGroup {
 		this.right.setMaterial(this.material);
 		this.right.setTexture(this.textureSide);
 
-		this.polygons = [this.top,this.bot,this.front,this.back,this.left,this.right]
+		this.shapes = [this.top,this.bot,this.front,this.back,this.left,this.right]
 	}
 	
 	display() {		

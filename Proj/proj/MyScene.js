@@ -19,26 +19,18 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
+        
 
-
-        //Initialize scene objects
+        this.defaultMaterial = new MyCGFappearance(this, 1, 1, 1, 1);
         this.axis = new CGFaxis(this);
-        this.cube = new MyUnitCube(this);
-        this.cube2 = new MyUnitCube(this);
-        this.cube3 = new MyUnitCube(this);
-        this.cube4 = new MyUnitCube(this);
-        
-        this.objects = [this.cube, this.cube2, this.cube3, this.cube4];
-        
-        this.cube2.translate(2,0,0);
-        this.cube3.translate(2,0,2);
-        this.cube4.scale(2,2,2);
-        this.cube4.translate(-1,2,-1);
+        this.initObjects();
 
         //Objects connected to MyInterface
+        this.scaleFactor = 1;
+        this.displayAxis = 1;
     }
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
+        this.lights[0].setPosition(5, 5, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
@@ -46,8 +38,33 @@ class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
+    initObjects() {
+        this.cube1 = new MyUnitCube(this);
+        this.cube2 = new MyUnitCube(this);
+        this.cube3 = new MyUnitCube(this);
+
+        this.cube1.scale(3,3,3);
+        this.cube2.scale(2,2,2);
+        this.cube3.scale(1,1,1);
+        this.cube1.translate(0,0,0);
+        this.cube2.translate(0,2,0);
+        this.cube3.translate(0,3,0);
+        
+        this.prism = new MyPrism(this, 6);
+        
+        this.joyTexture = new CGFtexture(this, 'images/emoji.jpg')
+        this.prism.setMaterial(this.defaultMaterial);
+        this.prism.setTexture(this.joyTexture);
+        this.prism.translate(0,3.5,0);
+
+        this.objects = [this.cube1, this.cube2, this.cube3, this.prism];
+        
+
+
+    }
+
     setDefaultAppearance() {
-        this.setAmbient(0.2, 0.4, 0.8, 1.0);
+        this.setAmbient(0.3, 0.5, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
@@ -65,10 +82,18 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        if (this.displayAxis)
+            this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
+
+        var scale = [this.scaleFactor, 0.0, 0.0, 0.0,
+            0.0, this.scaleFactor, 0.0, 0.0,
+            0.0, 0.0, this.scaleFactor, 0.0,
+            0.0, 0.0, 0.0, 1.0];
+        this.multMatrix(scale);
+
 
         // ---- BEGIN Primitive drawing section
 
