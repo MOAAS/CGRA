@@ -5,6 +5,5 @@ class MyCGFappearance extends CGFappearance {
         this.setDiffuse(diff, diff, diff, 1.0);
         this.setSpecular(spec, spec, spec, 1.0);
 		this.setShininess(shininess);
-
     }
 }

@@ -41,6 +41,8 @@ class MyScene extends CGFscene {
         this.cube1 = new MyUnitCube(this);
         this.cube2 = new MyUnitCube(this);
         this.cube3 = new MyUnitCube(this);
+        this.coolStructure = new ObjectGroup(this);
+        this.coolStructure.addObjects(this.cube1, this.cube2, this.cube3);
 
         this.cube1.scale(2,2,2);
         this.cube2.scale(1.5,1.5,1.5);
@@ -48,6 +50,9 @@ class MyScene extends CGFscene {
         this.cube1.translate(0,0,0);
         this.cube2.translate(0,1,0);
         this.cube3.translate(0,2,0);
+
+        this.coolStructure.setTextureFilter(this.gl.NEAREST)
+        this.coolStructure.setTexture(this.mineTop, this.mineBot, this.mineSide);
         
         this.prism = new MyPrism(this, 8);        
         this.prism.setTexture(this.joyTexture);
@@ -58,13 +63,13 @@ class MyScene extends CGFscene {
         this.cilinder.scale(2,2,2);
         this.cilinder.translate(0,-2,0);
 
-        this.objects = [this.cube1, this.cube2, this.cube3, this.prism, this.cilinder];
-        
-
-
+        this.objects = [this.coolStructure, this.prism, this.cilinder];    
     }
     initTextures() {
         this.joyTexture = new CGFtexture(this, 'images/emoji.jpg');
+        this.mineTop = new CGFtexture(this, 'images/mineTop.png')
+		this.mineSide = new CGFtexture(this, 'images/mineSide.png')
+		this.mineBot = new CGFtexture(this, 'images/mineBottom.png')
     }
 
     setDefaultAppearance() {

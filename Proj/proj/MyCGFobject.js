@@ -54,17 +54,12 @@ class MyCGFobject extends CGFobject {
         this.material = material;
     }
 
-    removeMaterial() {
-        this.material = null;
-    }
-
     setTexture(texture) {
         this.texture = texture;
         this.textureFilter = null;
     }
 
-    setTexture(texture, filterType) {
-        this.texture = texture;
+    setTextureFilter(filterType) {
         this.textureFilterType = filterType;
     }
 
