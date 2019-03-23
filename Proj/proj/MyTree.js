@@ -2,14 +2,19 @@ class MyTree extends ObjectGroup {
     constructor(scene, trunkHeight, trunkRadius, treeTopHeight, treeTopRadius, trunkTexture, treeTopTexture) {
         super(scene);
 
+        this.trunkMaterial = new MyCGFappearance(scene, 0.2, 0.8, 0.4, 10)
+        this.treeTopMaterial = new MyCGFappearance(scene, 0.2, 0.6, 1, 10)
+
         this.trunk = new MyCilinder(scene, 8);
         this.trunk.scale(trunkRadius, trunkHeight, trunkRadius);
         this.trunk.setTexture(trunkTexture);
+        this.trunk.setMaterial(this.trunkMaterial)
 
         this.treeTop = new MyCone(scene, 8);
         this.treeTop.scale(treeTopRadius, treeTopHeight, treeTopRadius);
         this.treeTop.translate(0, trunkHeight, 0);
         this.treeTop.setTexture(treeTopTexture);
+        this.treeTop.setMaterial(this.treeTopMaterial)
 
         this.addObjects(this.trunk, this.treeTop);
     }

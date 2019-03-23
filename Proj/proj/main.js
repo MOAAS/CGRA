@@ -18,6 +18,7 @@ serialInclude([
                 'MyCone.js',
                 'MyPyramid.js',
                 'MyTree.js',
+                'MyHouse.js',
 
 main=function()
 {

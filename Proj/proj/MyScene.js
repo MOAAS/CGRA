@@ -25,14 +25,14 @@ class MyScene extends CGFscene {
         this.initObjects();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 0.4;
+        this.scaleFactor = 0.3;
         this.displayAxis = 1;
         this.objectComplexity = 0.5;
         this.selectedObject = 0;
-        this.displayAll = true;
+        this.enableTex = true;
     }
     initLights() {
-        this.lights[0].setPosition(5, 5, 5, 1);
+        this.lights[0].setPosition(10, 3, 10, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
@@ -70,11 +70,17 @@ class MyScene extends CGFscene {
         this.dankStructure.addObjects(this.cubeStack, this.prism, this.cilinder);
         this.dankStructure.translate(15, 2, 15)
         
+        this.treePatch = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.mineBot, this.mineTop);        
+        this.treePatch.setTextureFilter(this.gl.NEAREST)
+        this.treePatch.translate(0, 0, -25)
 
-        this.treePatch = new MyTreeGroupPatch(this, 3, 1, 2, 2, this.mineBot, this.mineTop);        
-        this.treePatch.setTextureFilter(this.gl.NEAREST)        
+        this.house = new MyHouse(this, 12, 9, 8, this.houseSide, this.houseRoof)
+        this.house.setDoorTexture(this.houseFront)
+        this.house.setBackTexture(this.houseBack)
+        this.house.setFloorTexture(this.houseFloor)
         
-        this.objects = [this.dankStructure, this.treePatch]
+        this.objects = [this.dankStructure, this.treePatch, this.house]
+        this.objects = [this.house, this.treePatch]
 
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
@@ -84,10 +90,16 @@ class MyScene extends CGFscene {
 		this.mineSide = new CGFtexture(this, 'images/mineSide.png')
 		this.mineBot = new CGFtexture(this, 'images/mineBottom.png')
 		this.mineBot = new CGFtexture(this, 'images/floor.png')
+
+		this.houseFront = new CGFtexture(this, 'images/houseFront.png')
+		this.houseSide = new CGFtexture(this, 'images/houseSide.png')
+		this.houseBack = new CGFtexture(this, 'images/houseBack.png')
+		this.houseRoof = new CGFtexture(this, 'images/houseRoof.png')
+		this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
     }
 
     setDefaultAppearance() {
-        this.setAmbient(0, 0, 0, 1.0);
+        this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
@@ -109,6 +121,7 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+        this.enableTextures(this.enableTex);
 
         // Draw axis
         if (this.displayAxis)
