@@ -31,7 +31,7 @@ class MyUnitCube extends ObjectGroup {
 		this.right.translate(0,0,0.5);
 		this.right.rotate(Math.PI / 2, 0, 1, 0);
 
-		this.objects = [this.top,this.bot,this.front,this.back,this.left,this.right]
+		this.addObjects(this.top,this.bot,this.front,this.back,this.left,this.right);
 	}
 
 	setTexture(topTexture, botTexture, sideTexture) {

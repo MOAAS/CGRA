@@ -50,6 +50,12 @@ class MyCGFobject extends CGFobject {
         this.scene.popMatrix();        
     }
 
+	updateComplexity(complexity) {
+        
+    }
+
+    // --- Lighting, Materials, Textures -- //
+
     setMaterial(material) {
         this.material = material;
     }

@@ -9,12 +9,6 @@ class ObjectGroup extends MyCGFobject {
             this.objects[i].initBuffers();
         }		
     }
-
-	updateBuffers() {
-        for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].updateBuffers();
-        }		
-	}
 	
 	display() {
         for (var i = 0; i < this.objects.length; i++) {
@@ -43,6 +37,12 @@ class ObjectGroup extends MyCGFobject {
     addObjects(...args) {
         this.objects.push(...args);
     }
+
+	updateComplexity(complexity) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].updateComplexity(complexity);
+        }		
+	}
 
     // --- Lighting, Materials, Textures -- //
 	

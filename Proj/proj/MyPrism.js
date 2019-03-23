@@ -70,9 +70,8 @@ class MyPrism extends MyCGFobject {
         this.initGLBuffers();
     }
     
-    updateBuffers(complexity){
+    updateComplexity(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
-
         this.initBuffers();
     }
 	

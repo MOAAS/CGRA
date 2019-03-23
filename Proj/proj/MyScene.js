@@ -25,8 +25,11 @@ class MyScene extends CGFscene {
         this.initObjects();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 1;
+        this.scaleFactor = 0.4;
         this.displayAxis = 1;
+        this.objectComplexity = 0.5;
+        this.selectedObject = 0;
+        this.displayAll = true;
     }
     initLights() {
         this.lights[0].setPosition(5, 5, 5, 1);
@@ -41,8 +44,6 @@ class MyScene extends CGFscene {
         this.cube1 = new MyUnitCube(this);
         this.cube2 = new MyUnitCube(this);
         this.cube3 = new MyUnitCube(this);
-        this.coolStructure = new ObjectGroup(this);
-        this.coolStructure.addObjects(this.cube1, this.cube2, this.cube3);
 
         this.cube1.scale(2,2,2);
         this.cube2.scale(1.5,1.5,1.5);
@@ -51,8 +52,10 @@ class MyScene extends CGFscene {
         this.cube2.translate(0,1,0);
         this.cube3.translate(0,2,0);
 
-        this.coolStructure.setTextureFilter(this.gl.NEAREST)
-        this.coolStructure.setTexture(this.mineTop, this.mineBot, this.mineSide);
+        this.cubeStack = new ObjectGroup(this);
+        this.cubeStack.addObjects(this.cube1, this.cube2, this.cube3);
+        this.cubeStack.setTextureFilter(this.gl.NEAREST)
+        this.cubeStack.setTexture(this.mineTop, this.mineBot, this.mineSide);
         
         this.prism = new MyPrism(this, 8);        
         this.prism.setTexture(this.joyTexture);
@@ -63,13 +66,24 @@ class MyScene extends CGFscene {
         this.cilinder.scale(2,2,2);
         this.cilinder.translate(0,-2,0);
 
-        this.objects = [this.coolStructure, this.prism, this.cilinder];    
+        this.dankStructure = new ObjectGroup(this);
+        this.dankStructure.addObjects(this.cubeStack, this.prism, this.cilinder);
+        this.dankStructure.translate(15, 2, 15)
+        
+
+        this.treePatch = new MyTreeGroupPatch(this, 3, 1, 2, 2, this.mineBot, this.mineTop);        
+        this.treePatch.setTextureFilter(this.gl.NEAREST)        
+        
+        this.objects = [this.dankStructure, this.treePatch]
+
+        //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
     initTextures() {
         this.joyTexture = new CGFtexture(this, 'images/emoji.jpg');
         this.mineTop = new CGFtexture(this, 'images/mineTop.png')
 		this.mineSide = new CGFtexture(this, 'images/mineSide.png')
 		this.mineBot = new CGFtexture(this, 'images/mineBottom.png')
+		this.mineBot = new CGFtexture(this, 'images/floor.png')
     }
 
     setDefaultAppearance() {
@@ -77,6 +91,12 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
+    }
+
+    updateObjectComplexity() {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].updateComplexity(this.objectComplexity);
+        }
     }
 
     display() {

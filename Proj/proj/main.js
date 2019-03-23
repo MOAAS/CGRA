@@ -17,6 +17,7 @@ serialInclude([
                 'MyCilinder.js',
                 'MyCone.js',
                 'MyPyramid.js',
+                'MyTree.js',
 
 main=function()
 {
