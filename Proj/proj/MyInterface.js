@@ -25,9 +25,9 @@ class MyInterface extends CGFinterface {
         // a subfolder for grouping only the three coordinates of the light
         var f0 = this.gui.addFolder('Light 0 ');
         f0.add(this.scene.lights[0], 'enabled').name("Enabled");
-        f0.add(this.scene.lights[0].position, '0', -5.0, 5.0).name("X Position");
+        f0.add(this.scene.lights[0].position, '0', -25.0, 25.0).name("X Position");
         f0.add(this.scene.lights[0].position, '1', 0, 10.0).name("Y Position");
-        f0.add(this.scene.lights[0].position, '2', -5.0, 5.0).name("Z Position");
+        f0.add(this.scene.lights[0].position, '2', -25.0, 25.0).name("Z Position");
     
         // similar but for light 1
         var f1 = this.gui.addFolder('Light 1 ');

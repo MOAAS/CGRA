@@ -34,7 +34,8 @@ class MyUnitCube extends ObjectGroup {
 		this.addObjects(this.top,this.bot,this.front,this.back,this.left,this.right);
 	}
 
-	setTexture(topTexture, botTexture, sideTexture) {
+
+	setTextures(topTexture, botTexture, sideTexture) {
 		if (topTexture != null)
 			this.top.setTexture(topTexture);
 		if (botTexture != null)

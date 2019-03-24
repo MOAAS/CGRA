@@ -25,8 +25,8 @@ class MyScene extends CGFscene {
         this.initObjects();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 0.1;
-        this.displayAxis = 1;
+        this.scaleFactor = 0.5;
+        this.displayAxis = false;
         this.objectComplexity = 0.5;
         this.selectedObject = 0;
         this.enableTex = true;
@@ -41,6 +41,10 @@ class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
+
+        console.log(this.lights[0].constant_attenuation)
+        console.log(this.lights[0].linear_attenuation)
+        console.log(this.lights[0].quadratic_attenuation)
 
         this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
         this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -68,7 +72,7 @@ class MyScene extends CGFscene {
         this.cubeStack = new ObjectGroup(this);
         this.cubeStack.addObjects(this.cube1, this.cube2, this.cube3);
         this.cubeStack.setTextureFilter(this.gl.NEAREST)
-        this.cubeStack.setTexture(this.mineTop, this.mineBot, this.mineSide);
+        this.cubeStack.setTextures(this.mineTop, this.mineBot, this.mineSide);
         
         this.prism = new MyPrism(this, 8);        
         this.prism.setTexture(this.joyTexture);
@@ -107,7 +111,7 @@ class MyScene extends CGFscene {
         
         this.bigHill = new MyVoxelHill(this, 5)
         this.bigHill.scale(2,2,2)
-        this.bigHill.translate(20, 0, 20)
+        this.bigHill.translate(20, 0, 25)
         
         this.smallHill = new MyVoxelHill(this, 4)
         this.smallHill.scale(1.5, 1.5, 1.5)
@@ -116,16 +120,19 @@ class MyScene extends CGFscene {
         this.hills = new ObjectGroup(this)
         this.hills.addObjects(this.bigHill, this.smallHill)
         this.hills.setTextureFilter(this.gl.NEAREST)
-        this.hills.setTexture(this.mineTop, this.mineBot, this.mineSide)
+        this.hills.setTextures(this.mineTop, this.mineBot, this.mineSide)
+
+        this.swimmingPool = new MySwimmingPool(this, this.waterTexture, this.poolTexture, this.poolRampTexture)
+        this.swimmingPool.translate(20, 0, -5)
         
         this.soil = new MySquare(this)
         this.soil.rotate(Math.PI / 2, 1, 0, 0)
         this.soil.scale(150, 1, 150) 
-        this.soil.setMaterial(new MyCGFappearance(this, 1, 10, 1))  
+        this.soil.setMaterial(new MyCGFappearance(this, 0.8, 1, 1))  
         this.soil.setTexture(this.mineTop)
 
         this.objects = [this.dankStructure]
-        this.objects = [this.house, this.trees, this.soil, this.hills]
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool]
 
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
@@ -143,6 +150,11 @@ class MyScene extends CGFscene {
 		this.houseRoof = new CGFtexture(this, 'images/houseRoof.png')
 		this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
 		this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
+
+
+		this.poolTexture = new CGFtexture(this, 'images/poolRock.png')
+		this.waterTexture = new CGFtexture(this, 'images/water.png')
+		this.poolRampTexture = new CGFtexture(this, 'images/plastic.png')
     }
 
     setDefaultAppearance() {

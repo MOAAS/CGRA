@@ -58,11 +58,18 @@ class ObjectGroup extends MyCGFobject {
         }		
     }
 
-    setTexture(...args) {
+    setTexture(texture) {
         for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].setTexture(...args);
+            this.objects[i].setTexture(texture);
         }		
     }
+
+    setTextures(...args) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].setTextures(...args);
+        }		
+    }
+
 
     setTextureFilter(filterType) {
         for (var i = 0; i < this.objects.length; i++) {

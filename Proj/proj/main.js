@@ -20,6 +20,7 @@ serialInclude([
                 'MyTree.js',
                 'MyHouse.js',
                 'MyVoxelHill.js',
+                'MySwimmingPool.js',
 
 main=function()
 {
