@@ -62,17 +62,18 @@ class MyPyramid extends MyCGFobject {
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
             this.normals.push(...normal);
-            this.normals.push(...normal);
-
-
-            
+            this.normals.push(...normal);            
         }
+
+        this.vertices.push(0,1,0);
+        this.normals.push(0,1,0);
+        this.texCoords.push(0.5,0);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
     
-    updateBuffers(complexity){
+    updateComplexity(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
 
         // reinitialize buffers

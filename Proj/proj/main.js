@@ -19,6 +19,7 @@ serialInclude([
                 'MyPyramid.js',
                 'MyTree.js',
                 'MyHouse.js',
+                'MyVoxelHill.js',
 
 main=function()
 {

@@ -70,7 +70,7 @@ class MyScene extends CGFscene {
         this.dankStructure.addObjects(this.cubeStack, this.prism, this.cilinder);
         this.dankStructure.translate(15, 2, 15)
         
-        this.treePatch = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.woodTex, this.mineTop);        
+        this.treePatch = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.woodTex, this.leaves);        
         this.treePatch.setTextureFilter(this.gl.NEAREST)
         this.treePatch.translate(-5, 0, -30)
 
@@ -85,8 +85,21 @@ class MyScene extends CGFscene {
         this.soil.setMaterial(new MyCGFappearance(this, 1, 10, 1))  
         this.soil.setTexture(this.mineTop)
 
-        this.objects = [this.dankStructure, this.treePatch, this.house]
-        this.objects = [this.house, this.treePatch, this.soil]
+        this.bigHill = new MyVoxelHill(this, 5)
+        this.bigHill.scale(2,2,2)
+        this.bigHill.translate(20, 0, 20)
+
+        this.smallHill = new MyVoxelHill(this, 4)
+        this.smallHill.scale(1.5, 1.5, 1.5)
+        this.smallHill.translate(-15, 0, 15)
+
+        this.hills = new ObjectGroup(this)
+        this.hills.addObjects(this.bigHill, this.smallHill)
+        this.hills.setTextureFilter(this.gl.NEAREST)
+        this.hills.setTexture(this.mineTop, this.mineBot, this.mineSide)
+
+        this.objects = [this.dankStructure]
+        this.objects = [this.house, this.treePatch, this.soil, this.hills]
 
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
@@ -95,7 +108,8 @@ class MyScene extends CGFscene {
         this.mineTop = new CGFtexture(this, 'images/mineTop.png')
 		this.mineSide = new CGFtexture(this, 'images/mineSide.png')
 		this.mineBot = new CGFtexture(this, 'images/mineBottom.png')
-		this.woodTex = new CGFtexture(this, 'images/floor.png')
+		this.woodTex = new CGFtexture(this, 'images/trunk.jpg')
+		this.leaves = new CGFtexture(this, 'images/leaf.jpg')
 
 		this.houseFront = new CGFtexture(this, 'images/houseFront.png')
 		this.houseSide = new CGFtexture(this, 'images/houseSide.png')

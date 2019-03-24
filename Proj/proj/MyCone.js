@@ -30,10 +30,20 @@ class MyCone extends MyCGFobject {
         for(var i = 0, ang = 0; i < this.slices; i++, ang += angDiff){
 
             this.vertices.push(Math.cos(ang), 0, -Math.sin(ang));
-            this.indices.push(i + this.slices, (i + 1) % this.slices + this.slices, this.slices * 2);
+            this.vertices.push(Math.cos(ang+angDiff), 0, -Math.sin(ang+angDiff));
+            
             this.normals.push(Math.cos(ang), Math.cos(Math.PI/4.0), -Math.sin(ang));
+            this.normals.push(Math.cos(ang+angDiff), Math.cos(Math.PI/4.0), -Math.sin(ang+angDiff));
 
             this.texCoords.push(ang / (2*Math.PI), 1);
+            this.texCoords.push((ang + angDiff) / (2*Math.PI), 1);
+
+            this.indices.push(2 * i + this.slices, (2 * i + 1) % (2 * this.slices) + this.slices, this.slices * 3);
+
+            //this.texCoords.push((ang + angDiff) / (2*Math.PI), 1);
+
+            //this.texCoords.push(ang / (2*Math.PI), 1);
+            //this.texCoords.push(i % 2, 1);
         }
         
         this.vertices.push(0,1,0);
@@ -45,7 +55,7 @@ class MyCone extends MyCGFobject {
         this.initGLBuffers();
     }
     
-    updateBuffers(complexity){
+    updateComplexity(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
         // reinitialize buffers
         this.initBuffers();
