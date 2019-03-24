@@ -43,6 +43,7 @@ class MyCGFobject extends CGFobject {
             if (this.textureFilterType != null) {
                 this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.textureFilterType);
             }
+            //else this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.LINEAR);
         }
         else console.log("NULL MATERIAL!");
      

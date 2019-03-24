@@ -25,7 +25,7 @@ class MyScene extends CGFscene {
         this.initObjects();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 0.3;
+        this.scaleFactor = 0.1;
         this.displayAxis = 1;
         this.objectComplexity = 0.5;
         this.selectedObject = 0;
@@ -70,36 +70,49 @@ class MyScene extends CGFscene {
         this.dankStructure.addObjects(this.cubeStack, this.prism, this.cilinder);
         this.dankStructure.translate(15, 2, 15)
         
-        this.treePatch = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.woodTex, this.leaves);        
-        this.treePatch.setTextureFilter(this.gl.NEAREST)
-        this.treePatch.translate(-5, 0, -30)
+        this.treeGroup = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.woodTex, this.leaves);        
+        this.treeGroup.translate(-5, 0, -30)
+
+        this.treeRow1 = new MyTreeRowPatch(this, 9, 2, 4, 4.5, this.woodTex, this.leaves); 
+        this.treeRow2 = new MyTreeRowPatch(this, 9, 2, 4, 4.5, this.woodTex, this.leaves); 
+        this.treeRow3 = new MyTreeRowPatch(this, 9, 2, 4, 4.5, this.woodTex, this.leaves); 
+        this.treeRow1.rotate(Math.PI/2, 0, 1, 0)
+        this.treeRow2.rotate(Math.PI/2, 0, 1, 0)
+        this.treeRow3.rotate(Math.PI/2, 0, 1, 0)
+        this.treeRow1.translate(-30, 0, 40)
+        this.treeRow2.translate(-45, 0, 40)
+        this.treeRow3.translate(-60, 0, 40)
+
+        this.trees = new ObjectGroup(this)
+        this.trees.addObjects(this.treeGroup, this.treeRow1, this.treeRow2, this.treeRow3)
 
         this.house = new MyHouse(this, 12, 9, 8, this.houseSide, this.houseRoof, this.pillarTexture)
         this.house.setDoorTexture(this.houseFront)
         this.house.setBackTexture(this.houseBack)
         this.house.setFloorTexture(this.houseFloor)
 
-        this.soil = new MySquare(this)
-        this.soil.rotate(Math.PI / 2, 1, 0, 0)
-        this.soil.scale(100, 1, 100) 
-        this.soil.setMaterial(new MyCGFappearance(this, 1, 10, 1))  
-        this.soil.setTexture(this.mineTop)
-
+        
         this.bigHill = new MyVoxelHill(this, 5)
         this.bigHill.scale(2,2,2)
         this.bigHill.translate(20, 0, 20)
-
+        
         this.smallHill = new MyVoxelHill(this, 4)
         this.smallHill.scale(1.5, 1.5, 1.5)
-        this.smallHill.translate(-15, 0, 15)
-
+        this.smallHill.translate(-15, 0, 20)
+        
         this.hills = new ObjectGroup(this)
         this.hills.addObjects(this.bigHill, this.smallHill)
         this.hills.setTextureFilter(this.gl.NEAREST)
         this.hills.setTexture(this.mineTop, this.mineBot, this.mineSide)
+        
+        this.soil = new MySquare(this)
+        this.soil.rotate(Math.PI / 2, 1, 0, 0)
+        this.soil.scale(150, 1, 150) 
+        this.soil.setMaterial(new MyCGFappearance(this, 1, 10, 1))  
+        this.soil.setTexture(this.mineTop)
 
         this.objects = [this.dankStructure]
-        this.objects = [this.house, this.treePatch, this.soil, this.hills]
+        this.objects = [this.house, this.trees, this.soil, this.hills]
 
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
