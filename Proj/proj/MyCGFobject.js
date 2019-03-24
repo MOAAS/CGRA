@@ -6,7 +6,7 @@ class MyCGFobject extends CGFobject {
     constructor(scene) {
         super(scene);
         this.transformations = []
-        this.material = new MyCGFappearance(scene, 0.75, 1, 0.25, 10);
+        this.material = new MyCGFappearance(scene, 0.35, 0.8, 0.2, 10);
         this.texture = null;
         this.textureFilter = null;
     }

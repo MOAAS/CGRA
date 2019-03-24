@@ -4,11 +4,16 @@ class MyVoxelHill extends ObjectGroup {
 
         this.objects = []
 
+        this.hillMaterial = new MyCGFappearance(scene, 0.2, 1, 0, 10)
+
         for (var i = 0; i < height; i++) {
             var level = new MyHillLevel(scene, 2 * (height - i) - 1)
             level.translate(0, i, 0);
+            level.setMaterial(this.hillMaterial)
             this.objects.push(level)
         }
+
+
 
 
     }    

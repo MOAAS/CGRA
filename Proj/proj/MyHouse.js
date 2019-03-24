@@ -2,6 +2,7 @@ class MyHouse extends ObjectGroup {
     constructor(scene, houseLength, houseWidth, houseHeight, wallTexture, roofTexture, pillarTexture) {
         super(scene);
 
+
         this.walls = new MyUnitCube(scene);
         this.walls.scale(houseLength, houseHeight, houseWidth);
         this.walls.translate(0, houseHeight / 2, 0);
@@ -23,10 +24,20 @@ class MyHouse extends ObjectGroup {
         this.pillar3.translate(houseLength / 1.5, 0, -houseWidth / 1.5)
         this.pillar4.translate(-houseLength / 1.5, 0, -houseWidth / 1.5)
 
+
         this.pillars = new ObjectGroup(scene)
         this.pillars.addObjects(this.pillar1, this.pillar2, this.pillar3, this.pillar4)
         this.pillars.scale(1, houseHeight, 1)
         this.pillars.setTexture(pillarTexture)
+
+        this.pillarMaterial = new MyCGFappearance(scene, 0.3, 0.8, 0, 10)
+        this.roofMaterial = new MyCGFappearance(scene, 0.3, 0.8, 0, 10)
+        this.wallMaterial = new MyCGFappearance(scene, 0.3, 0.6, 0.5, 10)
+
+        this.pillars.setMaterial(this.pillarMaterial)
+        this.roof.setMaterial(this.roofMaterial)
+        this.walls.setMaterial(this.wallMaterial)
+
 
         this.objects = [this.walls, this.roof, this.pillars]
     }

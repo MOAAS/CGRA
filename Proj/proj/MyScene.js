@@ -32,11 +32,24 @@ class MyScene extends CGFscene {
         this.enableTex = true;
     }
     initLights() {
-        this.lights[0].setPosition(10, 3, 10, 1);
+        this.illumination = 1.0;
+        this.setGlobalAmbientLight(this.illumination, this.illumination, this.illumination, 1.0);
+
+        this.lights[0].setPosition(0, 2, 5, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
+        this.lights[0].setVisible(true);
         this.lights[0].update();
+
+        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
+        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
+        this.lights[1].disable();
+        this.lights[1].setVisible(true);
+        this.lights[1].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
@@ -155,6 +168,10 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+        this.setGlobalAmbientLight(this.illumination, this.illumination, this.illumination, 1.0);
+        this.lights[0].update();
+        this.lights[1].update();
+        
         this.enableTextures(this.enableTex);
 
         // Draw axis

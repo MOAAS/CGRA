@@ -3,7 +3,7 @@ class MyTree extends ObjectGroup {
         super(scene);
 
         this.trunkMaterial = new MyCGFappearance(scene, 0.25, 1, 0, 10)
-        this.treeTopMaterial = new MyCGFappearance(scene, 0.25, 1, 0, 10)
+        this.treeTopMaterial = new MyCGFappearance(scene, 0.4, 0.7, 0.8, 10)
 
         this.trunk = new MyCilinder(scene, 8);
         this.trunk.scale(trunkRadius, trunkHeight, trunkRadius);
