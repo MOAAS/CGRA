@@ -70,17 +70,23 @@ class MyScene extends CGFscene {
         this.dankStructure.addObjects(this.cubeStack, this.prism, this.cilinder);
         this.dankStructure.translate(15, 2, 15)
         
-        this.treePatch = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.mineBot, this.mineTop);        
+        this.treePatch = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.woodTex, this.mineTop);        
         this.treePatch.setTextureFilter(this.gl.NEAREST)
-        this.treePatch.translate(0, 0, -25)
+        this.treePatch.translate(-5, 0, -30)
 
-        this.house = new MyHouse(this, 12, 9, 8, this.houseSide, this.houseRoof)
+        this.house = new MyHouse(this, 12, 9, 8, this.houseSide, this.houseRoof, this.pillarTexture)
         this.house.setDoorTexture(this.houseFront)
         this.house.setBackTexture(this.houseBack)
         this.house.setFloorTexture(this.houseFloor)
-        
+
+        this.soil = new MySquare(this)
+        this.soil.rotate(Math.PI / 2, 1, 0, 0)
+        this.soil.scale(100, 1, 100) 
+        this.soil.setMaterial(new MyCGFappearance(this, 1, 10, 1))  
+        this.soil.setTexture(this.mineTop)
+
         this.objects = [this.dankStructure, this.treePatch, this.house]
-        this.objects = [this.house, this.treePatch]
+        this.objects = [this.house, this.treePatch, this.soil]
 
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
@@ -89,13 +95,14 @@ class MyScene extends CGFscene {
         this.mineTop = new CGFtexture(this, 'images/mineTop.png')
 		this.mineSide = new CGFtexture(this, 'images/mineSide.png')
 		this.mineBot = new CGFtexture(this, 'images/mineBottom.png')
-		this.mineBot = new CGFtexture(this, 'images/floor.png')
+		this.woodTex = new CGFtexture(this, 'images/floor.png')
 
 		this.houseFront = new CGFtexture(this, 'images/houseFront.png')
 		this.houseSide = new CGFtexture(this, 'images/houseSide.png')
 		this.houseBack = new CGFtexture(this, 'images/houseBack.png')
 		this.houseRoof = new CGFtexture(this, 'images/houseRoof.png')
 		this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
+		this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
     }
 
     setDefaultAppearance() {

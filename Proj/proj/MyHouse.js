@@ -1,5 +1,5 @@
 class MyHouse extends ObjectGroup {
-    constructor(scene, houseLength, houseWidth, houseHeight, wallTexture, roofTexture) {
+    constructor(scene, houseLength, houseWidth, houseHeight, wallTexture, roofTexture, pillarTexture) {
         super(scene);
 
         this.walls = new MyUnitCube(scene);
@@ -9,11 +9,26 @@ class MyHouse extends ObjectGroup {
 
         this.roof = new MyPyramid(scene, 4)
         this.roof.rotate(Math.PI / 4, 0, 1, 0)
-        this.roof.scale(houseLength, houseHeight / 2, houseWidth)
+        this.roof.scale(houseLength * 1.25, houseHeight / 1.5, houseWidth * 1.25)
         this.roof.translate(0, houseHeight, 0);
         this.roof.setTexture(roofTexture)
 
-        this.objects = [this.walls, this.roof]
+        this.pillar1 = new MyPrism(scene, 8)
+        this.pillar2 = new MyPrism(scene, 8)
+        this.pillar3 = new MyPrism(scene, 8)
+        this.pillar4 = new MyPrism(scene, 8)
+
+        this.pillar1.translate(houseLength / 1.5, 0, houseWidth / 1.5)
+        this.pillar2.translate(-houseLength / 1.5, 0, houseWidth / 1.5)
+        this.pillar3.translate(houseLength / 1.5, 0, -houseWidth / 1.5)
+        this.pillar4.translate(-houseLength / 1.5, 0, -houseWidth / 1.5)
+
+        this.pillars = new ObjectGroup(scene)
+        this.pillars.addObjects(this.pillar1, this.pillar2, this.pillar3, this.pillar4)
+        this.pillars.scale(1, houseHeight, 1)
+        this.pillars.setTexture(pillarTexture)
+
+        this.objects = [this.walls, this.roof, this.pillars]
     }
 
     setDoorTexture(texture) {
