@@ -32,6 +32,7 @@ class MySwimmingPool extends ObjectGroup {
         this.water.scale(length - 1, 1, width - 1);
         this.water.setTexture(waterTexture)
         this.water.translate(0, depth / 4, 0)
+        this.water.enableTextureSlide();
 
         // ------ Stair -------
 

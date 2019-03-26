@@ -45,6 +45,19 @@ class ObjectGroup extends MyCGFobject {
 	}
 
     // --- Lighting, Materials, Textures -- //
+
+    scaleTexCoords(s, t) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].scaleTexCoords(s,t);
+        }		
+    }
+
+    enableTextureSlide(amount) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].enableTextureSlide(amount);
+        }		
+    }
+
 	
 	setMaterial(material) {
         for (var i = 0; i < this.objects.length; i++) {

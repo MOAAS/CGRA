@@ -130,6 +130,8 @@ class MyScene extends CGFscene {
         this.soil.scale(150, 1, 150) 
         this.soil.setMaterial(new MyCGFappearance(this, 0.8, 1, 1))  
         this.soil.setTexture(this.mineTop)
+        this.soil.material.setTextureWrap('REPEAT', 'REPEAT');
+        this.soil.scaleTexCoords(150, 150);
 
         this.objects = [this.dankStructure]
         this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool]

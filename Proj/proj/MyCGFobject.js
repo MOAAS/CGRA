@@ -9,6 +9,7 @@ class MyCGFobject extends CGFobject {
         this.material = new MyCGFappearance(scene, 0.35, 0.8, 0.2, 10);
         this.texture = null;
         this.textureFilter = null;
+        this.textureSlide = false;
     }
 
     translate(x, y, z) {
@@ -46,6 +47,14 @@ class MyCGFobject extends CGFobject {
             //else this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.LINEAR);
         }
         else console.log("NULL MATERIAL!");
+
+        if (this.textureSlide) {
+            for (var i = 0; i < this.texCoords.length; i++) {
+                this.texCoords[i] -= 0.002;
+            }
+            this.material.setTextureWrap('REPEAT', 'REPEAT');
+            this.updateTexCoordsGLBuffers();                
+        }
      
         super.display();
         this.scene.popMatrix();        
@@ -56,6 +65,19 @@ class MyCGFobject extends CGFobject {
     }
 
     // --- Lighting, Materials, Textures -- //
+
+    enableTextureSlide(amount) {
+        this.textureSlide = true;
+        this.textureSlideAmount = amount;
+    }
+
+    scaleTexCoords(s, t) {
+        for (var i = 0; i < this.texCoords.length; i += 2) {
+            this.texCoords[i] *= s;
+            this.texCoords[i + 1] *= t;
+        }
+        this.updateTexCoordsGLBuffers();
+    }
 
     setMaterial(material) {
         this.material = material;
