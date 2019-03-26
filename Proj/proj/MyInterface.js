@@ -22,7 +22,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'objectComplexity', 0, 5).name('Object Complexity').onChange(this.scene.updateObjectComplexity.bind(this.scene));;
         this.gui.add(this.scene, 'illumination', 0, 1);
 
-        this.gui.add(this.scene, 'selectedTime', this.scene.timeIDs).name('Time of Day').onChange(this.scene.updateLights.bind(this.scene));;
+        this.gui.add(this.scene, 'selectedTime', this.scene.timeIDs).name('Time of Day').onChange(this.scene.updateTimeOfDay.bind(this.scene));;
 
         // a subfolder for grouping only the three coordinates of the light
         var f0 = this.gui.addFolder('Light 0 ');

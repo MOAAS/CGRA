@@ -32,7 +32,7 @@ class MyScene extends CGFscene {
         this.enableTex = true;
         this.selectedTime = 2;
         this.timeIDs = { 'Day': 0 , 'Night': 1, 'None': 2};
-        this.updateLights();
+        this.updateTimeOfDay();
     }
     initLights() {
         this.illumination = 1.0;
@@ -86,29 +86,6 @@ class MyScene extends CGFscene {
         this.lights[3].setLinearAttenuation(1);
         this.lights[3].setQuadraticAttenuation(0);
     }
-    updateLights() {
-        if (this.selectedTime == this.timeIDs['Day']) {
-            this.lights[0].disable();
-            this.lights[1].enable();
-            this.lights[2].disable();
-            this.lights[3].disable();
-        }
-        else if (this.selectedTime == this.timeIDs['Night']) {
-            this.lights[0].disable();
-            this.lights[1].disable();
-            this.lights[2].enable();
-            this.lights[3].enable();
-        }
-        else if (this.selectedTime == this.timeIDs['None']) {
-            this.lights[0].enable();
-            this.lights[1].disable();
-            this.lights[2].disable();
-            this.lights[3].disable();
-        }
-        else console.log("Invalid time!");
-
-    }
-
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
@@ -191,13 +168,17 @@ class MyScene extends CGFscene {
         this.soil.setTextureWrap('REPEAT', 'REPEAT');
         this.soil.scaleTexCoords(150, 150);
 
-        this.cubemap = new MyCubemap(this);
-        this.cubemap.scale(1000,1000,1000,1);
-        this.cubemap.setMaterial(new MyCGFappearance(this, 1, 1, 1, 1)) 
-        this.cubemap.setTextures(this.cubeMapTop,this.cubeMapBot,this.cubeMapFront,this.cubeMapBack,this.cubeMapLeft,this.cubeMapRight);
+        this.cubemapDay = new MyCubemap(this);
+        this.cubemapDay.setTextures(this.cubemapDayTop,this.cubemapDayBot,this.cubemapDayFront, this.cubemapDayBack, this.cubemapDayLeft, this.cubemapDayRight);
+
+        this.cubemapNight = new MyCubemap(this);
+        this.cubemapNight.setTextures(this.cubemapNightTop,this.cubemapNightBot,this.cubemapNightFront, this.cubemapNightBack, this.cubemapNightLeft, this.cubemapNightRight);
+
+        this.cubemap = this.cubemapDay;
 
         this.objects = [this.dankStructure]
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.cubemap]
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire]
+        
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
     initTextures() {
@@ -220,12 +201,19 @@ class MyScene extends CGFscene {
 		this.waterTexture = new CGFtexture(this, 'images/water.png')
         this.poolRampTexture = new CGFtexture(this, 'images/plastic.png')
         
-        this.cubeMapTop = new CGFtexture(this, 'images/skybox/posy.jpg')
-        this.cubeMapBot = new CGFtexture(this, 'images/skybox/negy.jpg')
-        this.cubeMapFront = new CGFtexture(this, 'images/skybox/posz.jpg')
-        this.cubeMapBack = new CGFtexture(this, 'images/skybox/negz.jpg')
-        this.cubeMapLeft = new CGFtexture(this, 'images/skybox/posx.jpg')
-        this.cubeMapRight = new CGFtexture(this, 'images/skybox/negx.jpg')
+        this.cubemapDayTop = new CGFtexture(this, 'images/skybox/posy.jpg')
+        this.cubemapDayBot = new CGFtexture(this, 'images/skybox/negy.jpg')
+        this.cubemapDayFront = new CGFtexture(this, 'images/skybox/posz.jpg')
+        this.cubemapDayBack = new CGFtexture(this, 'images/skybox/negz.jpg')
+        this.cubemapDayLeft = new CGFtexture(this, 'images/skybox/posx.jpg')
+        this.cubemapDayRight = new CGFtexture(this, 'images/skybox/negx.jpg')
+
+        this.cubemapNightTop = new CGFtexture(this, 'images/skybox/posy.jpg')
+        this.cubemapNightBot = new CGFtexture(this, 'images/skybox/negy.jpg')
+        this.cubemapNightFront = new CGFtexture(this, 'images/skybox/posz.jpg')
+        this.cubemapNightBack = new CGFtexture(this, 'images/skybox/negz.jpg')
+        this.cubemapNightLeft = new CGFtexture(this, 'images/skybox/posx.jpg')
+        this.cubemapNightRight = new CGFtexture(this, 'images/skybox/negx.jpg')
     }
 
     setDefaultAppearance() {
@@ -239,6 +227,32 @@ class MyScene extends CGFscene {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].updateComplexity(this.objectComplexity);
         }
+    }
+
+    updateTimeOfDay() {
+        if (this.selectedTime == this.timeIDs['Day']) {
+            this.lights[0].disable();
+            this.lights[1].enable();
+            this.lights[2].disable();
+            this.lights[3].disable();
+            this.cubemap = this.cubemapDay;
+        }
+        else if (this.selectedTime == this.timeIDs['Night']) {
+            this.lights[0].disable();
+            this.lights[1].disable();
+            this.lights[2].enable();
+            this.lights[3].enable();
+            this.cubemap = this.cubemapNight;
+        }
+        else if (this.selectedTime == this.timeIDs['None']) {
+            this.lights[0].enable();
+            this.lights[1].disable();
+            this.lights[2].disable();
+            this.lights[3].disable();
+            this.cubemap = this.cubemapDay;
+        }
+        else console.log("Invalid time!");
+
     }
 
     display() {
@@ -278,6 +292,8 @@ class MyScene extends CGFscene {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].display();
         }
+
+        this.cubemap.display();
 
         // ---- END Primitive drawing section
     }

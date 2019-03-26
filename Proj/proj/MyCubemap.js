@@ -32,6 +32,9 @@ class MyCubemap extends ObjectGroup {
 		this.right.rotate(Math.PI / 2, 0, 1, 0);
 
 		this.addObjects(this.top,this.bot,this.front,this.back,this.left,this.right);
+		
+		this.scale(1000, 1000, 1000)
+        this.setMaterial(new MyCGFappearance(scene, 1, 1, 1, 1)) 
 	}
 
 
