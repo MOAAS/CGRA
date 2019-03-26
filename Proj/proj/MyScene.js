@@ -22,6 +22,7 @@ class MyScene extends CGFscene {
         this.initTextures();
         
         this.axis = new CGFaxis(this);
+        this.wind = new Vector2D(0,0);
         this.initObjects();
 
         //Objects connected to MyInterface
@@ -130,7 +131,7 @@ class MyScene extends CGFscene {
         this.soil.scale(150, 1, 150) 
         this.soil.setMaterial(new MyCGFappearance(this, 0.8, 1, 1))  
         this.soil.setTexture(this.mineTop)
-        this.soil.material.setTextureWrap('REPEAT', 'REPEAT');
+        this.soil.setTextureWrap('REPEAT', 'REPEAT');
         this.soil.scaleTexCoords(150, 150);
 
         this.cubemap = new MyCubemap(this);

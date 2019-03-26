@@ -44,13 +44,13 @@ class MyCGFobject extends CGFobject {
             if (this.textureFilterType != null) {
                 this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.textureFilterType);
             }
-            //else this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.LINEAR);
         }
         else console.log("NULL MATERIAL!");
 
         if (this.textureSlide) {
-            for (var i = 0; i < this.texCoords.length; i++) {
-                this.texCoords[i] -= 0.002;
+            for (var i = 0; i < this.texCoords.length; i += 2) {
+                this.texCoords[i] -= this.scene.wind.x / 500;
+                this.texCoords[i + 1] -= this.scene.wind.y / 500;
             }
             this.material.setTextureWrap('REPEAT', 'REPEAT');
             this.updateTexCoordsGLBuffers();                
@@ -90,6 +90,10 @@ class MyCGFobject extends CGFobject {
 
     setTextureFilter(filterType) {
         this.textureFilterType = filterType;
+    }
+
+    setTextureWrap(x, y) {
+        this.material.setTextureWrap(x,y);
     }
 
     removeTexture() {

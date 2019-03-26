@@ -36,6 +36,11 @@ class MyInterface extends CGFinterface {
         f1.add(this.scene.lights[1].position, '1', -5.0, 5.0).name("Y Position");
         f1.add(this.scene.lights[1].position, '2', -5.0, 5.0).name("Z Position");
 
+        var f2 = this.gui.addFolder('Wind direction');
+        f2.add(this.scene.wind, 'x', -5, 5).name("X Direction");
+        f2.add(this.scene.wind, 'y', -5, 5).name("Y Direction");
+
+
         //this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs).name('Selected Objects');
 
        return true;

@@ -28,6 +28,12 @@ class ObjectGroup extends MyCGFobject {
         }		
     }
 
+    setTextureWrap(x, y) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].setTextureWrap(x, y);
+        }		
+    }
+
     scale(x, y, z) {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].scale(x, y, z);

@@ -22,6 +22,7 @@ serialInclude([
                 'MyVoxelHill.js',
                 'MySwimmingPool.js',
                 'MyCubemap.js',
+                'Vector2D.js',
 
 main=function()
 {
