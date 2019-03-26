@@ -21,6 +21,7 @@ serialInclude([
                 'MyHouse.js',
                 'MyVoxelHill.js',
                 'MySwimmingPool.js',
+                'MyCubemap.js',
 
 main=function()
 {

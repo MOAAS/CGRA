@@ -131,8 +131,13 @@ class MyScene extends CGFscene {
         this.soil.setMaterial(new MyCGFappearance(this, 0.8, 1, 1))  
         this.soil.setTexture(this.mineTop)
 
+        this.cubemap = new MyCubemap(this);
+        this.cubemap.scale(1000,1000,1000,1);
+        this.cubemap.setMaterial(new MyCGFappearance(this, 1, 1, 1)) 
+        this.cubemap.setTextures(this.cubeMapTop,this.cubeMapBot,this.cubeMapFront,this.cubeMapBack,this.cubeMapLeft,this.cubeMapRight);
+
         this.objects = [this.dankStructure]
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool]
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool , this.cubemap]
 
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
@@ -154,7 +159,14 @@ class MyScene extends CGFscene {
 
 		this.poolTexture = new CGFtexture(this, 'images/poolRock.png')
 		this.waterTexture = new CGFtexture(this, 'images/water.png')
-		this.poolRampTexture = new CGFtexture(this, 'images/plastic.png')
+        this.poolRampTexture = new CGFtexture(this, 'images/plastic.png')
+        
+        this.cubeMapTop = new CGFtexture(this, 'images/skybox/posy.jpg')
+        this.cubeMapBot = new CGFtexture(this, 'images/skybox/negy.jpg')
+        this.cubeMapFront = new CGFtexture(this, 'images/skybox/posz.jpg')
+        this.cubeMapBack = new CGFtexture(this, 'images/skybox/negz.jpg')
+        this.cubeMapLeft = new CGFtexture(this, 'images/skybox/posx.jpg')
+        this.cubeMapRight = new CGFtexture(this, 'images/skybox/negx.jpg')
     }
 
     setDefaultAppearance() {
