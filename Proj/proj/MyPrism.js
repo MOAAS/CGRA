@@ -33,7 +33,7 @@ class MyPrism extends MyCGFobject {
         }
         
         for(var i = 1; i < this.slices - 1; i++) {
-            this.indices.push(1 * this.slices , 1 * this.slices + i, 1 * this.slices + i + 1)
+            this.indices.push(this.slices , this.slices + i, this.slices + i + 1)
         }  
         
         for(var i = 0, ang = 0; i < this.slices; i++, ang += angDiff) {

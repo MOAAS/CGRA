@@ -46,8 +46,10 @@ class MyCilinder extends MyCGFobject {
             this.texCoords.push(ang / (2*Math.PI), 1);
             this.texCoords.push(ang / (2*Math.PI), 0);
 
-            this.indices.push(2 * (i + this.slices) + 0, 2 * (i + this.slices) + 1, 2 * (i + this.slices) + 2)
-            this.indices.push(2 * (i + this.slices) + 3, 2 * (i + this.slices) + 2, 2 * (i + this.slices) + 1)
+            if (i != this.slices) {
+                this.indices.push(2 * (i + this.slices) + 0, 2 * (i + this.slices) + 1, 2 * (i + this.slices) + 2)
+                this.indices.push(2 * (i + this.slices) + 3, 2 * (i + this.slices) + 2, 2 * (i + this.slices) + 1)
+            }
             
             this.normals.push(Math.cos(ang), 0, Math.sin(ang));
             this.normals.push(Math.cos(ang), 0, Math.sin(ang));
