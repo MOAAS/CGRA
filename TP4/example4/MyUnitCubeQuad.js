@@ -34,14 +34,13 @@ class MyUnitCubeQuad extends CGFobject {
 	
 	display() {
 		
-		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-
 		// top face
 		this.scene.pushMatrix()
 		this.scene.translate(0,0.5,0);
 		this.scene.rotate(-Math.PI / 2, 1, 0, 0);
 		this.material.setTexture(this.textureTop);
 		this.material.apply();
+		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 		this.top.display();
 		this.scene.popMatrix();
 
@@ -51,6 +50,7 @@ class MyUnitCubeQuad extends CGFobject {
 		this.scene.rotate(Math.PI / 2, 1, 0, 0);
 		this.material.setTexture(this.textureBot);
 		this.material.apply();
+		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 		this.bot.display();
 		this.scene.popMatrix();
 
@@ -59,6 +59,7 @@ class MyUnitCubeQuad extends CGFobject {
 		this.scene.translate(0,0,0.5);
 		this.material.setTexture(this.textureSide);
 		this.material.apply();
+		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 		this.bot.display();
 		this.scene.popMatrix();
 
@@ -68,6 +69,7 @@ class MyUnitCubeQuad extends CGFobject {
 		this.scene.translate(0,0,0.5);
 		this.material.setTexture(this.textureSide);
 		this.material.apply();
+		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 		this.bot.display();
 		this.scene.popMatrix();
 
@@ -77,6 +79,7 @@ class MyUnitCubeQuad extends CGFobject {
 		this.scene.translate(0,0,0.5);
 		this.material.setTexture(this.textureSide);
 		this.material.apply();
+		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 		this.bot.display();
 		this.scene.popMatrix();
 	
@@ -86,6 +89,7 @@ class MyUnitCubeQuad extends CGFobject {
 		this.scene.translate(0,0,0.5);
 		this.material.setTexture(this.textureSide);
 		this.material.apply();
+		this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
 		this.bot.display();
 		this.scene.popMatrix();
 	
