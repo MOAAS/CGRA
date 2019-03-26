@@ -23,6 +23,7 @@ serialInclude([
                 'MySwimmingPool.js',
                 'MyCubemap.js',
                 'Vector2D.js',
+                'MyFireplace.js',
 
 main=function()
 {

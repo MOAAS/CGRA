@@ -23,10 +23,17 @@ class MySwimmingPool extends ObjectGroup {
         this.leftWall.translate(- length / 2 + 0.5, 0, 0);
         this.rightWall.translate(length / 2 - 0.5, 0, 0);
 
+        this.frontWall.left.scaleTexCoords(0.25, 1);
+        this.frontWall.right.scaleTexCoords(0.25, 1);
+        this.backWall.left.scaleTexCoords(0.25, 1);
+        this.backWall.right.scaleTexCoords(0.25, 1);
+
         this.walls = new ObjectGroup(scene)
         this.walls.addObjects(this.frontWall, this.backWall, this.leftWall, this.rightWall);
         this.walls.setTexture(poolTexture);
-        
+
+        this.walls.setTextureWrap('REPEAT', 'REPEAT')
+       
         // ------ Water -------
         this.water = new MyUnitCube(scene);
         this.water.scale(length - 1, 1, width - 1);

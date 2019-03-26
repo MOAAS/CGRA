@@ -22,15 +22,17 @@ class MyScene extends CGFscene {
         this.initTextures();
         
         this.axis = new CGFaxis(this);
-        this.wind = new Vector2D(0,0);
+        this.wind = new Vector2D(1,1);
         this.initObjects();
 
         //Objects connected to MyInterface
         this.scaleFactor = 0.5;
         this.displayAxis = false;
         this.objectComplexity = 0.5;
-        this.selectedObject = 0;
         this.enableTex = true;
+        this.selectedTime = 2;
+        this.timeIDs = { 'Day': 0 , 'Night': 1, 'None': 2};
+        this.updateLights();
     }
     initLights() {
         this.illumination = 1.0;
@@ -47,12 +49,64 @@ class MyScene extends CGFscene {
         console.log(this.lights[0].linear_attenuation)
         console.log(this.lights[0].quadratic_attenuation)
 
-        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
-        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
+
+        // Dia
+
+        this.lights[1].setPosition(0.0, 20, 0.0, 1.0);
+        this.lights[1].setDiffuse(1.0, 0.85, 0.3, 1.0); // cor quentinha
+        this.lights[1].setSpecular(1.0, 0.85, 0.3, 1.0);
         this.lights[1].disable();
-        this.lights[1].setVisible(true);
+        this.lights[1].setVisible(false);
         this.lights[1].update();
+        this.lights[1].setConstantAttenuation(1);
+        this.lights[1].setLinearAttenuation(0);
+        this.lights[1].setQuadraticAttenuation(0);
+
+        // Noite
+
+        this.lights[2].setPosition(0.0, 20, 0.0, 1.0);
+        this.lights[2].setDiffuse(0.2, 0.4, 1, 1.0); // cor fresqeuinha
+        this.lights[2].setSpecular(0.2, 0.4, 1, 1.0);
+        this.lights[2].disable();
+        this.lights[2].setVisible(false);
+        this.lights[2].update();
+        this.lights[2].setConstantAttenuation(1);
+        this.lights[2].setLinearAttenuation(0.01);
+        this.lights[2].setQuadraticAttenuation(0);
+
+        // Fogueira (noite)
+
+        this.lights[3].setPosition(0.0, 2, 0.0, 1.0); // mudar
+        this.lights[3].setDiffuse(1.0, 0.85, 0, 1.0); // cor quentinha
+        this.lights[3].setSpecular(1.0, 0.85, 0, 1.0);
+        this.lights[3].disable();
+        this.lights[3].setVisible(false);
+        this.lights[3].update();
+        this.lights[3].setConstantAttenuation(1);
+        this.lights[3].setLinearAttenuation(1);
+        this.lights[3].setQuadraticAttenuation(0);
+    }
+    updateLights() {
+        if (this.selectedTime == this.timeIDs['Day']) {
+            this.lights[0].disable();
+            this.lights[1].enable();
+            this.lights[2].disable();
+            this.lights[3].disable();
+        }
+        else if (this.selectedTime == this.timeIDs['Night']) {
+            this.lights[0].disable();
+            this.lights[1].disable();
+            this.lights[2].enable();
+            this.lights[3].enable();
+        }
+        else if (this.selectedTime == this.timeIDs['None']) {
+            this.lights[0].enable();
+            this.lights[1].disable();
+            this.lights[2].disable();
+            this.lights[3].disable();
+        }
+        else console.log("Invalid time!");
+
     }
 
     initCameras() {
@@ -125,23 +179,25 @@ class MyScene extends CGFscene {
 
         this.swimmingPool = new MySwimmingPool(this, this.waterTexture, this.poolTexture, this.poolRampTexture)
         this.swimmingPool.translate(20, 0, -5)
+
+        this.campfire = new MyFireplace(this);
+        this.campfire.translate(0, 0, 20)
         
         this.soil = new MySquare(this)
         this.soil.rotate(Math.PI / 2, 1, 0, 0)
         this.soil.scale(150, 1, 150) 
-        this.soil.setMaterial(new MyCGFappearance(this, 0.8, 1, 1))  
+        this.soil.setMaterial(new MyCGFappearance(this, 0.5, 1, 0, 1))  
         this.soil.setTexture(this.mineTop)
         this.soil.setTextureWrap('REPEAT', 'REPEAT');
         this.soil.scaleTexCoords(150, 150);
 
         this.cubemap = new MyCubemap(this);
         this.cubemap.scale(1000,1000,1000,1);
-        this.cubemap.setMaterial(new MyCGFappearance(this, 1, 1, 1)) 
+        this.cubemap.setMaterial(new MyCGFappearance(this, 1, 1, 1, 1)) 
         this.cubemap.setTextures(this.cubeMapTop,this.cubeMapBot,this.cubeMapFront,this.cubeMapBack,this.cubeMapLeft,this.cubeMapRight);
 
         this.objects = [this.dankStructure]
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool , this.cubemap]
-
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.cubemap]
         //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
     }
     initTextures() {
@@ -198,6 +254,8 @@ class MyScene extends CGFscene {
         this.setGlobalAmbientLight(this.illumination, this.illumination, this.illumination, 1.0);
         this.lights[0].update();
         this.lights[1].update();
+        this.lights[2].update();
+        this.lights[3].update();
         
         this.enableTextures(this.enableTex);
 
