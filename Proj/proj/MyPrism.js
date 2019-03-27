@@ -38,11 +38,11 @@ class MyPrism extends MyCGFobject {
         
         for(var i = 0, ang = 0; i < this.slices; i++, ang += angDiff) {
             // Add vertices
-            this.vertices.push(Math.cos(ang), 0, Math.sin(ang)); // 0 + 4 * i
-            this.vertices.push(Math.cos(ang), 1, Math.sin(ang)); // 1 + 4 * i
+            this.vertices.push(Math.cos(ang), 0, -Math.sin(ang)); // 0 + 4 * i
+            this.vertices.push(Math.cos(ang), 1, -Math.sin(ang)); // 1 + 4 * i
 
-            this.vertices.push(Math.cos(ang + angDiff), 0, Math.sin(ang + angDiff)); // 2 + 4 * i
-            this.vertices.push(Math.cos(ang + angDiff), 1, Math.sin(ang + angDiff)); // 3 + 4 * i
+            this.vertices.push(Math.cos(ang + angDiff), 0, -Math.sin(ang + angDiff)); // 2 + 4 * i
+            this.vertices.push(Math.cos(ang + angDiff), 1, -Math.sin(ang + angDiff)); // 3 + 4 * i
 
             this.texCoords.push(ang / (2*Math.PI), 1);
             this.texCoords.push(ang / (2*Math.PI), 0);
@@ -50,8 +50,8 @@ class MyPrism extends MyCGFobject {
             this.texCoords.push((ang + angDiff) / (2*Math.PI), 0);
 
 
-            this.indices.push(4 * i + 2 * this.slices + 0, 4 * i + 2 * this.slices + 1, 4 * i + 2 * this.slices + 2)
-            this.indices.push(4 * i + 2 * this.slices + 3, 4 * i + 2 * this.slices + 2, 4 * i + 2 * this.slices + 1)
+            this.indices.push(4 * i + 2 * this.slices + 0, 4 * i + 2 * this.slices + 2, 4 * i + 2 * this.slices + 1)
+            this.indices.push(4 * i + 2 * this.slices + 3, 4 * i + 2 * this.slices + 1, 4 * i + 2 * this.slices + 2)
 
             var normal = [Math.sin(ang + angDiff) - Math.sin(ang), 0, Math.cos(ang) - Math.cos(ang + angDiff)]
             // normalization

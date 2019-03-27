@@ -40,19 +40,19 @@ class MyCilinder extends MyCGFobject {
 
         for(var i = 0, ang = 0; i <= this.slices; i++, ang += angDiff) {
             // Add vertices
-            this.vertices.push(Math.cos(ang), 0, Math.sin(ang)); // 0 + 2 * i
-            this.vertices.push(Math.cos(ang), 1, Math.sin(ang)); // 1 + 2 * i
+            this.vertices.push(Math.cos(ang), 0, -Math.sin(ang)); // 0 + 2 * i
+            this.vertices.push(Math.cos(ang), 1, -Math.sin(ang)); // 1 + 2 * i
 
             this.texCoords.push(ang / (2*Math.PI), 1);
             this.texCoords.push(ang / (2*Math.PI), 0);
 
             if (i != this.slices) {
-                this.indices.push(2 * (i + this.slices) + 0, 2 * (i + this.slices) + 1, 2 * (i + this.slices) + 2)
-                this.indices.push(2 * (i + this.slices) + 3, 2 * (i + this.slices) + 2, 2 * (i + this.slices) + 1)
+                this.indices.push(2 * (i + this.slices) + 0, 2 * (i + this.slices) + 2, 2 * (i + this.slices) + 1)
+                this.indices.push(2 * (i + this.slices) + 3, 2 * (i + this.slices) + 1, 2 * (i + this.slices) + 2)
             }
             
-            this.normals.push(Math.cos(ang), 0, Math.sin(ang));
-            this.normals.push(Math.cos(ang), 0, Math.sin(ang));
+            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
+            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
         }
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
