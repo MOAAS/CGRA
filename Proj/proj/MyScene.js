@@ -119,12 +119,12 @@ class MyScene extends CGFscene {
         this.dankStructure.addObjects(this.cubeStack, this.prism, this.cilinder);
         this.dankStructure.translate(15, 2, 15)
         
-        this.treeGroup = new MyTreeGroupPatch(this, 6, 1.5, 4, 3, this.woodTex, this.leaves);        
+        this.treeGroup = new MyTreeGroupPatch(this, 6, 1.5, 6, 3, this.woodTex, this.leaves);        
         this.treeGroup.translate(-5, 0, -30)
 
-        this.treeRow1 = new MyTreeRowPatch(this, 9, 2, 4, 4.5, this.woodTex, this.leaves); 
-        this.treeRow2 = new MyTreeRowPatch(this, 9, 2, 4, 4.5, this.woodTex, this.leaves); 
-        this.treeRow3 = new MyTreeRowPatch(this, 9, 2, 4, 4.5, this.woodTex, this.leaves); 
+        this.treeRow1 = new MyTreeRowPatch(this, 9, 2, 8, 5, this.woodTex, this.leaves); 
+        this.treeRow2 = new MyTreeRowPatch(this, 9, 2, 8, 5, this.woodTex, this.leaves); 
+        this.treeRow3 = new MyTreeRowPatch(this, 9, 2, 8, 5, this.woodTex, this.leaves); 
         this.treeRow1.rotate(Math.PI/2, 0, 1, 0)
         this.treeRow2.rotate(Math.PI/2, 0, 1, 0)
         this.treeRow3.rotate(Math.PI/2, 0, 1, 0)
@@ -141,11 +141,11 @@ class MyScene extends CGFscene {
         this.house.setFloorTexture(this.houseFloor)
 
         
-        this.bigHill = new MyVoxelHill(this, 5)
+        this.bigHill = new MyVoxelHill(this, 7)
         this.bigHill.scale(2,2,2)
-        this.bigHill.translate(20, 0, 25)
+        this.bigHill.translate(25, 0, 30)
         
-        this.smallHill = new MyVoxelHill(this, 4)
+        this.smallHill = new MyVoxelHill(this, 5)
         this.smallHill.scale(1.5, 1.5, 1.5)
         this.smallHill.translate(-15, 0, 20)
         
