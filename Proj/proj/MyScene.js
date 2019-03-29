@@ -26,7 +26,7 @@ class MyScene extends CGFscene {
         this.initObjects();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 0.5;
+        this.scaleFactor = 1;
         this.displayAxis = false;
         this.objectComplexity = 0.5;
         this.enableTex = true;
@@ -76,14 +76,14 @@ class MyScene extends CGFscene {
 
         // Fogueira (noite)
 
-        this.lights[3].setPosition(0.0, 2, 0.0, 1.0); // mudar
+        this.lights[3].setPosition(0.0, 3.5, 20, 1.0); // mudar
         this.lights[3].setDiffuse(1.0, 0.85, 0, 1.0); // cor quentinha
         this.lights[3].setSpecular(1.0, 0.85, 0, 1.0);
         this.lights[3].disable();
         this.lights[3].setVisible(false);
         this.lights[3].update();
         this.lights[3].setConstantAttenuation(1);
-        this.lights[3].setLinearAttenuation(1);
+        this.lights[3].setLinearAttenuation(0.2);
         this.lights[3].setQuadraticAttenuation(0);
     }
     initCameras() {
@@ -157,7 +157,7 @@ class MyScene extends CGFscene {
         this.swimmingPool = new MySwimmingPool(this, this.waterTexture, this.poolTexture, this.poolRampTexture)
         this.swimmingPool.translate(20, 0, -5)
 
-        this.campfire = new MyFireplace(this);
+        this.campfire = new MyFireplace(this,this.woodTex,this.fireTex,this.poolTexture);
         this.campfire.translate(0, 0, 20)
         
         this.soil = new MySquare(this)
@@ -187,7 +187,8 @@ class MyScene extends CGFscene {
 		this.mineSide = new CGFtexture(this, 'images/mineSide.png')
 		this.mineBot = new CGFtexture(this, 'images/mineBottom.png')
 		this.woodTex = new CGFtexture(this, 'images/trunk.jpg')
-		this.leaves = new CGFtexture(this, 'images/leaf.jpg')
+        this.leaves = new CGFtexture(this, 'images/leaf.jpg')
+        this.fireTex = new CGFtexture(this, 'images/fire.jpg')
 
 		this.houseFront = new CGFtexture(this, 'images/houseFront.png')
 		this.houseSide = new CGFtexture(this, 'images/houseSide.png')
