@@ -32,11 +32,12 @@ class MyFireplace extends ObjectGroup {
 
         // ----- Fire -------
         this.fire= new MyCone(scene, 8);
-        this.fireMaterial = new MyCGFappearance(scene, 0.2, 0.8, 0.8, 25);
+        this.fireMaterial = new MyCGFappearance(scene, 1, 0, 0, 25);
         this.fire.scale(0.65,1.2,0.65);
         this.fire.translate(0,1.85,0);
         this.fire.setMaterial(this.fireMaterial);
         this.fire.setTexture(fireTexture);
+        this.fire.enableTextureSlide();
 
 
         // ----- Base -------
@@ -49,6 +50,21 @@ class MyFireplace extends ObjectGroup {
 
         this.addObjects(this.fire, this.fireWoods , this.base);
 
+    }
+
+    enableFire() {
+        this.enabled = true;
+    }
+
+    disableFire() {
+        this.enabled = false;
+    }
+
+    display() {
+        this.objects = [this.fireWoods, this.base];
+        if (this.enabled)
+            this.addObjects(this.fire)
+        super.display();
     }
 
 }

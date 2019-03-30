@@ -26,7 +26,7 @@ class MyScene extends CGFscene {
         this.initObjects();
 
         //Objects connected to MyInterface
-        this.scaleFactor = 1;
+        this.scaleFactor = 0.2;
         this.displayAxis = false;
         this.objectComplexity = 0.5;
         this.enableTex = true;
@@ -38,22 +38,17 @@ class MyScene extends CGFscene {
         this.illumination = 1.0;
         this.setGlobalAmbientLight(this.illumination, this.illumination, this.illumination, 1.0);
 
-        this.lights[0].setPosition(0, 2, 5, 1.0);
+        this.lights[0].setPosition(10, 30, 30, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
 
-        console.log(this.lights[0].constant_attenuation)
-        console.log(this.lights[0].linear_attenuation)
-        console.log(this.lights[0].quadratic_attenuation)
-
-
         // Dia
 
-        this.lights[1].setPosition(0.0, 20, 0.0, 1.0);
-        this.lights[1].setDiffuse(1.0, 0.85, 0.3, 1.0); // cor quentinha
+        this.lights[1].setPosition(0.0, 40, 0.0, 1.0);
+        this.lights[1].setDiffuse(1.0, 0.85, 0.6, 1.0); // cor quentinha
         this.lights[1].setSpecular(1.0, 0.85, 0.3, 1.0);
         this.lights[1].disable();
         this.lights[1].setVisible(false);
@@ -64,7 +59,7 @@ class MyScene extends CGFscene {
 
         // Noite
 
-        this.lights[2].setPosition(0.0, 20, 0.0, 1.0);
+        this.lights[2].setPosition(0.0, 40, 0.0, 1.0);
         this.lights[2].setDiffuse(0.2, 0.4, 1, 1.0); // cor fresqeuinha
         this.lights[2].setSpecular(0.2, 0.4, 1, 1.0);
         this.lights[2].disable();
@@ -76,7 +71,7 @@ class MyScene extends CGFscene {
 
         // Fogueira (noite)
 
-        this.lights[3].setPosition(0.0, 3.5, 20, 1.0); // mudar
+        this.lights[3].setPosition(0.0, 3, 20, 1.0); // mudar
         this.lights[3].setDiffuse(1.0, 0.85, 0, 1.0); // cor quentinha
         this.lights[3].setSpecular(1.0, 0.85, 0, 1.0);
         this.lights[3].disable();
@@ -236,6 +231,7 @@ class MyScene extends CGFscene {
             this.lights[1].enable();
             this.lights[2].disable();
             this.lights[3].disable();
+            this.campfire.disableFire();
             this.cubemap = this.cubemapDay;
         }
         else if (this.selectedTime == this.timeIDs['Night']) {
@@ -243,6 +239,7 @@ class MyScene extends CGFscene {
             this.lights[1].disable();
             this.lights[2].enable();
             this.lights[3].enable();
+            this.campfire.enableFire();
             this.cubemap = this.cubemapNight;
         }
         else if (this.selectedTime == this.timeIDs['None']) {
@@ -250,6 +247,7 @@ class MyScene extends CGFscene {
             this.lights[1].disable();
             this.lights[2].disable();
             this.lights[3].disable();
+            this.campfire.disableFire();
             this.cubemap = this.cubemapDay;
         }
         else console.log("Invalid time!");
@@ -267,10 +265,6 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
         this.setGlobalAmbientLight(this.illumination, this.illumination, this.illumination, 1.0);
-        this.lights[0].update();
-        this.lights[1].update();
-        this.lights[2].update();
-        this.lights[3].update();
         
         this.enableTextures(this.enableTex);
 
@@ -287,6 +281,10 @@ class MyScene extends CGFscene {
             0.0, 0.0, 0.0, 1.0];
         this.multMatrix(scale);
 
+        this.lights[0].update();
+        this.lights[1].update();
+        this.lights[2].update();
+        this.lights[3].update();
 
         // ---- BEGIN Primitive drawing section
 

@@ -68,7 +68,7 @@ class MySwimmingPool extends ObjectGroup {
         this.ramp.translate(0, depth / 2, width / 2)
 
 
-        this.waterMaterial = new MyCGFappearance(scene, 0.2, 0.6, 1, 40)
+        this.waterMaterial = new MyCGFappearance(scene, 0.2, 0.6, 1, 10)
         this.wallsMaterial = new MyCGFappearance(scene, 0.3, 0.8, 0.4, 10)
         this.rampMaterial = new MyCGFappearance(scene, 0.2, 0.8, 0.8, 25)
 
