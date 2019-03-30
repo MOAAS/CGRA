@@ -204,12 +204,12 @@ class MyScene extends CGFscene {
         this.cubemapDayLeft = new CGFtexture(this, 'images/skybox/posx.jpg')
         this.cubemapDayRight = new CGFtexture(this, 'images/skybox/negx.jpg')
 
-        this.cubemapNightTop = new CGFtexture(this, 'images/skybox/posy.jpg')
-        this.cubemapNightBot = new CGFtexture(this, 'images/skybox/negy.jpg')
-        this.cubemapNightFront = new CGFtexture(this, 'images/skybox/posz.jpg')
-        this.cubemapNightBack = new CGFtexture(this, 'images/skybox/negz.jpg')
-        this.cubemapNightLeft = new CGFtexture(this, 'images/skybox/posx.jpg')
-        this.cubemapNightRight = new CGFtexture(this, 'images/skybox/negx.jpg')
+        this.cubemapNightTop = new CGFtexture(this, 'images/nightbox/space_up.png')
+        this.cubemapNightBot = new CGFtexture(this, 'images/nightbox/space_dn.png')
+        this.cubemapNightFront = new CGFtexture(this, 'images/nightbox/space_ft.png')
+        this.cubemapNightBack = new CGFtexture(this, 'images/nightbox/space_bk.png')
+        this.cubemapNightLeft = new CGFtexture(this, 'images/nightbox/space_lf.png')
+        this.cubemapNightRight = new CGFtexture(this, 'images/nightbox/space_rt.png')
     }
 
     setDefaultAppearance() {
