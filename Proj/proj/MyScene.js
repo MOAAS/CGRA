@@ -208,7 +208,7 @@ class MyScene extends CGFscene {
         this.cubemapNightBot = new CGFtexture(this, 'images/nightbox/space_dn.png')
         this.cubemapNightFront = new CGFtexture(this, 'images/nightbox/space_ft.png')
         this.cubemapNightBack = new CGFtexture(this, 'images/nightbox/space_bk.png')
-        this.cubemapNightLeft = new CGFtexture(this, 'images/nightbox/space_lf.png')
+        this.cubemapNightLeft = new CGFtexture(this, 'images/nightbox/space_lt.png')
         this.cubemapNightRight = new CGFtexture(this, 'images/nightbox/space_rt.png')
     }
 
