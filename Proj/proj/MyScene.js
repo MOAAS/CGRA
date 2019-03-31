@@ -85,35 +85,6 @@ class MyScene extends CGFscene {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     initObjects() {
-        this.cube1 = new MyUnitCube(this);
-        this.cube2 = new MyUnitCube(this);
-        this.cube3 = new MyUnitCube(this);
-
-        this.cube1.scale(2,2,2);
-        this.cube2.scale(1.5,1.5,1.5);
-        this.cube3.scale(1,1,1);
-        this.cube1.translate(0,0,0);
-        this.cube2.translate(0,1,0);
-        this.cube3.translate(0,2,0);
-
-        this.cubeStack = new ObjectGroup(this);
-        this.cubeStack.addObjects(this.cube1, this.cube2, this.cube3);
-        this.cubeStack.setTextureFilter(this.gl.NEAREST)
-        this.cubeStack.setTextures(this.mineTop, this.mineBot, this.mineSide);
-        
-        this.prism = new MyPrism(this, 8);        
-        this.prism.setTexture(this.joyTexture);
-        this.prism.translate(0,2.5,0);
-        
-        this.cilinder = new MyCilinder(this, 25);
-        this.cilinder.setTexture(this.joyTexture);
-        this.cilinder.scale(2,2,2);
-        this.cilinder.translate(0,-2,0);
-
-        this.dankStructure = new ObjectGroup(this);
-        this.dankStructure.addObjects(this.cubeStack, this.prism, this.cilinder);
-        this.dankStructure.translate(15, 2, 15)
-        
         this.treeGroup = new MyTreeGroupPatch(this, 6, 1.5, 6, 3, this.woodTex, this.leaves);        
         this.treeGroup.translate(-5, 0, -30)
 
@@ -154,7 +125,22 @@ class MyScene extends CGFscene {
 
         this.campfire = new MyFireplace(this,this.woodTex,this.fireTex,this.poolTexture);
         this.campfire.translate(0, 0, 20)
+
+        this.person1 = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
+        this.person2 = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
+        this.person3 = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
+
+        this.person1.rotate(1, 0, 1, 0)
+        this.person2.rotate(3, 0, 1, 0)
+        this.person3.rotate(4, 0, 1, 0)
+
+        this.person1.translate(0, 0, 10)
+        this.person2.translate(-5, 0, 22)
+        this.person3.translate(20, 0, 8)
         
+        this.people = new ObjectGroup(this)
+        this.people.addObjects(this.person1, this.person2, this.person3)
+
         this.soil = new MySquare(this)
         this.soil.rotate(Math.PI / 2, 1, 0, 0)
         this.soil.scale(150, 1, 150) 
@@ -169,12 +155,7 @@ class MyScene extends CGFscene {
         this.cubemapNight = new MyCubemap(this);
         this.cubemapNight.setTextures(this.cubemapNightTop,this.cubemapNightBot,this.cubemapNightFront, this.cubemapNightBack, this.cubemapNightLeft, this.cubemapNightRight);
 
-        this.cubemap = this.cubemapDay;
-
-        this.objects = [this.dankStructure]
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire]
-        
-        //this.objectIDs = {'Dank Structure': 0, 'Tree Patch': 1, 'None': 2};
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people]
     }
     initTextures() {
         this.joyTexture = new CGFtexture(this, 'images/emoji.jpg');
@@ -191,6 +172,13 @@ class MyScene extends CGFscene {
 		this.houseRoof = new CGFtexture(this, 'images/houseRoof.png')
 		this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
 		this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
+
+        this.skinTex = new CGFtexture(this, 'images/skin.png')
+		this.faceTex = new CGFtexture(this, 'images/face.png')
+		this.hairTex = new CGFtexture(this, 'images/hair.jpg')
+        this.shirtTex = new CGFtexture(this, 'images/shirt.jpg')
+        this.pantsTex = new CGFtexture(this, 'images/pants.jpg') 
+        this.shoeTex = new CGFtexture(this, 'images/shoe.jpg') 
 
 
 		this.poolTexture = new CGFtexture(this, 'images/poolRock.png')

@@ -24,6 +24,7 @@ serialInclude([
                 'MyCubemap.js',
                 'Vector2D.js',
                 'MyFireplace.js',
+                'MyPerson.js',
 
 main=function()
 {
