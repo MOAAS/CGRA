@@ -40,8 +40,8 @@ class MyPerson extends ObjectGroup {
         this.armLeft.rotate(-Math.PI/3, 1, 0, 0)
         this.armRight.rotate(Math.PI/3, 1, 0, 0)
 
-        this.armLeft.translate(0, -2, -1)
-        this.armRight.translate(0, -2, 1)
+        this.armLeft.translate(0, -1.25, -1)
+        this.armRight.translate(0, -1.25, 1)
 
         this.shirt = new ObjectGroup(scene);
         this.shirt.addObjects(this.body, this.armLeft, this.armRight)
@@ -61,8 +61,8 @@ class MyPerson extends ObjectGroup {
         this.handLeft.rotate(-5 * Math.PI/6, 1, 0, 0)
         this.handRight.rotate(5 * Math.PI/6, 1, 0, 0)
 
-        this.handLeft.translate(0, -0.75, -3)
-        this.handRight.translate(0, -0.75, 3)
+        this.handLeft.translate(0, 0, -3)
+        this.handRight.translate(0, 0, 3)
 
 
         // -- legs -- //
