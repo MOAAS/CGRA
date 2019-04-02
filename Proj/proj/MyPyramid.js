@@ -44,8 +44,8 @@ class MyPyramid extends MyCGFobject {
             this.vertices.push(Math.cos(ang+angDiff), 0, -Math.sin(ang+angDiff));
             
             this.texCoords.push(0.5,0);
-            this.texCoords.push(ang / (2*Math.PI), 1);
-            this.texCoords.push((ang + angDiff) / (2*Math.PI), 1);
+            this.texCoords.push(1, 1);
+            this.texCoords.push(0, 1);
             
             this.indices.push(3 * i + this.slices, (3 * i + 1) + this.slices, (3 * i + 2) + this.slices);
 
