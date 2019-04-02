@@ -85,8 +85,8 @@ class MyScene extends CGFscene {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     initObjects() {
-        this.treeGroup = new MyTreeGroupPatch(this, 6, 1.5, 6, 3, this.woodTex, this.leaves);        
-        this.treeGroup.translate(-5, 0, -30)
+        this.treeGroup = new MyTreeGroupPatch(this, 6, 1.5, 6, 4, this.woodTex, this.leaves);        
+        this.treeGroup.translate(-15, 0, -40)
 
         this.treeRow1 = new MyTreeRowPatch(this, 9, 2, 8, 5, this.woodTex, this.leaves); 
         this.treeRow2 = new MyTreeRowPatch(this, 9, 2, 8, 5, this.woodTex, this.leaves); 
