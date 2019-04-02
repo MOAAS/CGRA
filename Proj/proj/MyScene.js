@@ -169,7 +169,7 @@ class MyScene extends CGFscene {
 		this.houseFront = new CGFtexture(this, 'images/houseFront.png')
 		this.houseSide = new CGFtexture(this, 'images/houseSide.png')
 		this.houseBack = new CGFtexture(this, 'images/houseBack.png')
-		this.houseRoof = new CGFtexture(this, 'images/houseRoof.jpg')
+		this.houseRoof = new CGFtexture(this, 'images/houseRoofff.jpg')
 		this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
 		this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
 
