@@ -206,12 +206,14 @@ class MyScene extends CGFscene {
         this.football.translate(22, 1, 8)
 
         this.skyBoxDay = new MySkyBox(this);
+        this.skyBoxDay.setMaterial(new MyCGFappearance(this, 1,1,1,1));
         this.skyBoxDay.setTexture(this.skyBoxDayTex);
-        this.skyBoxDay.scale(400,400,400);
+        this.skyBoxDay.scale(1000,1000,1000);
 
         this.skyBoxNight = new MySkyBox(this);
+        this.skyBoxNight.setMaterial(new MyCGFappearance(this, 1,1,1,1));
         this.skyBoxNight.setTexture(this.skyBoxNightTex);
-        this.skyBoxNight.scale(400,400,400);
+        this.skyBoxNight.scale(1000,1000,1000);
 
         this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.football, this.cars, this.roads]
        // this.objects = [this.campfire]
@@ -248,8 +250,8 @@ class MyScene extends CGFscene {
 
         this.footballTexture = new CGFtexture(this, 'images/football.jpg')
         
-        this.skyBoxDayTex = new CGFtexture(this, 'images/teeeste.png')
-        this.skyBoxNightTex= new CGFtexture(this, 'images/teeeste.png')
+        this.skyBoxDayTex = new CGFtexture(this, 'images/skyboxx.jpg')
+        this.skyBoxNightTex= new CGFtexture(this, 'images/nightboxx.jpg')
 
     }
 
