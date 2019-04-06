@@ -25,6 +25,8 @@ serialInclude([
                 'Vector2D.js',
                 'MyFireplace.js',
                 'MyPerson.js',
+                'MySmokeParticle.js',
+                'MyCar.js',
 
 main=function()
 {

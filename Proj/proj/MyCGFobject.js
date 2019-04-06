@@ -10,10 +10,19 @@ class MyCGFobject extends CGFobject {
         this.texture = null;
         this.textureFilter = null;
         this.textureSlide = false;
+        this.xpos = 0;
+        this.ypos = 0;
+        this.zpos = 0;
     }
 
     translate(x, y, z) {
-        this.transformations.push(new Translation(x,y,z))
+        let length = this.transformations.length
+        if (length > 0 && this.transformations[length - 1] instanceof Translation) {
+            this.transformations[length - 1].x += x;
+            this.transformations[length - 1].y += y
+            this.transformations[length - 1].z += z;
+        }
+        else this.transformations.push(new Translation(x, y, z))
     }
 
     rotate(angle, x, y, z) {
@@ -24,8 +33,21 @@ class MyCGFobject extends CGFobject {
         this.transformations.push(new Scaling(x,y,z))
     }
 
+    setPos(x, y, z) {
+        this.xpos = x;
+        this.ypos = y;
+        this.zpos = z;        
+    }
+
+    movePos(x, y, z) {
+        this.xpos += x;
+        this.ypos += y;
+        this.zpos += z;        
+    }
+
     display() {
         this.scene.pushMatrix()
+        this.scene.translate(this.xpos, this.ypos, this.zpos);
         for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
             if (transformation instanceof Translation)
@@ -62,6 +84,10 @@ class MyCGFobject extends CGFobject {
 
 	updateComplexity(complexity) {
         
+    }
+
+    update() {
+
     }
 
     // --- Lighting, Materials, Textures -- //
