@@ -199,10 +199,11 @@ class MyScene extends CGFscene {
         this.soil.setTextureWrap('REPEAT', 'REPEAT');
         this.soil.scaleTexCoords(150, 150);
 
-        this.sphere = new MySphere(this,20,20,1);
-        this.sphere.setMaterial(new MyCGFappearance(this, 0.5, 1, 0, 1));
-        this.sphere.setTexture(this.footballTexture)
-        this.sphere.translate(15, 5, 15)
+        this.football = new MySphere(this,20,20,1);
+        this.football.setMaterial(new MyCGFappearance(this, 0.5, 1, 0, 1));
+        this.football.setTexture(this.footballTexture)
+        this.football.scale(0.5, 0.5, 0.5)
+        this.football.translate(22, 1, 8)
 
         this.cubemapDay = new MyCubemap(this);
         this.cubemapDay.setTextures(this.cubemapDayTop,this.cubemapDayBot,this.cubemapDayFront, this.cubemapDayBack, this.cubemapDayLeft, this.cubemapDayRight);
@@ -210,7 +211,7 @@ class MyScene extends CGFscene {
         this.cubemapNight = new MyCubemap(this);
         this.cubemapNight.setTextures(this.cubemapNightTop,this.cubemapNightBot,this.cubemapNightFront, this.cubemapNightBack, this.cubemapNightLeft, this.cubemapNightRight);
 
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people,this.sphere, this.cars, this.roads]
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.football, this.cars, this.roads]
        // this.objects = [this.campfire]
        // this.objects = [this.campfire]
     }
