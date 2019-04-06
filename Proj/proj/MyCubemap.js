@@ -33,7 +33,7 @@ class MyCubemap extends ObjectGroup {
 
 		this.addObjects(this.top,this.bot,this.front,this.back,this.left,this.right);
 		
-		this.scale(1000, 1000, 1000)
+		this.scale(400, 400, 400)
         this.setMaterial(new MyCGFappearance(scene, 1, 1, 1, 1)) 
 	}
 

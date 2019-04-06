@@ -152,10 +152,10 @@ class MyScene extends CGFscene {
         this.soil.setTextureWrap('REPEAT', 'REPEAT');
         this.soil.scaleTexCoords(150, 150);
 
-        this.sphere = new MySphere(this,20,20,1);
+        this.sphere = new MySphere(this,20,20,0.6);
         this.sphere.setMaterial(new MyCGFappearance(this, 0.5, 1, 0, 1));
         this.sphere.setTexture(this.footballTexture)
-        this.sphere.translate(15, 5, 15)
+        this.sphere.translate(15, 0.6, 10)
 
         this.cubemapDay = new MyCubemap(this);
         this.cubemapDay.setTextures(this.cubemapDayTop,this.cubemapDayBot,this.cubemapDayFront, this.cubemapDayBack, this.cubemapDayLeft, this.cubemapDayRight);
