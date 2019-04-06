@@ -23,6 +23,7 @@ class MyScene extends CGFscene {
         
         this.axis = new CGFaxis(this);
         this.wind = new Vector2D(1,1);
+        this.setUpdatePeriod(10);
         this.initObjects();
 
         //Objects connected to MyInterface
@@ -107,12 +108,12 @@ class MyScene extends CGFscene {
         this.house.setFloorTexture(this.houseFloor)
 
         
-        this.bigHill = new MyVoxelHill(this, 7)
-        this.bigHill.scale(2,2,2)
+        this.bigHill = new MyVoxelHill(this, 5)
+        this.bigHill.scale(2,2,2);
         this.bigHill.translate(25, 0, 30)
         
-        this.smallHill = new MyVoxelHill(this, 5)
-        this.smallHill.scale(1.5, 1.5, 1.5)
+        this.smallHill = new MyVoxelHill(this, 4)
+        this.smallHill.scale(1.5,1.5,1.5);
         this.smallHill.translate(-15, 0, 20)
         
         this.hills = new ObjectGroup(this)
@@ -125,21 +126,23 @@ class MyScene extends CGFscene {
 
         this.campfire = new MyFireplace(this,this.woodTex,this.fireTex,this.poolTexture);
         this.campfire.translate(0, 0, 20)
+        this.campfire.enableSmoke(0, 3, 20);
 
         this.person1 = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
         this.person2 = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
-        this.person3 = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
+        this.child = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
 
         this.person1.rotate(1, 0, 1, 0)
         this.person2.rotate(3, 0, 1, 0)
-        this.person3.rotate(4, 0, 1, 0)
+        this.child.rotate(4, 0, 1, 0)
 
         this.person1.translate(0, 0, 10)
         this.person2.translate(-5, 0, 22)
-        this.person3.translate(20, 0, 8)
+        this.child.scale(0.5, 0.6, 0.5)
+        this.child.translate(20, 0, 8)
         
         this.people = new ObjectGroup(this)
-        this.people.addObjects(this.person1, this.person2, this.person3)
+        this.people.addObjects(this.person1, this.person2, this.child)
 
         this.soil = new MySquare(this)
         this.soil.rotate(Math.PI / 2, 1, 0, 0)
@@ -245,7 +248,10 @@ class MyScene extends CGFscene {
             this.campfire.disableFire();
             this.cubemap = this.cubemapDay;
         }
+
+        
         else console.log("Invalid time!");
+        
 
     }
 
@@ -281,6 +287,7 @@ class MyScene extends CGFscene {
         this.lights[2].update();
         this.lights[3].update();
 
+
         // ---- BEGIN Primitive drawing section
 
         for (var i = 0; i < this.objects.length; i++) {
@@ -290,5 +297,11 @@ class MyScene extends CGFscene {
         this.cubemap.display();
 
         // ---- END Primitive drawing section
+    }
+
+    update() {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].update();
+        }
     }
 }

@@ -26,14 +26,21 @@ class ObjectGroup extends MyCGFobject {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].rotate(angle, x, y, z) ;
         }		
-    }
+    }    
 
-    setTextureWrap(x, y) {
+    setPos(x, y, z) {
         for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].setTextureWrap(x, y);
+            this.objects[i].setPos(x, y, z) ;
         }		
     }
 
+    movePos(x, y, z) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].movePos(x, y, z) ;
+        }		
+    }
+
+    
     scale(x, y, z) {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].scale(x, y, z);
@@ -43,14 +50,26 @@ class ObjectGroup extends MyCGFobject {
     addObjects(...args) {
         this.objects.push(...args);
     }
-
+    
 	updateComplexity(complexity) {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].updateComplexity(complexity);
         }		
-	}
-
+    }
+    
+    update() {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].update();
+        }		
+    }
+    
     // --- Lighting, Materials, Textures -- //
+    
+    setTextureWrap(x, y) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].setTextureWrap(x, y);
+        }		
+    }
 
     scaleTexCoords(s, t) {
         for (var i = 0; i < this.objects.length; i++) {

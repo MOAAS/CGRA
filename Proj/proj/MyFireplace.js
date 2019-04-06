@@ -60,11 +60,42 @@ class MyFireplace extends ObjectGroup {
         this.enabled = false;
     }
 
+    enableSmoke(x, y, z) {
+        this.smoke = true;
+        this.smokeSpawnX = x;
+        this.smokeSpawnY = y;
+        this.smokeSpawnZ = z;
+        this.particles = [];
+    }
+
     display() {
         this.objects = [this.fireWoods, this.base];
-        if (this.enabled)
+        if (this.enabled) {
             this.addObjects(this.fire)
+        }
+        for (let i = 0; i < this.particles.length; i++)
+            this.particles[i].display();
         super.display();
     }
 
+    update() {
+        if (this.enabled && this.smoke) {
+            let xSpawn = this.smokeSpawnX + getRandNum(-0.8,0.8);
+            let ySpawn = this.smokeSpawnY + getRandNum(-1,1);
+            let zSpawn = this.smokeSpawnZ + getRandNum(-0.8,0.8);
+            this.particles.push(new MySmokeParticle(this.scene, xSpawn, ySpawn, zSpawn));
+        }
+        for (let i = 0; i < this.particles.length; i++) {
+            if (this.particles[i].dead) {
+                this.particles.splice(i, 1);
+                i--;
+            }
+            else this.particles[i].update();
+        }
+    }
+
+}
+
+function getRandNum(min, max) {
+    return Math.random() * (max - min) + min;
 }
