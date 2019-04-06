@@ -53,7 +53,7 @@ class MyPrism extends MyCGFobject {
             this.indices.push(4 * i + 2 * this.slices + 0, 4 * i + 2 * this.slices + 2, 4 * i + 2 * this.slices + 1)
             this.indices.push(4 * i + 2 * this.slices + 3, 4 * i + 2 * this.slices + 1, 4 * i + 2 * this.slices + 2)
 
-            var normal = [Math.sin(ang + angDiff) - Math.sin(ang), 0, Math.cos(ang) - Math.cos(ang + angDiff)]
+            var normal = [Math.sin(ang + angDiff) - Math.sin(ang), 0, Math.cos(ang + angDiff) - Math.cos(ang)]
             // normalization
             var normalLength=Math.sqrt(normal[0]*normal[0] + normal[1]*normal[1] + normal[2]*normal[2])
             normal[0] /= normalLength;

@@ -144,9 +144,56 @@ class MyScene extends CGFscene {
         this.people = new ObjectGroup(this)
         this.people.addObjects(this.person1, this.person2, this.child)
 
+        this.road1 = new MyRoad(this, 8, false, this.pillarTexture);
+        this.road2 = new MyRoad(this, 8, true, this.pillarTexture);
+
+        this.road1.translate(30, 0, -30);
+        this.road2.translate(40, 0, -40);
+
+        this.car0 = new MyCar(this, this.road1);
+        this.car1 = new MyCar(this, this.road1);
+        this.car2 = new MyCar(this, this.road1);
+        this.car3 = new MyCar(this, this.road1);
+        this.car4 = new MyCar(this, this.road1);
+        this.car5 = new MyCar(this, this.road2);
+        this.car6 = new MyCar(this, this.road2);
+        this.car7 = new MyCar(this, this.road2);
+        this.car8 = new MyCar(this, this.road2);
+        this.car9 = new MyCar(this, this.road2);
+
+        this.car0.translate(30, 0, -30);
+        this.car1.translate(30, 0, -30);
+        this.car2.translate(30, 0, -30);
+        this.car3.translate(30, 0, -30);
+        this.car4.translate(30, 0, -30);
+
+        this.car5.translate(40, 0, -40);
+        this.car6.translate(40, 0, -40);
+        this.car7.translate(40, 0, -40);
+        this.car8.translate(40, 0, -40);
+        this.car9.translate(40, 0, -40);
+        
+        this.car0.movePos(-60, 0, -60);
+        this.car1.movePos(-30, 0, -30);
+        this.car2.movePos(0, 0, 0);
+        this.car3.movePos(30, 0, 30);
+        this.car4.movePos(60, 0, 60);
+
+        this.car5.movePos(-60, 0, -60);
+        this.car6.movePos(-30, 0, -30);
+        this.car7.movePos(0, 0, 0);
+        this.car8.movePos(30, 0, 30);
+        this.car9.movePos(60, 0, 60);
+
+        this.roads = new ObjectGroup(this);
+        this.cars = new ObjectGroup(this);
+
+        this.roads.addObjects(this.road1, this.road2);
+        this.cars.addObjects(this.car0, this.car1, this.car2, this.car3, this.car4, this.car5, this.car6,this.car7,this.car8, this.car9);
+
         this.soil = new MySquare(this)
         this.soil.rotate(Math.PI / 2, 1, 0, 0)
-        this.soil.scale(150, 1, 150) 
+        this.soil.scale(200, 1, 200) 
         this.soil.setMaterial(new MyCGFappearance(this, 0.5, 1, 0, 1))  
         this.soil.setTexture(this.mineTop)
         this.soil.setTextureWrap('REPEAT', 'REPEAT');
@@ -158,7 +205,7 @@ class MyScene extends CGFscene {
         this.cubemapNight = new MyCubemap(this);
         this.cubemapNight.setTextures(this.cubemapNightTop,this.cubemapNightBot,this.cubemapNightFront, this.cubemapNightBack, this.cubemapNightLeft, this.cubemapNightRight);
 
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people]
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.cars, this.roads]
        // this.objects = [this.campfire]
        // this.objects = [this.campfire]
     }
