@@ -17,6 +17,7 @@ serialInclude([
                 'MyCilinder.js',
                 'MyCone.js',
                 'MyPyramid.js',
+                'MySphere.js',
                 'MyTree.js',
                 'MyHouse.js',
                 'MyVoxelHill.js',
