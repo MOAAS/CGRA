@@ -22,12 +22,12 @@ serialInclude([
                 'MyHouse.js',
                 'MyVoxelHill.js',
                 'MySwimmingPool.js',
-                'MyCubemap.js',
                 'Vector2D.js',
                 'MyFireplace.js',
                 'MyPerson.js',
                 'MySmokeParticle.js',
                 'MyCar.js',
+                'MySkyBox.js',
 
 main=function()
 {

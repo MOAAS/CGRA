@@ -205,17 +205,20 @@ class MyScene extends CGFscene {
         this.football.scale(0.5, 0.5, 0.5)
         this.football.translate(22, 1, 8)
 
-        this.cubemapDay = new MyCubemap(this);
-        this.cubemapDay.setTextures(this.cubemapDayTop,this.cubemapDayBot,this.cubemapDayFront, this.cubemapDayBack, this.cubemapDayLeft, this.cubemapDayRight);
+        this.skyBoxDay = new MySkyBox(this);
+        this.skyBoxDay.setTexture(this.skyBoxDayTex);
+        this.skyBoxDay.scale(400,400,400);
 
-        this.cubemapNight = new MyCubemap(this);
-        this.cubemapNight.setTextures(this.cubemapNightTop,this.cubemapNightBot,this.cubemapNightFront, this.cubemapNightBack, this.cubemapNightLeft, this.cubemapNightRight);
+        this.skyBoxNight = new MySkyBox(this);
+        this.skyBoxNight.setTexture(this.skyBoxNightTex);
+        this.skyBoxNight.scale(400,400,400);
 
         this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.football, this.cars, this.roads]
        // this.objects = [this.campfire]
        // this.objects = [this.campfire]
     }
     initTextures() {
+        this.testeTex = new CGFtexture(this, 'images/teeeste.png');
         this.joyTexture = new CGFtexture(this, 'images/emoji.jpg');
         this.mineTop = new CGFtexture(this, 'images/mineTop.png')
 		this.mineSide = new CGFtexture(this, 'images/mineSide.png')
@@ -245,19 +248,9 @@ class MyScene extends CGFscene {
 
         this.footballTexture = new CGFtexture(this, 'images/football.jpg')
         
-        this.cubemapDayTop = new CGFtexture(this, 'images/skybox/posy.jpg')
-        this.cubemapDayBot = new CGFtexture(this, 'images/skybox/negy.jpg')
-        this.cubemapDayFront = new CGFtexture(this, 'images/skybox/posz.jpg')
-        this.cubemapDayBack = new CGFtexture(this, 'images/skybox/negz.jpg')
-        this.cubemapDayLeft = new CGFtexture(this, 'images/skybox/posx.jpg')
-        this.cubemapDayRight = new CGFtexture(this, 'images/skybox/negx.jpg')
+        this.skyBoxDayTex = new CGFtexture(this, 'images/teeeste.png')
+        this.skyBoxNightTex= new CGFtexture(this, 'images/teeeste.png')
 
-        this.cubemapNightTop = new CGFtexture(this, 'images/nightbox/space_up.png')
-        this.cubemapNightBot = new CGFtexture(this, 'images/nightbox/space_dn.png')
-        this.cubemapNightFront = new CGFtexture(this, 'images/nightbox/space_ft.png')
-        this.cubemapNightBack = new CGFtexture(this, 'images/nightbox/space_bk.png')
-        this.cubemapNightLeft = new CGFtexture(this, 'images/nightbox/space_lt.png')
-        this.cubemapNightRight = new CGFtexture(this, 'images/nightbox/space_rt.png')
     }
 
     setDefaultAppearance() {
@@ -280,7 +273,7 @@ class MyScene extends CGFscene {
             this.lights[2].disable();
             this.lights[3].disable();
             this.campfire.disableFire();
-            this.cubemap = this.cubemapDay;
+            this.cubemap = this.skyBoxDay;
         }
         else if (this.selectedTime == this.timeIDs['Night']) {
             this.lights[0].disable();
@@ -288,7 +281,7 @@ class MyScene extends CGFscene {
             this.lights[2].enable();
             this.lights[3].enable();
             this.campfire.enableFire();
-            this.cubemap = this.cubemapNight;
+            this.cubemap = this.skyBoxNight;
         }
         else if (this.selectedTime == this.timeIDs['None']) {
             this.lights[0].enable();
@@ -296,7 +289,7 @@ class MyScene extends CGFscene {
             this.lights[2].disable();
             this.lights[3].disable();
             this.campfire.disableFire();
-            this.cubemap = this.cubemapDay;
+            this.cubemap = this.skyBoxDay;
         }
 
         
