@@ -71,8 +71,8 @@ class MyCGFobject extends CGFobject {
 
         if (this.textureSlide) {
             for (var i = 0; i < this.texCoords.length; i += 2) {
-                this.texCoords[i] -= this.scene.wind.x / 500;
-                this.texCoords[i + 1] -= this.scene.wind.y / 500;
+                this.texCoords[i] -= this.scene.wind.x / 1000;
+                this.texCoords[i + 1] -= this.scene.wind.y / 1000;
             }
             this.material.setTextureWrap('REPEAT', 'REPEAT');
             this.updateTexCoordsGLBuffers();                
