@@ -4,7 +4,7 @@
  * @param scene - Reference to MyScene object
  */
 
-class MyTriangle extends CGFobject {
+class MyTriangle extends MyCGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();		

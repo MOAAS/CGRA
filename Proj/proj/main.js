@@ -28,6 +28,7 @@ serialInclude([
                 'MySmokeParticle.js',
                 'MyCar.js',
                 'MySkyBox.js',
+                'MyWindVane.js',
 
 main=function()
 {

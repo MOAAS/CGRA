@@ -13,6 +13,10 @@ class MyCGFobject extends CGFobject {
         this.xpos = 0;
         this.ypos = 0;
         this.zpos = 0;
+
+        this.xAngle = 0;
+        this.yAngle = 0;
+        this.zAngle = 0;        
     }
 
     translate(x, y, z) {
@@ -45,9 +49,34 @@ class MyCGFobject extends CGFobject {
         this.zpos += z;        
     }
 
+    setAngle(x, y , z) {
+        this.xAngle = x;
+        this.yAngle = y;
+        this.zAngle = z;        
+    }
+
+    moveAngle(x, y, z) {
+        this.xAngle += x;
+        this.yAngle += y;
+        this.zAngle += z;
+        while (this.xAngle > 2 * Math.PI)    
+            this.xAngle -= 2 * Math.PI;
+        while (this.yAngle > 2 * Math.PI)    
+            this.yAngle -= 2 * Math.PI;
+        while (this.zAngle > 2 * Math.PI)    
+            this.zAngle -= 2 * Math.PI;
+    }
+
     display() {
         this.scene.pushMatrix()
-        this.scene.translate(this.xpos, this.ypos, this.zpos);
+        if (this.xpos || this.ypos || this.zpos)
+            this.scene.translate(this.xpos, this.ypos, this.zpos);
+        if (this.xAngle)
+            this.scene.rotate(this.xAngle, 1, 0, 0);
+        if (this.yAngle)
+            this.scene.rotate(this.yAngle, 0, 1, 0);
+        if (this.zAngle)
+            this.scene.rotate(this.zAngle, 0, 0, 1);
         for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
             if (transformation instanceof Translation)

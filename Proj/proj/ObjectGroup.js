@@ -40,6 +40,19 @@ class ObjectGroup extends MyCGFobject {
         }		
     }
 
+    setAngle(x, y , z) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].setAngle(x, y, z) ;
+        }		
+    }
+
+    moveAngle(x, y, z) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].moveAngle(x, y, z) ;
+        }		
+    }
+
+
     
     scale(x, y, z) {
         for (var i = 0; i < this.objects.length; i++) {

@@ -31,6 +31,7 @@ class MyScene extends CGFscene {
         this.displayAxis = false;
         this.objectComplexity = 0.5;
         this.enableTex = true;
+        this.enableSkybox = true;
         this.selectedTime = 2;
         this.timeIDs = { 'Day': 0 , 'Night': 1, 'None': 2};
         this.updateTimeOfDay();
@@ -191,6 +192,9 @@ class MyScene extends CGFscene {
         this.roads.addObjects(this.road1, this.road2);
         this.cars.addObjects(this.car0, this.car1, this.car2, this.car3, this.car4, this.car5, this.car6,this.car7,this.car8, this.car9);
 
+        this.windvane = new MyWindVane(this, this.pillarTexture);
+        this.windvane.movePos(-15, 0, 0)
+
         this.soil = new MySquare(this)
         this.soil.rotate(Math.PI / 2, 1, 0, 0)
         this.soil.scale(200, 1, 200) 
@@ -199,24 +203,25 @@ class MyScene extends CGFscene {
         this.soil.setTextureWrap('REPEAT', 'REPEAT');
         this.soil.scaleTexCoords(150, 150);
 
-        this.football = new MySphere(this,20,20,1);
+        this.football = new MySphere(this,20,20,0.5);
         this.football.setMaterial(new MyCGFappearance(this, 0.5, 1, 0, 1));
         this.football.setTexture(this.footballTexture)
-        this.football.scale(0.5, 0.5, 0.5)
         this.football.translate(22, 1, 8)
 
         this.skyBoxDay = new MySkyBox(this);
         this.skyBoxDay.setMaterial(new MyCGFappearance(this, 1,1,1,1));
         this.skyBoxDay.setTexture(this.skyBoxDayTex);
-        this.skyBoxDay.scale(1000,1000,1000);
-
+        this.skyBoxDay.scale(200,200,200);
+        this.skyBoxDay.translate(0, 25, 0);
+        
         this.skyBoxNight = new MySkyBox(this);
         this.skyBoxNight.setMaterial(new MyCGFappearance(this, 1,1,1,1));
         this.skyBoxNight.setTexture(this.skyBoxNightTex);
-        this.skyBoxNight.scale(1000,1000,1000);
+        this.skyBoxNight.scale(200,200,200);
+        this.skyBoxNight.translate(0, 25, 0);
 
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.football, this.cars, this.roads]
-       // this.objects = [this.campfire]
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.football, this.cars, this.roads, this.windvane]
+        //this.objects = [this.windvane]
        // this.objects = [this.campfire]
     }
     initTextures() {
@@ -250,8 +255,8 @@ class MyScene extends CGFscene {
 
         this.footballTexture = new CGFtexture(this, 'images/football.jpg')
         
-        this.skyBoxDayTex = new CGFtexture(this, 'images/skyboxx.jpg')
-        this.skyBoxNightTex= new CGFtexture(this, 'images/nightboxx.jpg')
+        this.skyBoxDayTex = new CGFtexture(this, 'images/skybox.jpg')
+        this.skyBoxNightTex= new CGFtexture(this, 'images/nightbox.jpg')
 
     }
 
@@ -339,7 +344,8 @@ class MyScene extends CGFscene {
             this.objects[i].display();
         }
 
-        this.cubemap.display();
+        if (this.enableSkybox)
+            this.cubemap.display();
 
         // ---- END Primitive drawing section
     }

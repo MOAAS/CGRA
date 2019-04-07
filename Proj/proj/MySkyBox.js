@@ -133,14 +133,7 @@ class MySkyBox extends MyCGFobject {
 			0.25,2/3,   
 		]
 
-        //var ang = 0;
-        //var alphaAng = 2*Math.PI/this.slices;
-
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}
-
-	updateBuffers(complexity){
-		
-    }
 }
