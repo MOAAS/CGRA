@@ -39,7 +39,9 @@ class MyWindVane extends ObjectGroup {
 
     update() {
         let targetAngle = Math.atan2(this.scene.wind.x, this.scene.wind.y) + Math.PI / 2;
-        this.arrow.setAngle(0, targetAngle, 0);
+        let currAngle = this.triangle.yAngle;
+        let angleDiff = Math.atan2(Math.sin(targetAngle - currAngle), Math.cos(targetAngle- currAngle));
+        this.arrow.moveAngle(0, angleDiff / 10, 0);
     }
 
 }
