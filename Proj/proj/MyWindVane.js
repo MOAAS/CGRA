@@ -3,15 +3,16 @@ class MyWindVane extends ObjectGroup {
         super(scene);
 
         this.triangle = new MyTriangle(scene);
-        this.rectangle = new MySquare(scene);
+        this.rectangle = new MyPrism(scene, 4);
         this.square = new MySquare(scene);
 
         this.arrow = new ObjectGroup(scene);
         this.arrow.addObjects(this.triangle, this.rectangle, this.square);
 
-        this.triangle.rotate(- Math.PI / 4, 0, 0, 1);        
-        this.rectangle.scale(5, 0.25, 1);
-        this.rectangle.translate(3, 0, -0.01)
+        this.triangle.rotate(- Math.PI / 4, 0, 0, 1);
+        this.rectangle.rotate(Math.PI / 4, 0, 1, 0);        
+        this.rectangle.scale(3, 0.25, 0.1);
+        this.rectangle.translate(2.75, 0, -0.01)
         this.square.translate(5, 0, 0);
 
         this.arrow.translate(-1, 2, 0)
