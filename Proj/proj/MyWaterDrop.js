@@ -3,6 +3,8 @@ class MyRainSpawner extends MyCGFobject {
         super(scene)
         this.particles = [];
         this.enableRain = false;
+        this.rainFrequency = 0.2;
+        this.rainAmount = 6;
         this.ticksLeft = 0;
     }
 
@@ -35,11 +37,12 @@ class MyRainSpawner extends MyCGFobject {
             this.ticksLeft--;
             return;
         }
-        else this.ticksLeft = 5;
+        else this.ticksLeft = 1 / this.rainFrequency;
 
-        for (let x = -50; x <= 50; x += 20) {
-            for (let z = -50; z <= 50; z += 20) {
-                this.particles.push(new MyWaterDrop(this.scene, x + getRandNum(-10, 10), 100, z + getRandNum(-10, 10)));
+        let diff = 150 / this.rainAmount;
+        for (let x = -75; x <= 75; x += diff) {
+            for (let z = -75; z <= 75; z += diff) {
+                this.particles.push(new MyWaterDrop(this.scene, x + getRandNum(-diff / 2, diff / 2), 100, z + getRandNum(-diff / 2, diff / 2)));
             }
         }
 
@@ -51,10 +54,7 @@ class MyWaterDrop extends ObjectGroup {
     constructor(scene, x, y, z) {
         super(scene);
         this.dead = false;
-        this.offsetX =  getRandNum(-0.04, 0.04);
-        this.offsetY =  getRandNum(-0.04, 0.04);
         this.velocity = getRandNum(-1, -2);
-
 
         this.sphere = new MySphere(scene, 15, 15, 0.5);
         this.sphere.setPos(x, y ,z);
@@ -66,12 +66,13 @@ class MyWaterDrop extends ObjectGroup {
         this.addObjects(this.sphere, this.cone);
 
         this.material = new MyCGFappearance(scene, 0.8, 0.8, 1, 5);
-        this.material.setColor(0, 200, 255)
+        this.material.setColor(0, 150, 255)
         this.setMaterial(this.material);
     }
 
     update() {
-        this.movePos(this.scene.wind.x/75 + this.offsetX, this.velocity, this.scene.wind.y/75+ this.offsetY);
+        this.movePos(this.scene.wind.x / 5, this.velocity, this.scene.wind.y / 5);
+        this.setAngle(-this.scene.wind.y/15, 0, this.scene.wind.x/15);
         if (this.sphere.ypos <= 0)
             this.dead = true;
     }

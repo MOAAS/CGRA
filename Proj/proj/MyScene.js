@@ -23,7 +23,6 @@ class MyScene extends CGFscene {
         
         this.axis = new CGFaxis(this);
         this.wind = new Vector2D(1,1);
-        this.setUpdatePeriod(10);
         this.initObjects();
 
         //Objects connected to MyInterface
@@ -35,6 +34,7 @@ class MyScene extends CGFscene {
         this.selectedTime = 2;
         this.timeIDs = { 'Day': 0 , 'Night': 1, 'None': 2};
         this.updateTimeOfDay();
+        this.setUpdatePeriod(10);
     }
     initLights() {
         this.illumination = 1.0;

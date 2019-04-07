@@ -18,8 +18,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'enableTex').name('Enable Textures');
         this.gui.add(this.scene, 'enableSkybox').name('Enable Sky Box');
-        this.gui.add(this.scene.rainSpawner, 'enableRain').name('Enable Rain');
-        
+       
         this.gui.add(this.scene, 'scaleFactor', 0.1, 1).name('Scale Factor');
         this.gui.add(this.scene, 'objectComplexity', 0, 5).name('Object Complexity').onChange(this.scene.updateObjectComplexity.bind(this.scene));;
         this.gui.add(this.scene, 'illumination', 0, 1);
@@ -38,6 +37,10 @@ class MyInterface extends CGFinterface {
         f1.add(this.scene.wind, 'x', -5, 5).name("X Direction");
         f1.add(this.scene.wind, 'y', -5, 5).name("Y Direction");
 
+        var f2 = this.gui.addFolder('Rain');
+        f2.add(this.scene.rainSpawner, 'enableRain').name('Enable Rain');
+        f2.add(this.scene.rainSpawner, 'rainFrequency', 0.05, 0.5).name('Rain Frequency');
+        f2.add(this.scene.rainSpawner, 'rainAmount', 3, 8).name('Rain Amount');
 
         //this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs).name('Selected Objects');
 
