@@ -3,6 +3,10 @@ class MySmokeParticle extends MyCGFobject {
         super(scene);
         this.particleLife = getRandNum(50, 150);
         this.dead = false;
+        this.offsetX =  getRandNum(-0.04, 0.04);
+        this.offsetY =  getRandNum(-0.04, 0.04);
+        this.velocity = getRandNum(0.075, 0.15);
+
 
         this.sphere = new MySphere(scene, 5, 5, this.particleLife / 1000);
         this.sphere.setPos(x, y ,z);
@@ -17,7 +21,7 @@ class MySmokeParticle extends MyCGFobject {
     }
 
     update() {
-        this.sphere.movePos(this.scene.wind.x/75 , getRandNum(0.1, 0.2), this.scene.wind.y/75);
+        this.sphere.movePos(this.scene.wind.x/75 + this.offsetX, this.velocity, this.scene.wind.y/75+ this.offsetY);
         this.particleLife--;
         if (this.particleLife <= 0)
             this.dead = true;
