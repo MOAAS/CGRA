@@ -39,7 +39,7 @@ class MyRainSpawner extends MyCGFobject {
 
         for (let x = -50; x <= 50; x += 20) {
             for (let z = -50; z <= 50; z += 20) {
-                this.particles.push(new MyWaterDrop(this.scene, x + getRandNum(-10, 10), 50, z + getRandNum(-10, 10)));
+                this.particles.push(new MyWaterDrop(this.scene, x + getRandNum(-10, 10), 100, z + getRandNum(-10, 10)));
             }
         }
 
