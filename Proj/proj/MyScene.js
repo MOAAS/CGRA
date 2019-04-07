@@ -195,6 +195,9 @@ class MyScene extends CGFscene {
         this.windvane = new MyWindVane(this, this.pillarTexture);
         this.windvane.movePos(-15, 0, 0)
 
+        this.rainSpawner = new MyRainSpawner(this);
+
+
         this.soil = new MySquare(this)
         this.soil.rotate(Math.PI / 2, 1, 0, 0)
         this.soil.scale(200, 1, 200) 
@@ -220,8 +223,7 @@ class MyScene extends CGFscene {
         this.skyBoxNight.scale(200,200,200);
         this.skyBoxNight.translate(0, 25, 0);
 
-        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.football, this.cars, this.roads, this.windvane]
-        //this.objects = [this.windvane]
+        this.objects = [this.house, this.trees, this.soil, this.hills, this.swimmingPool, this.campfire, this.people, this.football, this.cars, this.roads, this.windvane, this.rainSpawner]
        // this.objects = [this.campfire]
     }
     initTextures() {

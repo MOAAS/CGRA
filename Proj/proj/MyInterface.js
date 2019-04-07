@@ -18,6 +18,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         this.gui.add(this.scene, 'enableTex').name('Enable Textures');
         this.gui.add(this.scene, 'enableSkybox').name('Enable Sky Box');
+        this.gui.add(this.scene.rainSpawner, 'enableRain').name('Enable Rain');
         
         this.gui.add(this.scene, 'scaleFactor', 0.1, 1).name('Scale Factor');
         this.gui.add(this.scene, 'objectComplexity', 0, 5).name('Object Complexity').onChange(this.scene.updateObjectComplexity.bind(this.scene));;

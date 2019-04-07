@@ -29,6 +29,7 @@ serialInclude([
                 'MyCar.js',
                 'MySkyBox.js',
                 'MyWindVane.js',
+                'MyWaterDrop.js',
 
 main=function()
 {
