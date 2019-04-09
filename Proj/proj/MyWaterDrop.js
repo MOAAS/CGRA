@@ -56,16 +56,16 @@ class MyWaterDrop extends ObjectGroup {
         this.dead = false;
         this.velocity = getRandNum(-1, -2);
 
-        this.sphere = new MySphere(scene, 15, 15, 0.5);
+        this.sphere = new MySphere(scene, 15, 15, 0.25);
         this.sphere.setPos(x, y ,z);
         this.cone = new MyCone(scene, 15);
-        this.cone.scale(0.5, 1.5, 0.5);
+        this.cone.scale(0.25, 1.25, 0.25);
         this.cone.setPos(x, y, z);
 
         
         this.addObjects(this.sphere, this.cone);
 
-        this.material = new MyCGFappearance(scene, 0.8, 0.8, 1, 5);
+        this.material = new MyCGFappearance(scene, 0.25, 0.2, 0.3, 3);
         this.material.setColor(0, 150, 255)
         this.setMaterial(this.material);
     }

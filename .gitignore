@@ -32,3 +32,5 @@
 *.app
 Proj/.vscode/ipch/64f41133173ebcd0/mmap_address.bin
 Proj/.vscode/ipch/64f41133173ebcd0/FORENSICS.ipch
+*.ipch
+*.bin
