@@ -80,7 +80,7 @@ class MyScene extends CGFscene {
         this.lights[3].setVisible(false);
         this.lights[3].update();
         this.lights[3].setConstantAttenuation(1);
-        this.lights[3].setLinearAttenuation(0.2);
+        this.lights[3].setLinearAttenuation(0.5);
         this.lights[3].setQuadraticAttenuation(0);
     }
     initCameras() {
