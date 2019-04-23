@@ -80,15 +80,17 @@ class MyScene extends CGFscene {
         this.lights[3].setVisible(false);
         this.lights[3].update();
         this.lights[3].setConstantAttenuation(1);
-        this.lights[3].setLinearAttenuation(0.2);
+        this.lights[3].setLinearAttenuation(0.5);
         this.lights[3].setQuadraticAttenuation(0);
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     initObjects() {
-        this.treeGroup = new MyTreeGroupPatch(this, 6, 1.5, 6, 4, this.woodTex, this.leaves);        
-        this.treeGroup.translate(-15, 0, -40)
+        this.treeGroup1 = new MyTreeGroupPatch(this, 6, 1.5, 6, 4, this.woodTex, this.leaves);        
+        this.treeGroup2 = new MyTreeGroupPatch(this, 6, 1.5, 6, 4, this.woodTex, this.leaves);        
+        this.treeGroup1.translate(-15, 0, -40)
+        this.treeGroup2.translate(-60, 0, -80)
 
         this.treeRow1 = new MyTreeRowPatch(this, 9, 2, 8, 5, this.woodTex, this.leaves); 
         this.treeRow2 = new MyTreeRowPatch(this, 9, 2, 8, 5, this.woodTex, this.leaves); 
@@ -101,7 +103,7 @@ class MyScene extends CGFscene {
         this.treeRow3.translate(-60, 0, 40)
 
         this.trees = new ObjectGroup(this)
-        this.trees.addObjects(this.treeGroup, this.treeRow1, this.treeRow2, this.treeRow3)
+        this.trees.addObjects(this.treeGroup1, this.treeGroup2, this.treeRow1, this.treeRow2, this.treeRow3)
 
         this.house = new MyHouse(this, 12, 9, 8, this.houseSide, this.houseRoof, this.pillarTexture)
         this.house.setDoorTexture(this.houseFront)
