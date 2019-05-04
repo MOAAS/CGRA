@@ -26,12 +26,12 @@ class MyScene extends CGFscene {
         this.ruleX1 = "F[-X][X]F[-X]+FX";
         this.ruleX2 = "F[-X][x]+X";
         this.ruleX3 = "F[-X][x]+X";
-        this.ruleX4 = "F[-X][x]+X";
-        this.ruleX5 = "F[-X][x]+X";
-        this.ruleX6 = "F[-X][x]+X";
-        this.ruleX7 = "F[-X][x]+X";
-        this.ruleX8 = "F[-X][x]+X";
-        this.ruleX9 = "F[-X][x]+X";
+        this.ruleX4 = "F[/X][X]F[\\X]+X";
+        this.ruleX5 = "F[\X][X]/X";
+        this.ruleX6 = "F[/X]\X";
+        this.ruleX7 = "F[^X][X]F[&X]^X";
+        this.ruleX8 = "F[^X][X]F[&X]^X";
+        this.ruleX9 = "F[&X]^X";
         this.angle = 60.0;
         this.iterations = 2;
         this.scaleFactor = 1;
@@ -42,7 +42,7 @@ class MyScene extends CGFscene {
                 this.axiom,
                 {
                     "F": [ this.ruleF ],
-                    "X": [ this.ruleX1, this.ruleX2, this.ruleX3 ]
+                    "X": [ this.ruleX1, this.ruleX2, this.ruleX3, this.ruleX4, ]
                 },
                 this.angle,
                 this.iterations,
