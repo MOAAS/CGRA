@@ -21,15 +21,58 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
         this.setUpdatePeriod(50);
 
-        //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.plane = new Plane(this, 32);
+        this.initTextures();
+        this.initObjects();
 
         //Objects connected to MyInterface
+        this.enableTex = true;
+        this.enableSkybox = true;
+
+        // Shaders
+        this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
+        this.terrainShader.setUniformsValues({ uSampler2: 1 });
     }
+
+    initTextures() {
+        this.terrainTex = new CGFtexture(this, 'images/terrain.jpg');
+        this.terrainMap = new CGFtexture(this, 'images/heightmap.jpg');
+
+        this.houseFront = new CGFtexture(this, 'images/houseFront.png')
+		this.houseSide = new CGFtexture(this, 'images/houseSide.png')
+		this.houseBack = new CGFtexture(this, 'images/houseBack.png')
+		this.houseRoof = new CGFtexture(this, 'images/houseRoof.jpg')
+		this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
+		this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
+    }
+
+    initObjects() {
+        this.axis = new CGFaxis(this);
+
+        this.skybox = new MySkyBox(this);
+        this.skybox.setMaterial(new MyCGFappearance(this, 1,1,1,1));
+        this.skybox.setTexture(new CGFtexture(this, 'images/skybox.jpg'));
+        this.skybox.scale(200,200,200);
+
+        this.house = new MyHouse(this, 2.5, 2, 3, 0.3);
+        this.house.setWallTexture(this.houseSide)
+        this.house.setDoorTexture(this.houseFront)
+        this.house.setBackTexture(this.houseBack)
+        this.house.setFloorTexture(this.houseFloor)
+        this.house.setRoofTexture(this.houseRoof)
+        this.house.setPillarTexture(this.pillarTexture)
+
+        this.house.setPos(-3, 3, 5)
+
+        this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap)
+
+        this.objects = [this.house, this.terrain];
+    }
+
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
+        this.lights[0].setAmbient(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].setSpecular(1, 1, 1, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
     }
@@ -39,7 +82,7 @@ class MyScene extends CGFscene {
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-        this.setSpecular(0.2, 0.4, 0.8, 1.0);
+        this.setSpecular(0.0, 0.0, 0.0, 1.0);
         this.setShininess(10.0);
     }
     update(t){
@@ -60,15 +103,13 @@ class MyScene extends CGFscene {
         // Draw axis
         this.axis.display();
 
-        //Apply default appearance
-        this.setDefaultAppearance();
-
-        // ---- BEGIN Primitive drawing section
-        this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 1);
-        this.plane.display();
-        this.popMatrix();
+        // Textures
+        this.enableTextures(this.enableTex);
+        
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].display();
+        }
+            
         // ---- END Primitive drawing section
     }
 }
