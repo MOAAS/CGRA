@@ -32,6 +32,7 @@ class MyScene extends CGFscene {
         this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
         this.terrainShader.setUniformsValues({ uSampler2: 1 });
         this.terrainShader.setUniformsValues({ uSampler3: 2 });
+
     }
 
     initTextures() {
@@ -55,6 +56,10 @@ class MyScene extends CGFscene {
         this.skybox.setTexture(new CGFtexture(this, 'images/skybox.jpg'));
         this.skybox.scale(200,200,200);
 
+        this.bird = new MyBird(this)
+        //this.bird.scale(0.3,0.3,0.3)
+        //this.bird.translate(0,10,0)
+
         this.house = new MyHouse(this, 2.5, 2, 3, 0.3);
         this.house.setWallTexture(this.houseSide)
         this.house.setDoorTexture(this.houseFront)
@@ -67,7 +72,8 @@ class MyScene extends CGFscene {
 
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
-        this.objects = [this.house, this.terrain];
+        //this.objects = [this.house, this.terrain, this.bird];
+        this.objects = [this.bird];
     }
 
     initLights() {
@@ -88,7 +94,7 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
     update(t){
-
+        this.bird.update()
     }
 
     display() {

@@ -23,6 +23,7 @@ serialInclude([
     'Vector2D.js',
     'Plane.js',
     'MyTerrain.js',
+    'MyBird.js',
 
 main=function()
 {
