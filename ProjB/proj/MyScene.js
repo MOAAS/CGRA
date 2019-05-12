@@ -31,11 +31,13 @@ class MyScene extends CGFscene {
         // Shaders
         this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
         this.terrainShader.setUniformsValues({ uSampler2: 1 });
+        this.terrainShader.setUniformsValues({ uSampler3: 2 });
     }
 
     initTextures() {
         this.terrainTex = new CGFtexture(this, 'images/terrain.jpg');
         this.terrainMap = new CGFtexture(this, 'images/heightmap.jpg');
+        this.terrainAlt = new CGFtexture(this, 'images/altimetry.png');
 
         this.houseFront = new CGFtexture(this, 'images/houseFront.png')
 		this.houseSide = new CGFtexture(this, 'images/houseSide.png')
@@ -63,7 +65,7 @@ class MyScene extends CGFscene {
 
         this.house.setPos(-3, 3, 5)
 
-        this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap)
+        this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
         this.objects = [this.house, this.terrain];
     }
