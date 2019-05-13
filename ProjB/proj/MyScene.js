@@ -27,6 +27,8 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.enableTex = true;
         this.enableSkybox = true;
+        this.scaleFactor = 1;
+        this.speedFactor = 3;
 
         // Shaders
         this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
@@ -97,6 +99,12 @@ class MyScene extends CGFscene {
         this.checkKeys();
     }
 
+    updateBirdSpeed() {
+        this.bird.speedFactor = this.speedFactor;
+        this.bird.scaleFactor = this.scaleFactor;
+        this.bird.onSpeedFactorUpdate();
+    }
+
     checkKeys()  {
         var text="Keys pressed: ";
         var keysPressed=false;
@@ -107,11 +115,15 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyS"))
             this.bird.accelerate(-0.01);
         if (this.gui.isKeyPressed("KeyA"))
-            this.bird.turn(0.04);
+            this.bird.turn(0.12);
         if (this.gui.isKeyPressed("KeyD"))
-            this.bird.turn(-0.04);
+            this.bird.turn(-0.12);
         if (this.gui.isKeyPressed("KeyR"))
             this.bird.resetPos();
+        if (this.gui.isKeyPressed("ShiftLeft"))
+            this.bird.changeHeight(-0.2);
+        if (this.gui.isKeyPressed("Space"))
+            this.bird.changeHeight(0.2);
     }
 
     display() {

@@ -60,12 +60,13 @@ class MyBird extends ObjectGroup {
 
         this.objects = [this.head,this.body,this.beak,this.eyes,this.backFeathers,this.wings]
 
-      //  this.scale(0.1, 0.1, 0.1)
-        this.movePos(0, 6, 0)
+        this.scaleFactor = 1;
+        this.speedFactor = 1;
 
-        this.pos = [0, 6, 0]
-        this.birdAngle = 0;
+        this.pos = [0, 40, 0]
         this.speed = 0.1; 
+        this.birdAngle = 0;
+        this.turnRate = 1;
 
         this.wingVelocity = 5
         this.wingAngle = 0
@@ -78,12 +79,16 @@ class MyBird extends ObjectGroup {
     update(){
         this.updateBirdWoble()
         this.updateWingAngle()
-        this.pos[0] += Math.sin(this.birdAngle) * this.speed;
-        this.pos[2] += Math.cos(this.birdAngle) * this.speed;
+        this.pos[0] += Math.sin(this.birdAngle) * this.speed * this.speedFactor;
+        this.pos[2] += Math.cos(this.birdAngle) * this.speed * this.speedFactor;
+    }
+
+    changeHeight(v) {
+        this.pos[1] += v;
     }
     
     turn(v) {
-        this.birdAngle += v;
+        this.birdAngle += v * this.speedFactor;
     }
 
     accelerate(v) {
@@ -91,9 +96,14 @@ class MyBird extends ObjectGroup {
     }
 
     resetPos() {
-        this.pos = [0, 6, 0]
+        this.pos = [0, 40, 0]
         this.birdAngle = 0;
         this.speed = 0.1; 
+    }
+
+    onSpeedFactorUpdate() {
+        this.wobleAngVel = Math.PI / 1024 * this.speedFactor;
+        this.wingVelocity = 5 * this.speedFactor;
     }
 
     updateBirdWoble(){
@@ -119,8 +129,11 @@ class MyBird extends ObjectGroup {
     }
 
     display() {
+        this.scene.pushMatrix();
+        this.scene.scale(this.scaleFactor * 0.1, this.scaleFactor * 0.1, this.scaleFactor * 0.1)
         this.setPos(this.pos[0], this.pos[1], this.pos[2]);
         this.setAngle(null, this.birdAngle, null)
         super.display();
+        this.scene.popMatrix();
     }
 }

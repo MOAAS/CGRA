@@ -15,6 +15,9 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
         this.gui.add(this.scene, 'enableTex').name('Enable Textures');
         this.gui.add(this.scene, 'enableSkybox').name('Enable Sky Box');
+
+        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Bird scale').onChange(this.scene.updateBirdSpeed.bind(this.scene))
+        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Bird speed').onChange(this.scene.updateBirdSpeed.bind(this.scene))
         
         var obj = this;
 
