@@ -57,8 +57,6 @@ class MyScene extends CGFscene {
         this.skybox.scale(200,200,200);
 
         this.bird = new MyBird(this)
-        //this.bird.scale(0.3,0.3,0.3)
-        //this.bird.translate(0,10,0)
 
         this.house = new MyHouse(this, 2.5, 2, 3, 0.3);
         this.house.setWallTexture(this.houseSide)
@@ -73,7 +71,7 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
         //this.objects = [this.house, this.terrain, this.bird];
-        this.objects = [this.bird];
+        this.objects = [this.bird, this.house, this.terrain];
     }
 
     initLights() {
@@ -93,8 +91,27 @@ class MyScene extends CGFscene {
         this.setSpecular(0.0, 0.0, 0.0, 1.0);
         this.setShininess(10.0);
     }
+
     update(t){
         this.bird.update()
+        this.checkKeys();
+    }
+
+    checkKeys()  {
+        var text="Keys pressed: ";
+        var keysPressed=false;
+        
+        // Check for key codes e.g. in ​https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW"))
+            this.bird.accelerate(0.01);
+        if (this.gui.isKeyPressed("KeyS"))
+            this.bird.accelerate(-0.01);
+        if (this.gui.isKeyPressed("KeyA"))
+            this.bird.turn(0.04);
+        if (this.gui.isKeyPressed("KeyD"))
+            this.bird.turn(-0.04);
+        if (this.gui.isKeyPressed("KeyR"))
+            this.bird.resetPos();
     }
 
     display() {

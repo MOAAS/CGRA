@@ -21,7 +21,7 @@ class MyBird extends ObjectGroup {
 
     
         this.eyes = new ObjectGroup(scene)
-        this.eyes.addObjects(this.leftEye, this.rightEye,)
+        this.eyes.addObjects(this.leftEye, this.rightEye)
 
         this.backFeather1 = new MySphere(scene,8,15,1)
         this.backFeather1.scale(1,0.3,4)
@@ -60,25 +60,48 @@ class MyBird extends ObjectGroup {
 
         this.objects = [this.head,this.body,this.beak,this.eyes,this.backFeathers,this.wings]
 
-        this.velocity = 5
+      //  this.scale(0.1, 0.1, 0.1)
+        this.movePos(0, 6, 0)
+
+        this.pos = [0, 6, 0]
+        this.birdAngle = 0;
+        this.speed = 0.1; 
+
+        this.wingVelocity = 5
         this.wingAngle = 0
         this.wingDir = 1
 
         this.wobleAngVel = Math.PI/1024
-        this.birdAngle = 0
+        this.wobleAng = 0
     }
 
     update(){
         this.updateBirdWoble()
         this.updateWingAngle()
+        this.pos[0] += Math.sin(this.birdAngle) * this.speed;
+        this.pos[2] += Math.cos(this.birdAngle) * this.speed;
+    }
+    
+    turn(v) {
+        this.birdAngle += v;
+    }
+
+    accelerate(v) {
+        this.speed += v;
+    }
+
+    resetPos() {
+        this.pos = [0, 6, 0]
+        this.birdAngle = 0;
+        this.speed = 0.1; 
     }
 
     updateBirdWoble(){
-        if(this.birdAngle >= Math.PI/32)
+        if(this.wobleAng >= Math.PI/32)
             this.wobleAngVel = -this.wobleAngVel
-        if(this.birdAngle <= -Math.PI/32)
+        if(this.wobleAng <= -Math.PI/32)
             this.wobleAngVel = -this.wobleAngVel
-        this.birdAngle+=this.wobleAngVel
+        this.wobleAng+=this.wobleAngVel
         this.moveAngle(this.wobleAngVel,0,0)
     }
 
@@ -87,11 +110,17 @@ class MyBird extends ObjectGroup {
             this.wingDir = -1
         if(this.wingAngle <= -Math.PI/8)
             this.wingDir = 1
-        var wingAngVel = this.velocity * this.wingDir / 100 
+        var wingAngVel = this.wingVelocity * this.wingDir / 100 
         this.wingAngle+=wingAngVel
 
         this.rightWing.moveAngle(0, 0, wingAngVel)
         this.leftWing.moveAngle(0, 0, -wingAngVel)
         this.backFeathers.moveAngle(wingAngVel/10,0,0);
+    }
+
+    display() {
+        this.setPos(this.pos[0], this.pos[1], this.pos[2]);
+        this.setAngle(null, this.birdAngle, null)
+        super.display();
     }
 }

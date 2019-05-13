@@ -49,10 +49,13 @@ class MyCGFobject extends CGFobject {
         this.zpos += z;        
     }
 
-    setAngle(x, y , z) {
-        this.xAngle = x;
-        this.yAngle = y;
-        this.zAngle = z;        
+    setAngle(x, y, z) {
+        if (x != null)
+            this.xAngle = x;
+        if (y != null)
+            this.yAngle = y;
+        if (z != null)
+            this.zAngle = z;        
     }
 
     moveAngle(x, y, z) {
