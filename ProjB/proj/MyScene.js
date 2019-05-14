@@ -140,9 +140,9 @@ class MyScene extends CGFscene {
         
         // Check for key codes e.g. in ​https://keycode.info/
         if (this.gui.isKeyPressed("KeyW"))
-            this.bird.accelerate(0.01);
+            this.bird.accelerate(0.05);
         if (this.gui.isKeyPressed("KeyS"))
-            this.bird.accelerate(-0.01);
+            this.bird.accelerate(-0.05);
         if (this.gui.isKeyPressed("KeyA"))
             this.bird.turn(0.12);
         if (this.gui.isKeyPressed("KeyD"))
@@ -150,9 +150,9 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR"))
             this.bird.resetPos();
         if (this.gui.isKeyPressed("ShiftLeft"))
-            this.bird.changeHeight(-0.2);
+            this.bird.changeHeight(-0.4);
         if (this.gui.isKeyPressed("Space"))
-            this.bird.changeHeight(0.2);
+            this.bird.changeHeight(0.6);
     }
 
     display() {
