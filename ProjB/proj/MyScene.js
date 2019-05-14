@@ -29,6 +29,14 @@ class MyScene extends CGFscene {
         this.enableSkybox = true;
         this.scaleFactor = 1;
         this.speedFactor = 1;
+        this.firstPerson = false;
+
+        this.selectedView = 1;
+        this.viewList = {
+            'First Person': 0,
+			'Second Person': 1,
+			'Third Person': 2
+		}
 
         // Shaders
         this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
@@ -84,6 +92,7 @@ class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
@@ -96,13 +105,33 @@ class MyScene extends CGFscene {
 
     update(t){
         this.bird.update()
+
+        if (this.selectedView == 0) {
+            let cameraPos = [this.bird.pos[0], this.bird.pos[1] - 1, this.bird.pos[2]]
+            this.camera.fov = 1.2
+            this.camera.setPosition(vec3.fromValues(cameraPos[0], cameraPos[1], cameraPos[2]))
+            this.camera.setTarget(vec3.fromValues(cameraPos[0] + Math.sin(this.bird.birdAngle), cameraPos[1], cameraPos[2] + Math.cos(this.bird.birdAngle)));
+        }
+
+        else if (this.selectedView == 2) {
+            this.camera.fov = 1.2
+            let cameraPos = [this.bird.pos[0] - 8 * Math.sin(this.bird.birdAngle), this.bird.pos[1] + 2, this.bird.pos[2] - 8 * Math.cos(this.bird.birdAngle)]
+            this.camera.setPosition(vec3.fromValues(cameraPos[0], cameraPos[1], cameraPos[2]))
+            this.camera.setTarget(vec3.fromValues(cameraPos[0] + Math.sin(this.bird.birdAngle), cameraPos[1], cameraPos[2] + Math.cos(this.bird.birdAngle)));
+        }
+
         this.checkKeys();
     }
 
     updateBirdSpeed() {
         this.bird.speedFactor = this.speedFactor;
         this.bird.scaleFactor = this.scaleFactor;
-        this.bird.onSpeedFactorUpdate();
+        this.bird.onSpeedUpdate();
+    }
+
+    updateCamera() {
+        if (this.selectedView == 1)
+            this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
 
     checkKeys()  {

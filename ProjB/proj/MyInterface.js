@@ -19,6 +19,8 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Bird scale').onChange(this.scene.updateBirdSpeed.bind(this.scene))
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Bird speed').onChange(this.scene.updateBirdSpeed.bind(this.scene))
         
+        this.gui.add(this.scene, 'selectedView', this.scene.viewList).name('CAMEERA').onChange(this.scene.updateCamera.bind(this.scene))
+
         var obj = this;
 
         this.initKeys();

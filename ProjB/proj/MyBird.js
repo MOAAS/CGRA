@@ -77,6 +77,7 @@ class MyBird extends ObjectGroup {
     }
 
     update(){
+        this.onSpeedUpdate();
         this.updateBirdWoble()
         this.updateWingAngle()
         this.pos[0] += Math.sin(this.birdAngle) * this.speed * this.speedFactor;
@@ -101,9 +102,9 @@ class MyBird extends ObjectGroup {
         this.birdAngle = 0;
     }
 
-    onSpeedFactorUpdate() {
-        this.wobleAngVel = Math.PI / 1024 * this.speedFactor;
-        this.wingVelocity = 5 * this.speedFactor;
+    onSpeedUpdate() {
+        this.wobleAngVel = Math.PI / 1024 * this.speedFactor * this.speed * 10;
+        this.wingVelocity = 5 * this.speedFactor * this.speed * 10;
     }
 
     updateBirdWoble(){
