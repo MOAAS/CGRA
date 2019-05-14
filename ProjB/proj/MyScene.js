@@ -28,7 +28,7 @@ class MyScene extends CGFscene {
         this.enableTex = true;
         this.enableSkybox = true;
         this.scaleFactor = 1;
-        this.speedFactor = 3;
+        this.speedFactor = 1;
 
         // Shaders
         this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");

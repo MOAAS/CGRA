@@ -63,7 +63,7 @@ class MyBird extends ObjectGroup {
         this.scaleFactor = 1;
         this.speedFactor = 1;
 
-        this.pos = [0, 40, 0]
+        this.pos = [0, 10, 0]
         this.speed = 0.1; 
         this.birdAngle = 0;
         this.turnRate = 1;
@@ -96,9 +96,9 @@ class MyBird extends ObjectGroup {
     }
 
     resetPos() {
-        this.pos = [0, 40, 0]
-        this.birdAngle = 0;
+        this.pos = [0, 10, 0]
         this.speed = 0.1; 
+        this.birdAngle = 0;
     }
 
     onSpeedFactorUpdate() {
@@ -120,9 +120,9 @@ class MyBird extends ObjectGroup {
             this.wingDir = -1
         if(this.wingAngle <= -Math.PI/8)
             this.wingDir = 1
-        var wingAngVel = this.wingVelocity * this.wingDir / 100 
+        var wingAngVel = this.wingVelocity * this.wingDir / 100;
+        
         this.wingAngle+=wingAngVel
-
         this.rightWing.moveAngle(0, 0, wingAngVel)
         this.leftWing.moveAngle(0, 0, -wingAngVel)
         this.backFeathers.moveAngle(wingAngVel/10,0,0);
@@ -130,7 +130,7 @@ class MyBird extends ObjectGroup {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(this.scaleFactor * 0.1, this.scaleFactor * 0.1, this.scaleFactor * 0.1)
+        this.setScale(0.1 * this.scaleFactor, 0.1 * this.scaleFactor, 0.1 * this.scaleFactor)
         this.setPos(this.pos[0], this.pos[1], this.pos[2]);
         this.setAngle(null, this.birdAngle, null)
         super.display();

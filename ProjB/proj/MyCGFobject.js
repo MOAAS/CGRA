@@ -16,7 +16,11 @@ class MyCGFobject extends CGFobject {
 
         this.xAngle = 0;
         this.yAngle = 0;
-        this.zAngle = 0;        
+        this.zAngle = 0;   
+        
+        this.xScale = 1;
+        this.yScale = 1;
+        this.zScale = 1;
     }
 
     translate(x, y, z) {
@@ -70,16 +74,25 @@ class MyCGFobject extends CGFobject {
             this.zAngle -= 2 * Math.PI;
     }
 
+    setScale(x, y, z) {
+        this.xScale = x;
+        this.yScale = y;
+        this.zScale = z;
+    }
+
+    addScale(x, y, z) {
+        this.xScale += x;
+        this.yScale += y;
+        this.zScale += z;
+    }
+
     display() {
         this.scene.pushMatrix()
-        if (this.xpos || this.ypos || this.zpos)
-            this.scene.translate(this.xpos, this.ypos, this.zpos);
-        if (this.xAngle)
-            this.scene.rotate(this.xAngle, 1, 0, 0);
-        if (this.yAngle)
-            this.scene.rotate(this.yAngle, 0, 1, 0);
-        if (this.zAngle)
-            this.scene.rotate(this.zAngle, 0, 0, 1);
+        this.scene.translate(this.xpos, this.ypos, this.zpos);
+        this.scene.scale(this.xScale, this.yScale, this.zScale)
+        this.scene.rotate(this.xAngle, 1, 0, 0);
+        this.scene.rotate(this.yAngle, 0, 1, 0);
+        this.scene.rotate(this.zAngle, 0, 0, 1);
         for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
             if (transformation instanceof Translation)

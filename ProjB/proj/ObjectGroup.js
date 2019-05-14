@@ -52,6 +52,17 @@ class ObjectGroup extends MyCGFobject {
         }		
     }
 
+    setScale(x, y, z) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].setScale(x, y, z) ;
+        }		
+    }
+
+    addScale(x, y, z) {
+        for (var i = 0; i < this.objects.length; i++) {
+            this.objects[i].addScale(x, y, z) ;
+        }		
+    }
 
     
     scale(x, y, z) {
