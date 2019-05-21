@@ -24,12 +24,16 @@ serialInclude([
     'Plane.js',
     'MyTerrain.js',
     'MyBird.js',
+<<<<<<< HEAD
     'MyLSystem.js',
     'MyLSPlant.js',
     'MyBranch.js',
     'MyLeaf.js',
     'MyLightning.js',
     'MyLightningLight.js',
+=======
+    'MyNest.js',
+>>>>>>> 20ba14541a5ce3e5d8ba46f54b838b363c8b6095
 
 main=function()
 {
