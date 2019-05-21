@@ -24,6 +24,12 @@ serialInclude([
     'Plane.js',
     'MyTerrain.js',
     'MyBird.js',
+    'MyLSystem.js',
+    'MyLSPlant.js',
+    'MyBranch.js',
+    'MyLeaf.js',
+    'MyLightning.js',
+    'MyLightningLight.js',
 
 main=function()
 {

@@ -42,7 +42,6 @@ class MyScene extends CGFscene {
         this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
         this.terrainShader.setUniformsValues({ uSampler2: 1 });
         this.terrainShader.setUniformsValues({ uSampler3: 2 });
-
     }
 
     initTextures() {
@@ -82,6 +81,18 @@ class MyScene extends CGFscene {
 
         //this.objects = [this.house, this.terrain, this.bird];
         this.objects = [this.bird, this.house, this.terrain];
+        
+        this.lightning = new MyLightning(this);
+        this.tree1 = new MyLSPlant(this);
+        this.tree2 = new MyLSPlant(this);
+        this.tree3 = new MyLSPlant(this);
+
+        this.axiom = "X";
+        this.tree1.generate(this.axiom);
+        this.tree2.generate(this.axiom);
+        this.tree3.generate(this.axiom);
+        this.lightning.generate(this.axiom);
+
     }
 
     initLights() {
@@ -134,10 +145,7 @@ class MyScene extends CGFscene {
             this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
 
-    checkKeys()  {
-        var text="Keys pressed: ";
-        var keysPressed=false;
-        
+    checkKeys()  {        
         // Check for key codes e.g. in ​https://keycode.info/
         if (this.gui.isKeyPressed("KeyW"))
             this.bird.accelerate(0.05);
@@ -175,6 +183,26 @@ class MyScene extends CGFscene {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].display();
         }
+
+       //
+
+        this.pushMatrix()
+        this.translate(0, 10, 0);       
+        this.lightning.display();
+        this.popMatrix();
+
+        this.pushMatrix()
+
+        this.translate(15, 0, 8);
+        this.tree1.display();
+
+        this.translate(-25, 0, -15);
+        this.tree2.display();
+
+        this.translate(21, 0, -5);
+        this.tree3.display();
+
+        this.popMatrix();
             
         // ---- END Primitive drawing section
     }
