@@ -80,8 +80,10 @@ class MyScene extends CGFscene {
 
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
-        //this.objects = [this.house, this.terrain, this.bird];
+        this.nest = new MyNest(this)
+
         this.objects = [this.bird, this.house, this.terrain];
+        //this.objects = [this.nest]
     }
 
     initLights() {
