@@ -83,16 +83,17 @@ class MyScene extends CGFscene {
 
         this.objects = [this.bird, this.house, this.terrain];
         
-        this.lightning = new MyLightning(this);
+        this.axiom = "X";
+
+        this.lightning = new MyLightning(this, this.axiom);
+        this.lightning.generate();
+        
         this.tree1 = new MyLSPlant(this);
         this.tree2 = new MyLSPlant(this);
         this.tree3 = new MyLSPlant(this);
-
-        this.axiom = "X";
         this.tree1.generate(this.axiom);
         this.tree2.generate(this.axiom);
         this.tree3.generate(this.axiom);
-        this.lightning.generate(this.axiom);
 
         //this.objects = [this.nest]
     }
@@ -118,6 +119,7 @@ class MyScene extends CGFscene {
 
     update(t){
         this.bird.update()
+        this.lightning.update(t);
 
         if (this.selectedView == 0) {
             let cameraPos = [this.bird.pos[0], this.bird.pos[1] - 1, this.bird.pos[2]]
@@ -133,7 +135,7 @@ class MyScene extends CGFscene {
             this.camera.setTarget(vec3.fromValues(cameraPos[0] + Math.sin(this.bird.birdAngle), cameraPos[1], cameraPos[2] + Math.cos(this.bird.birdAngle)));
         }
 
-        this.checkKeys();
+        this.checkKeys(t);
     }
 
     updateBirdSpeed() {
@@ -147,7 +149,7 @@ class MyScene extends CGFscene {
             this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
 
-    checkKeys()  {        
+    checkKeys(t)  {        
         // Check for key codes e.g. in ​https://keycode.info/
         if (this.gui.isKeyPressed("KeyW"))
             this.bird.accelerate(0.05);
@@ -163,6 +165,8 @@ class MyScene extends CGFscene {
             this.bird.changeHeight(-0.4);
         if (this.gui.isKeyPressed("Space"))
             this.bird.changeHeight(0.6);
+        if (this.gui.isKeyPressed("KeyL"))
+            this.lightning.startAnimation(t);
     }
 
     display() {
@@ -181,15 +185,15 @@ class MyScene extends CGFscene {
 
         // Textures
         this.enableTextures(this.enableTex);
-        
+
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].display();
         }
-
-       //
-
-        this.pushMatrix()
-        this.translate(0, 10, 0);       
+       
+        this.pushMatrix()   
+        this.translate(0, 25, 0)
+        this.scale(5,5,5)
+        this.rotate(Math.PI, 0, 0, 1)
         this.lightning.display();
         this.popMatrix();
 
