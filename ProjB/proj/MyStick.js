@@ -29,33 +29,32 @@ class MyStick extends ObjectGroup {
 
 		this.bird = bird
 		this.state = 'grounded'
+
+		this.setPos(this.x, 4, this.z)
+		this.setAngle(0, this.angle, 0)
 	}
 
 	update() {
-		switch (this.state) {
-			case 'grounded': {
-				this.setPos(this.x,4,this.z)
-				this.setAngle(0,this.angle,0)
-				break
-			 }
-			case 'birded': { 
-				//this.setPos(this.bird.pos[0], this.bird.pos[1], this.bird.pos[2])
-				this.setPos(this.bird.pos[0]+Math.sin(this.bird.birdAngle),this.bird.pos[1],this.bird.pos[2]+Math.cos(this.bird.birdAngle))
-				this.setAngle(0, this.bird.birdAngle+Math.PI/2, 0)
-				break
-			 }
-			case 'nested': { 
-				break
-			}
+		if (this.state == 'birded') {
+			this.setPos(this.bird.pos[0] + Math.sin(this.bird.birdAngle), this.bird.pos[1], this.bird.pos[2] + Math.cos(this.bird.birdAngle))
+			this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
 		}
 	}
 
 	checkColision(bird) {
-		this.bird = bird
-		if (Math.abs(bird.pos[0] - this.x) < 2.5 && Math.abs(bird.pos[2] - this.z) < 2.5) {
-			this.state = 'birded'
-			return true
+		if (this.state == 'grounded') {
+			this.bird = bird
+			if (Math.abs(bird.pos[0] - this.x) < 2.5 && Math.abs(bird.pos[2] - this.z) < 2.5) {
+				this.state = 'birded'
+				return true
+			}
 		}
 		return false
+	}
+
+	land() {
+		this.state = 'nested'
+		this.setPos(this.bird.pos[0] + Math.sin(this.bird.birdAngle), this.bird.pos[1], this.bird.pos[2] + Math.cos(this.bird.birdAngle))
+		this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
 	}
 }

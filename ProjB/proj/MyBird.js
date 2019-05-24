@@ -1,5 +1,5 @@
 class MyBird extends ObjectGroup {
-    constructor(scene, stick) {
+    constructor(scene, stick, nest) {
         super(scene);
 
         this.head = new MySphere(scene, 15, 15, 4)
@@ -80,6 +80,7 @@ class MyBird extends ObjectGroup {
         this.wobleAng = 0
 
         this.stick = stick
+        this.nest = nest
     }
 
     update() {
@@ -160,17 +161,21 @@ class MyBird extends ObjectGroup {
                     this.movementState = 'goingUp'
                     break
                 }
-                if (this.hasStick) {
-                    //nests
-                }
-                else {
-                    if (this.pos[1] <= 5) {
+                if (this.pos[1] <= 5) {
+                    if (this.hasStick) {
+                        if (this.nest.checkColision(this)){
+                            this.hasStick = false
+                            this.stick.land()
+                        }
+                    }
+                    else {
                         if (this.stick.checkColision(this))
                             this.hasStick = true
-                        this.movementState = 'goingUp'
-                        break
                     }
+                    this.movementState = 'goingUp'
+                    break
                 }
+
                 this.changeHeight(-0.25)
                 break
             }

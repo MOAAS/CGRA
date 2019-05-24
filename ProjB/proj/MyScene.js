@@ -64,10 +64,10 @@ class MyScene extends CGFscene {
         this.skybox.setMaterial(new MyCGFappearance(this, 1,1,1,1));
         this.skybox.setTexture(new CGFtexture(this, 'images/skybox.jpg'));
         this.skybox.scale(200,200,200);
-
+        
+        this.nest = new MyNest(this,12,-7)
         this.stick = new MyStick(this,9,7)
-        this.bird = new MyBird(this,this.stick)
-        this.stick.setPos(7,4,9)
+        this.bird = new MyBird(this,this.stick,this.nest)
 
         this.house = new MyHouse(this, 2.5, 2, 3, 0.3);
         this.house.setWallTexture(this.houseSide)
@@ -81,9 +81,8 @@ class MyScene extends CGFscene {
 
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
-        this.nest = new MyNest(this)
 
-        this.objects = [this.bird, this.house, this.terrain , this.stick];
+        this.objects = [this.bird, this.house, this.terrain , this.stick , this.nest];
         
         this.axiom = "X";
 

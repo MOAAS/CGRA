@@ -1,7 +1,8 @@
 class MyNest extends ObjectGroup {
-    constructor(scene) {
+    constructor(scene,x,z) {
         super(scene)
-
+        this.x = x
+        this.z = z
         this.branches = [];
         for (var i = 1; i < 5; i++) {
             for (var j = 0; j < 2 * (i + 5); j++) {
@@ -16,7 +17,16 @@ class MyNest extends ObjectGroup {
         this.base = new MyCilinder(scene, 10)
         this.base.scale(1, 0.2, 1)
         this.base.translate(0, 0.4, 0)
+        this.scale(0.3,0.3,0.3)
         this.addObjects(...this.branches)
         this.addObjects(this.base)
+        this.setPos(x,4,z)
     }
+
+    checkColision(bird) {
+		if (Math.abs(bird.pos[0] - this.x) < 1 && Math.abs(bird.pos[2] - this.z) < 1)
+			return true
+		return false
+    }
+    
 }
