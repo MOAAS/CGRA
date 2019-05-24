@@ -65,7 +65,9 @@ class MyScene extends CGFscene {
         this.skybox.setTexture(new CGFtexture(this, 'images/skybox.jpg'));
         this.skybox.scale(200,200,200);
 
-        this.bird = new MyBird(this)
+        this.stick = new MyStick(this,9,7)
+        this.bird = new MyBird(this,this.stick)
+        this.stick.setPos(7,4,9)
 
         this.house = new MyHouse(this, 2.5, 2, 3, 0.3);
         this.house.setWallTexture(this.houseSide)
@@ -81,7 +83,7 @@ class MyScene extends CGFscene {
 
         this.nest = new MyNest(this)
 
-        this.objects = [this.bird, this.house, this.terrain];
+        this.objects = [this.bird, this.house, this.terrain , this.stick];
         
         this.axiom = "X";
 
@@ -119,7 +121,8 @@ class MyScene extends CGFscene {
 
     update(t){
         this.bird.update()
-        this.lightning.update(t);
+        this.stick.update()
+        this.lightning.update(t)
 
         if (this.selectedView == 0) {
             let cameraPos = [this.bird.pos[0], this.bird.pos[1] - 1, this.bird.pos[2]]
@@ -151,20 +154,7 @@ class MyScene extends CGFscene {
 
     checkKeys(t)  {        
         // Check for key codes e.g. in ​https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW"))
-            this.bird.accelerate(0.05);
-        if (this.gui.isKeyPressed("KeyS"))
-            this.bird.accelerate(-0.05);
-        if (this.gui.isKeyPressed("KeyA"))
-            this.bird.turn(0.12);
-        if (this.gui.isKeyPressed("KeyD"))
-            this.bird.turn(-0.12);
-        if (this.gui.isKeyPressed("KeyR"))
-            this.bird.resetPos();
-        if (this.gui.isKeyPressed("ShiftLeft"))
-            this.bird.changeHeight(-0.4);
-        if (this.gui.isKeyPressed("Space"))
-            this.bird.changeHeight(0.6);
+        this.bird.check(this.gui)
         if (this.gui.isKeyPressed("KeyL"))
             this.lightning.startAnimation(t);
     }

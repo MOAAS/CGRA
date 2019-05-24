@@ -31,6 +31,7 @@ serialInclude([
     'MyLightning.js',
     'MyLightningLight.js',
     'MyNest.js',
+    'MyStick.js',
 
 main=function()
 {

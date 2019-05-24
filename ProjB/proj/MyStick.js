@@ -1,0 +1,61 @@
+/**
+ * MyRectangle
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param x - Scale of rectangle in X
+ * @param y - Scale of rectangle in Y
+ */
+class MyStick extends ObjectGroup {
+	constructor(scene, x, z, bird) {
+		super(scene);
+		this.x = x
+		this.z = z
+		this.cilinder = new MyCilinder(scene, 6);
+		this.cilinder.scale(0.2, 1.5, 0.2);
+		this.cilinder.rotate(Math.PI / 2, 1, 0, 0)
+
+		this.coords = { x, z }
+		this.angle = Math.random() * Math.PI
+		//this.cilinder.rotate(this.angle, 0, 1, 0)
+
+		//this.cilinder.translate(x, 4, z)
+		//this.setPos(this.x,4,this.z)
+
+		let material = new MyCGFappearance(this.scene, 0.7, 0.8, 0.6);
+		material.setColor(70, 30, 30)
+		this.cilinder.setMaterial(material);
+
+		this.addObjects(this.cilinder)
+
+		this.bird = bird
+		this.state = 'grounded'
+	}
+
+	update() {
+		switch (this.state) {
+			case 'grounded': {
+				this.setPos(this.x,4,this.z)
+				this.setAngle(0,this.angle,0)
+				break
+			 }
+			case 'birded': { 
+				//this.setPos(this.bird.pos[0], this.bird.pos[1], this.bird.pos[2])
+				this.setPos(this.bird.pos[0]+Math.sin(this.bird.birdAngle),this.bird.pos[1],this.bird.pos[2]+Math.cos(this.bird.birdAngle))
+				this.setAngle(0, this.bird.birdAngle+Math.PI/2, 0)
+				break
+			 }
+			case 'nested': { 
+				break
+			}
+		}
+	}
+
+	checkColision(bird) {
+		this.bird = bird
+		if (Math.abs(bird.pos[0] - this.x) < 2.5 && Math.abs(bird.pos[2] - this.z) < 2.5) {
+			this.state = 'birded'
+			return true
+		}
+		return false
+	}
+}
