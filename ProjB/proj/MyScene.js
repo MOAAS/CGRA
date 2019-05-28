@@ -66,8 +66,13 @@ class MyScene extends CGFscene {
         this.skybox.scale(200,200,200);
         
         this.nest = new MyNest(this,12,-7)
-        this.stick = new MyStick(this,9,7)
-        this.bird = new MyBird(this,this.stick,this.nest)
+        this.stick1 = new MyStick(this,9,7)
+        this.stick2 = new MyStick(this,15,-2)
+        this.sticks = new ObjectGroup(this)
+        this.sticks.addObjects(this.stick1,this.stick2)
+
+        this.bird = new MyBird(this, this.sticks,this.nest)
+        //this.bird.scale(7,7,7)
 
         this.house = new MyHouse(this, 2.5, 2, 3, 0.3);
         this.house.setWallTexture(this.houseSide)
@@ -82,8 +87,8 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
-        this.objects = [this.bird, this.house, this.terrain , this.stick , this.nest];
-        
+        this.objects = [this.bird, this.house, this.terrain , this.sticks , this.nest];
+        //this.objects = [this.bird]
         this.axiom = "X";
 
         this.lightning = new MyLightning(this, this.axiom);
@@ -120,7 +125,7 @@ class MyScene extends CGFscene {
 
     update(t){
         this.bird.update()
-        this.stick.update()
+        this.sticks.update()
         this.lightning.update(t)
 
         if (this.selectedView == 0) {
