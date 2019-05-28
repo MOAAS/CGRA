@@ -55,6 +55,9 @@ class MyScene extends CGFscene {
 		this.houseRoof = new CGFtexture(this, 'images/houseRoof.jpg')
 		this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
 		this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
+
+		this.branchTex = new CGFtexture(this, 'images/branch.jpg')
+		this.leafTex = new CGFtexture(this, 'images/leaf.jpg')
     }
 
     initObjects() {
@@ -89,9 +92,9 @@ class MyScene extends CGFscene {
         this.lightning = new MyLightning(this, this.axiom);
         this.lightning.generate();
         
-        this.tree1 = new MyLSPlant(this);
-        this.tree2 = new MyLSPlant(this);
-        this.tree3 = new MyLSPlant(this);
+        this.tree1 = new MyLSPlant(this, this.branchTex, this.leafTex);
+        this.tree2 = new MyLSPlant(this, this.branchTex, this.leafTex);
+        this.tree3 = new MyLSPlant(this, this.branchTex, this.leafTex);
         this.tree1.generate(this.axiom);
         this.tree2.generate(this.axiom);
         this.tree3.generate(this.axiom);

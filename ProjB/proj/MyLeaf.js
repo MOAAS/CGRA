@@ -1,14 +1,10 @@
 class MyLeaf extends ObjectGroup {
-	constructor(scene) {
+	constructor(scene, texture) {
         super(scene);
-        this.triangle = new MyTriangle(scene);
-
-        
-		let material = new MyCGFappearance(this.scene, 0.8, 0.8, 0.5);
-		material.setColor(28, 242, 24)
-		this.triangle.setMaterial(material);
-
-		this.addObjects(this.triangle)
-
+		this.cilinder = new MyCilinder(scene, 12);
+		this.cilinder.rotate(Math.PI / 2, 1, 0, 0);
+		this.cilinder.scale(0.5, 2, 0.1)
+		this.cilinder.setTexture(texture);
+		this.addObjects(this.cilinder)
     }
 }
