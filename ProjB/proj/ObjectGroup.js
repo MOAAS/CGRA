@@ -87,6 +87,9 @@ class ObjectGroup extends MyCGFobject {
         }		
     }
     
+    getObjects() {
+        return this.objects;
+    }
     // --- Lighting, Materials, Textures -- //
     
     setTextureWrap(x, y) {

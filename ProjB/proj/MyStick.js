@@ -21,9 +21,9 @@ class MyStick extends ObjectGroup {
 		//this.cilinder.translate(x, 4, z)
 		//this.setPos(this.x,4,this.z)
 
-		let material = new MyCGFappearance(this.scene, 0.7, 0.8, 0.6);
+		let material = new MyCGFappearance(this.scene, 0.7, 0.8, 0.6)
 		material.setColor(70, 30, 30)
-		this.cilinder.setMaterial(material);
+		this.cilinder.setMaterial(material)
 
 		this.addObjects(this.cilinder)
 
@@ -36,7 +36,8 @@ class MyStick extends ObjectGroup {
 
 	update() {
 		if (this.state == 'birded') {
-			this.setPos(this.bird.pos[0] + Math.sin(this.bird.birdAngle), this.bird.pos[1], this.bird.pos[2] + Math.cos(this.bird.birdAngle))
+			//this.setPos(this.bird.pos[0] + Math.sin(this.bird.birdAngle), this.bird.pos[1], this.bird.pos[2] + Math.cos(this.bird.birdAngle))
+			this.setPos(this.bird.beakPos[0],this.bird.beakPos[1],this.bird.beakPos[2])
 			this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
 		}
 	}

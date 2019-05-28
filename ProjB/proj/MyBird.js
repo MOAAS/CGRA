@@ -1,5 +1,5 @@
 class MyBird extends ObjectGroup {
-    constructor(scene, stick, nest) {
+    constructor(scene, sticks, nest) {
         super(scene);
 
         this.head = new MySphere(scene, 15, 15, 4)
@@ -67,10 +67,11 @@ class MyBird extends ObjectGroup {
         this.hasStick = false
 
         this.pos = [0, 10, 0]
-        this.speed = 0.1;
-        this.minSpeed = 0.05;
-        this.birdAngle = 0;
-        this.turnRate = 1;
+        this.speed = 0.1
+        //this.speed=0
+        this.minSpeed = 0.05
+        this.birdAngle = 0
+        this.turnRate = 1
 
         this.wingVelocity = 5
         this.wingAngle = 0
@@ -79,7 +80,7 @@ class MyBird extends ObjectGroup {
         this.wobleAngVel = Math.PI / 1024
         this.wobleAng = 0
 
-        this.stick = stick
+        this.sticks = sticks
         this.nest = nest
     }
 
@@ -89,6 +90,7 @@ class MyBird extends ObjectGroup {
         this.updateWingAngle()
         this.pos[0] += Math.sin(this.birdAngle) * this.speed * this.speedFactor;
         this.pos[2] += Math.cos(this.birdAngle) * this.speed * this.speedFactor;
+        this.beakPos =[this.pos[0] + Math.sin(this.birdAngle)*this.scaleFactor, this.pos[1]+this.scaleFactor*0.5, this.pos[2] + Math.cos(this.birdAngle)*this.scaleFactor] 
     }
 
     changeHeight(v) {
@@ -165,12 +167,18 @@ class MyBird extends ObjectGroup {
                     if (this.hasStick) {
                         if (this.nest.checkColision(this)){
                             this.hasStick = false
-                            this.stick.land()
+                            this.pickedStick.land()
                         }
                     }
                     else {
-                        if (this.stick.checkColision(this))
-                            this.hasStick = true
+                        var sticksArray = this.sticks.getObjects()
+                        for(let i = 0, length = sticksArray.length ; i<length;i++){
+                            if (sticksArray[i].checkColision(this)){
+                                this.hasStick = true
+                                this.pickedStick = sticksArray[i]
+                                break
+                            }
+                        }
                     }
                     this.movementState = 'goingUp'
                     break

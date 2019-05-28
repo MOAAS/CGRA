@@ -20,11 +20,12 @@ class MyNest extends ObjectGroup {
         this.scale(0.3,0.3,0.3)
         this.addObjects(...this.branches)
         this.addObjects(this.base)
+        this.scale(1,0.7,1)
         this.setPos(x,4,z)
     }
 
     checkColision(bird) {
-		if (Math.abs(bird.pos[0] - this.x) < 1 && Math.abs(bird.pos[2] - this.z) < 1)
+		if (Math.abs(bird.beakPos[0] - this.x) < 1 && Math.abs(bird.beakPos[2] - this.z) < 1)
 			return true
 		return false
     }
