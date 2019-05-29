@@ -50,7 +50,7 @@ class MyLightning extends MyLSystem {
     }
 
     startAnimation(t) {
-        this.sounds[Math.floor(Math.random() * this.sounds.length)].play();
+        this.scene.playSound(this.sounds[Math.floor(Math.random() * this.sounds.length)]);
         this.generate();
         this.animating = true;
         this.startTime = t;

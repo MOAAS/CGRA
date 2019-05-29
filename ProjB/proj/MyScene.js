@@ -31,6 +31,7 @@ class MyScene extends CGFscene {
         this.scaleFactor = 1;
         this.speedFactor = 1;
         this.firstPerson = false;
+        this.enableSound = false;
 
         this.selectedView = 1;
         this.viewList = {
@@ -58,7 +59,9 @@ class MyScene extends CGFscene {
 		this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
 
 		this.branchTex = new CGFtexture(this, 'images/branch.jpg')
-		this.leafTex = new CGFtexture(this, 'images/leaf.jpg')
+        this.leafTex = new CGFtexture(this, 'images/leaf.jpg')
+        
+        this.nestTex = new CGFtexture(this, 'images/nest.png');
     }
 
     initObjects() {
@@ -71,6 +74,8 @@ class MyScene extends CGFscene {
         this.skybox.translate(0, 30, 0);
         
         this.nest = new MyNest(this,12,-7)
+        this.nest.setTexture(this.nestTex);
+
         this.stick1 = new MyStick(this,9,7)
         this.stick2 = new MyStick(this,15,-2)
         this.sticks = new ObjectGroup(this)
@@ -117,6 +122,7 @@ class MyScene extends CGFscene {
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
+
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -124,7 +130,13 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
 
+    playSound(sound) {
+        if (this.enableSound)
+            sound.play();
+    }
+
     update(t){
+        this.checkKeys(t);
         this.bird.update()
         this.sticks.update()
         this.lightning.update(t)
@@ -143,7 +155,6 @@ class MyScene extends CGFscene {
             this.camera.setTarget(vec3.fromValues(cameraPos[0] + Math.sin(this.bird.birdAngle), cameraPos[1], cameraPos[2] + Math.cos(this.bird.birdAngle)));
         }
 
-        this.checkKeys(t);
     }
 
     updateBirdFactors() {

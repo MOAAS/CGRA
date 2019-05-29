@@ -11,10 +11,10 @@ class MyStick extends ObjectGroup {
 		this.x = x
 		this.z = z
 		this.cilinder = new MyCilinder(scene, 6);
+		this.cilinder.translate(0, -0.5, 0)
 		this.cilinder.scale(0.2, 1.5, 0.2);
 		this.cilinder.rotate(Math.PI / 2, 1, 0, 0)
 
-		this.coords = { x, z }
 		this.angle = Math.random() * Math.PI
 		//this.cilinder.rotate(this.angle, 0, 1, 0)
 
@@ -36,7 +36,6 @@ class MyStick extends ObjectGroup {
 
 	update() {
 		if (this.state == 'birded') {
-			//this.setPos(this.bird.pos[0] + Math.sin(this.bird.birdAngle), this.bird.pos[1], this.bird.pos[2] + Math.cos(this.bird.birdAngle))
 			this.setPos(this.bird.beakPos[0],this.bird.beakPos[1],this.bird.beakPos[2])
 			this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
 		}
@@ -55,7 +54,6 @@ class MyStick extends ObjectGroup {
 
 	land() {
 		this.state = 'nested'
-		this.setPos(this.bird.pos[0] + Math.sin(this.bird.birdAngle), this.bird.pos[1], this.bird.pos[2] + Math.cos(this.bird.birdAngle))
 		this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
 	}
 }
