@@ -50,6 +50,7 @@ class MyStick extends ObjectGroup {
 
 	land() {
 		this.state = 'nested'
+		this.setPos(this.bird.beakPos[0], 4.5, this.bird.beakPos[2])
 		this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
 	}
 }
