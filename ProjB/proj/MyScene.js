@@ -93,7 +93,7 @@ class MyScene extends CGFscene {
 
         this.axiom = "X";
 
-        this.lightning = new MyLightning(this, this.axiom, -20, 20, 20, 25, -20, 20);
+        this.lightning = new MyLightning(this, this.axiom, -15, 15, 20, 25, -15, 15);
 
         this.objects = [this.bird, this.house, this.terrain , this.sticks , this.nest, this.lightning];
         
@@ -164,6 +164,7 @@ class MyScene extends CGFscene {
     checkKeys(t)  {        
         // Check for key codes e.g. in ​https://keycode.info/
         this.bird.check(this.gui)
+
         if (this.gui.isKeyPressed("KeyL"))
             this.lightning.startAnimation(t);
     }

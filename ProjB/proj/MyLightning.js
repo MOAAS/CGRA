@@ -11,6 +11,11 @@ class MyLightning extends MyLSystem {
         this.yMax = yMax;
         this.zMin = zMin;
         this.zMax = zMax;
+
+        let sound1 = new Audio('sounds/t1.mp3');
+        let sound2 = new Audio('sounds/t2.mp3');
+        let sound3 = new Audio('sounds/t3.mp3');
+        this.sounds = [sound1, sound2, sound3];
     }
 
     init(){
@@ -45,6 +50,7 @@ class MyLightning extends MyLSystem {
     }
 
     startAnimation(t) {
+        this.sounds[Math.floor(Math.random() * this.sounds.length)].play();
         this.generate();
         this.animating = true;
         this.startTime = t;
