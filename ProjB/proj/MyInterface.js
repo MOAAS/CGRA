@@ -13,11 +13,12 @@ class MyInterface extends CGFinterface {
         // init GUI. For more information on the methods, check:
         // http://workshop.chromeexperiments.com/examples/gui
         this.gui = new dat.GUI();
-        this.gui.add(this.scene, 'enableTex').name('Enable Textures');
+        this.gui.add(this.scene, 'enableTex').name('Enable Textures').onChange(this.scene.updateTexEnable.bind(this.scene))
         this.gui.add(this.scene, 'enableSkybox').name('Enable Sky Box');
+        this.gui.add(this.scene, 'sceneScale', 0.1, 2).name('Scene scale');
 
-        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Bird scale').onChange(this.scene.updateBirdSpeed.bind(this.scene))
-        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Bird speed').onChange(this.scene.updateBirdSpeed.bind(this.scene))
+        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Bird scale').onChange(this.scene.updateBirdFactors.bind(this.scene))
+        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Bird speed').onChange(this.scene.updateBirdFactors.bind(this.scene))
         
         this.gui.add(this.scene, 'selectedView', this.scene.viewList).name('CAMEERA').onChange(this.scene.updateCamera.bind(this.scene))
 

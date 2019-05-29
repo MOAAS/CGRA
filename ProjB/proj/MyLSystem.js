@@ -78,10 +78,8 @@ class MyLSystem extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(this.scale, this.scale, this.scale);
 
-        var i;
-
         // percorre a cadeia de caracteres
-        for (i=0; i<this.axiom.length; ++i){
+        for (let i=0; i<this.axiom.length; ++i){
 
             // verifica se sao caracteres especiais
             switch(this.axiom[i]){

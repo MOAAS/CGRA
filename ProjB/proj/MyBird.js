@@ -229,24 +229,17 @@ class MyBird extends ObjectGroup {
     }
 
     onSpeedUpdate() {
-        this.wobleAngVel = Math.PI / 1024 * this.speedFactor * this.speed * 100;
+        this.wobleAngVel = Math.PI / 1024 * this.speedFactor * this.speed * 100; 
         this.wingVelocity = 5 * this.speedFactor * this.speed * 10;
     }
 
     updateBirdWoble() {
-        /*
-        if (!this.turning) {
-            if (this.wobleAng >= Math.PI / 8) {
-                this.wobleDir = -1
-            }
-            if (this.wobleAng <= -Math.PI / 8) {
-                this.wobleDir = 1
-            }
-            this.wobleAng += this.wobleAngVel * this.wobleDir
-            this.moveAngle(this.wobleAngVel * this.wobleDir, 0, 0)
-        }
-        else this.turning = false
-        */
+        if (this.wobleAng >= Math.PI / 8)
+            this.wobleDir = -1
+        if (this.wobleAng <= -Math.PI / 8)
+            this.wobleDir = 1
+        this.wobleAng += this.wobleAngVel * this.wobleDir;
+        this.setAngle(this.wobleAng, null, null)
     }
 
     updateWingAngle() {
@@ -256,8 +249,8 @@ class MyBird extends ObjectGroup {
             this.wingDir = 1
         this.wingAngVel = this.wingVelocity * this.wingDir / 70;
         this.wingAngle += this.wingAngVel
-        this.rightWing.moveAngle(0, 0, this.wingAngVel)
-        this.leftWing.moveAngle(0, 0, -this.wingAngVel)
+        this.rightWing.moveAngle(0, 0, this.wingAngVel);
+        this.leftWing.moveAngle(0, 0, -this.wingAngVel);
         this.backFeathers.moveAngle(this.wingAngVel / 5, 0, 0);
         this.changeHeight(this.wingAngVel * 0.7)
     }
@@ -315,7 +308,7 @@ class MyBird extends ObjectGroup {
                 if (this.pos[1] >= 10) {
                     this.movementState = 'freeRoam'
                 }
-                else this.changeHeight(+0.25)
+                else this.changeHeight(0.25)
                 break
             }
         }
@@ -324,12 +317,9 @@ class MyBird extends ObjectGroup {
 
 
     display() {
-        this.scene.pushMatrix();
         this.setScale(0.1 * this.scaleFactor, 0.1 * this.scaleFactor, 0.1 * this.scaleFactor)
         this.setPos(this.pos[0], this.pos[1], this.pos[2]);
-        //this.setPos(0, this.pos[1], 0);
         this.setAngle(null, this.birdAngle, null)
         super.display();
-        this.scene.popMatrix();
     }
 }

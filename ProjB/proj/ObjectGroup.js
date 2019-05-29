@@ -1,6 +1,8 @@
 class ObjectGroup extends MyCGFobject {
 	constructor(scene) {
         super(scene);
+        
+        // Composite pattern, each ObjectGroup contains a group of MyCGFobjects and is one itself.
         this.objects = [];
     }
 
@@ -11,9 +13,20 @@ class ObjectGroup extends MyCGFobject {
     }
 	
 	display() {
+        this.scene.pushMatrix()
+        // Applies general transformations
+        this.scene.translate(this.xpos, this.ypos, this.zpos);
+        this.scene.scale(this.xScale, this.yScale, this.zScale)
+        this.scene.rotate(this.zAngle, 0, 0, 1);
+        this.scene.rotate(this.yAngle, 0, 1, 0);
+        this.scene.rotate(this.xAngle, 1, 0, 0);
+
+        // Displays each component individually
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].display();
         }		
+
+        this.scene.popMatrix();
 	}
 	
 	translate(x, y, z) {
@@ -28,43 +41,7 @@ class ObjectGroup extends MyCGFobject {
         }		
     }    
 
-    setPos(x, y, z) {
-        for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].setPos(x, y, z) ;
-        }		
-    }
-
-    movePos(x, y, z) {
-        for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].movePos(x, y, z) ;
-        }		
-    }
-
-    setAngle(x, y, z) {
-        for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].setAngle(x, y, z) ;
-        }		
-    }
-
-    moveAngle(x, y, z) {
-        for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].moveAngle(x, y, z) ;
-        }		
-    }
-
-    setScale(x, y, z) {
-        for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].setScale(x, y, z) ;
-        }		
-    }
-
-    addScale(x, y, z) {
-        for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].addScale(x, y, z) ;
-        }		
-    }
-
-    
+   
     scale(x, y, z) {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].scale(x, y, z);

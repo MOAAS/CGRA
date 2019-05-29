@@ -25,6 +25,7 @@ class MyScene extends CGFscene {
         this.initObjects();
 
         //Objects connected to MyInterface
+        this.sceneScale = 1;
         this.enableTex = true;
         this.enableSkybox = true;
         this.scaleFactor = 1;
@@ -66,7 +67,8 @@ class MyScene extends CGFscene {
         this.skybox = new MySkyBox(this);
         this.skybox.setMaterial(new MyCGFappearance(this, 1,1,1,1));
         this.skybox.setTexture(new CGFtexture(this, 'images/skybox.jpg'));
-        this.skybox.scale(200,200,200);
+        this.skybox.scale(60,60,60);
+        this.skybox.translate(0, 30, 0);
         
         this.nest = new MyNest(this,12,-7)
         this.stick1 = new MyStick(this,9,7)
@@ -75,7 +77,6 @@ class MyScene extends CGFscene {
         this.sticks.addObjects(this.stick1,this.stick2)
 
         this.bird = new MyBird(this, this.sticks,this.nest)
-        //this.bird.scale(7,7,7)
 
         this.house = new MyHouse(this, 2.5, 2, 3, 0.3);
         this.house.setWallTexture(this.houseSide)
@@ -90,12 +91,11 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
-        this.objects = [this.bird, this.house, this.terrain , this.sticks , this.nest];
-        //this.objects = [this.bird]
         this.axiom = "X";
 
-        this.lightning = new MyLightning(this, this.axiom);
-        this.lightning.generate();
+        this.lightning = new MyLightning(this, this.axiom, -20, 20, 20, 25, -20, 20);
+
+        this.objects = [this.bird, this.house, this.terrain , this.sticks , this.nest, this.lightning];
         
         this.tree1 = new MyLSPlant(this, this.branchTex, this.leafTex);
         this.tree2 = new MyLSPlant(this, this.branchTex, this.leafTex);
@@ -103,8 +103,6 @@ class MyScene extends CGFscene {
         this.tree1.generate(this.axiom);
         this.tree2.generate(this.axiom);
         this.tree3.generate(this.axiom);
-
-        //this.objects = [this.nest]
     }
 
     initLights() {
@@ -148,10 +146,14 @@ class MyScene extends CGFscene {
         this.checkKeys(t);
     }
 
-    updateBirdSpeed() {
+    updateBirdFactors() {
         this.bird.speedFactor = this.speedFactor;
         this.bird.scaleFactor = this.scaleFactor;
         this.bird.onSpeedUpdate();
+    }
+
+    updateTexEnable() {
+        this.enableTextures(this.enableTex);
     }
 
     updateCamera() {
@@ -180,20 +182,15 @@ class MyScene extends CGFscene {
         // Draw axis
         this.axis.display();
 
-        // Textures
-        this.enableTextures(this.enableTex);
+        this.scale(this.sceneScale, this.sceneScale, this.sceneScale);
 
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].display();
         }
-       
-        this.pushMatrix()   
-        this.translate(0, 25, 0)
-        this.scale(5,5,5)
-        this.rotate(Math.PI, 0, 0, 1)
-        this.lightning.display();
-        this.popMatrix();
 
+        if (this.enableSkybox)
+            this.skybox.display();
+       
         this.pushMatrix()
 
         this.translate(15, 0, 8);

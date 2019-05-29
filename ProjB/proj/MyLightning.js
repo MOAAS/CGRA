@@ -1,9 +1,16 @@
 class MyLightning extends MyLSystem {
-	constructor(scene, axiom) {
+	constructor(scene, axiom, xMin, xMax, yMin, yMax, zMin, zMax) {
         super(scene);
         this.startingAxiom = axiom;
         this.animating = false;
         this.init();
+
+        this.xMin = xMin;
+        this.xMax = xMax;
+        this.yMin = yMin;
+        this.yMax = yMax;
+        this.zMin = zMin;
+        this.zMax = zMax;
     }
 
     init(){
@@ -19,11 +26,18 @@ class MyLightning extends MyLSystem {
     }
 
     generate() {
+        // Escolhe posicao de lightning e angulo aleatorio
+        this.lightX = Math.random() * (this.xMax - this.xMin) + this.xMin;
+        this.lightY = Math.random() * (this.yMax - this.yMin) + this.yMin;
+        this.lightZ = Math.random() * (this.zMax - this.zMin) + this.zMin;
+        this.lightAngle = Math.random() * Math.PI * 2;
+
+        // Gera o axioma
         super.generate(this.startingAxiom,
         {
           "F": ["FF"],
-          //"X": ["F[-X][X]F[-X]+FX"]
           "X": ["F[-X][X]F[-X]+FX", "X+[X]-X-[X]",  "XX[F[/X][X]F[\\X]+XF-[F[/X][X]F[\\X]+XF-[/X][X]+X]+XX"]
+          //"X": ["F[-X][X]F[-X]+FX"]
         },
         25.0,
         3,
@@ -49,13 +63,16 @@ class MyLightning extends MyLSystem {
 
     display(){
         this.scene.pushMatrix();
-        this.scene.scale(this.scale, this.scale, this.scale);
+        this.scene.translate(this.lightX, this.lightY, this.lightZ);
+        this.scene.rotate(this.lightAngle, 0, 1, 0);
+        this.scene.rotate(Math.PI, 1, 0, 0);
+        this.scene.scale(this.scale * 10, this.scale * 10, this.scale * 10);
 
-        var i;
-
+        // Conta o número de pushMatrix chamados
         let numPushes = 0;
+
         // percorre a cadeia de caracteres
-        for (i=0; i < this.depth; ++i){
+        for (let i=0; i < this.depth; ++i){
 
             // verifica se sao caracteres especiais
             switch(this.axiom[i]){
@@ -72,21 +89,25 @@ class MyLightning extends MyLSystem {
                     break;
     
                 case "[":
+                    // atualiza o número de push matrix
                     numPushes++;
                     this.scene.pushMatrix();
                     break;
     
                 case "]":
+                    // atualiza o número de push matrix
                     numPushes--;
                     this.scene.popMatrix();
                     break;
     
                 case "\\":
+                    // translate para os retângulos encaixarem
                     this.scene.translate(0, 0, Math.sin(this.angle) / 2);
                     this.scene.rotate(this.angle, 1, 0, 0);
                     break;
     
                 case "/":
+                    // translate para os retângulos encaixarem
                     this.scene.translate(0, 0, -Math.sin(this.angle) / 2);
                     this.scene.rotate(-this.angle, 1, 0, 0);
                     break;    
@@ -103,8 +124,10 @@ class MyLightning extends MyLSystem {
             }
         }
         
-        for (i = 0; i < numPushes; i++)
+        // Por cada pushMatrix que não teve um popMatrix, faz-se popMatrix
+        for (let i = 0; i < numPushes; i++)
             this.scene.popMatrix();
+
         this.scene.popMatrix();
     }
 }

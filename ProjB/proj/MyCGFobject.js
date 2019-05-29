@@ -24,7 +24,8 @@ class MyCGFobject extends CGFobject {
     }
 
     translate(x, y, z) {
-        let length = this.transformations.length
+        // if last transformation is Translation, adds to its values
+        let length = this.transformations.length;
         if (length > 0 && this.transformations[length - 1] instanceof Translation) {
             this.transformations[length - 1].x += x;
             this.transformations[length - 1].y += y
@@ -66,6 +67,7 @@ class MyCGFobject extends CGFobject {
         this.xAngle += x;
         this.yAngle += y;
         this.zAngle += z;
+        // Normalizes the angles
         while (this.xAngle > 2 * Math.PI)    
             this.xAngle -= 2 * Math.PI;
         while (this.yAngle > 2 * Math.PI)    
@@ -86,15 +88,21 @@ class MyCGFobject extends CGFobject {
         this.zScale += z;
     }
 
+
+    // Displays the object, after applying all the transformations
     display() {
         this.scene.pushMatrix()
+        // Applies general transformations
         this.scene.translate(this.xpos, this.ypos, this.zpos);
         this.scene.scale(this.xScale, this.yScale, this.zScale)
-        this.scene.rotate(this.xAngle, 1, 0, 0);
-        this.scene.rotate(this.yAngle, 0, 1, 0);
         this.scene.rotate(this.zAngle, 0, 0, 1);
+        this.scene.rotate(this.yAngle, 0, 1, 0);
+        this.scene.rotate(this.xAngle, 1, 0, 0);
+
+        // Applies ordered transformations from the array
         for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
+            // Applies transformation to the screen depending on its type
             if (transformation instanceof Translation)
                 this.scene.translate(transformation.x, transformation.y, transformation.z);
             else if (transformation instanceof Rotation)
@@ -102,9 +110,10 @@ class MyCGFobject extends CGFobject {
             else if (transformation instanceof Scaling) {
                 this.scene.scale(transformation.x, transformation.y, transformation.z);
             }
-            else this.is.how.we.crash.js = 40;
+            else console.log("Unknown transformation type!")
         }
 
+        // Applies texture to scene
         if (this.material != null) {
             this.material.setTexture(this.texture);
             this.material.apply();
@@ -112,9 +121,11 @@ class MyCGFobject extends CGFobject {
                 this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.textureFilterType);
             }
         }
-        else console.log("NULL MATERIAL!");
+        else console.log("NULL material!");
 
+        // Applies texture slide if enabled
         if (this.textureSlide) {
+            // Moves the texture if slide enabled
             for (var i = 0; i < this.texCoords.length; i += 2) {
                 this.texCoords[i] -= this.scene.wind.x / 1000;
                 this.texCoords[i + 1] -= this.scene.wind.y / 1000;
@@ -125,14 +136,6 @@ class MyCGFobject extends CGFobject {
      
         super.display();
         this.scene.popMatrix();        
-    }
-
-	updateComplexity(complexity) {
-        
-    }
-
-    update() {
-
     }
 
     // --- Lighting, Materials, Textures -- //
