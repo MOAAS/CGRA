@@ -206,7 +206,7 @@ class MyBird extends ObjectGroup {
         this.updateBirdWoble()
         this.pos[0] += Math.sin(this.birdAngle) * this.speed * this.speedFactor;
         this.pos[2] += Math.cos(this.birdAngle) * this.speed * this.speedFactor;
-        // coordenadas esfericas (com incremento no y porque o bico esta mais alto)
+        // coordenadas esfericas 
         let beakAngle = this.wobleAng - Math.PI / 8;
         let radius = this.scaleFactor * 1.15;
         this.beakPos = [this.pos[0] + Math.sin(this.birdAngle) * Math.cos(beakAngle) * radius, 

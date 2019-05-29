@@ -16,10 +16,6 @@ class MyStick extends ObjectGroup {
 		this.cilinder.rotate(Math.PI / 2, 1, 0, 0)
 
 		this.angle = Math.random() * Math.PI
-		//this.cilinder.rotate(this.angle, 0, 1, 0)
-
-		//this.cilinder.translate(x, 4, z)
-		//this.setPos(this.x,4,this.z)
 
 		let material = new MyCGFappearance(this.scene, 0.7, 0.8, 0.6)
 		material.setColor(70, 30, 30)
