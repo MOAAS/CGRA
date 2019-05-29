@@ -52,14 +52,14 @@ class MyBird extends ObjectGroup {
         this.leftWing1 = new MyUnitCube(scene)
         this.leftWing1.scale(7, 0.2, 6)
         this.leftWing1.translate(3, 0.5, -3)
-        
-        this.leftWing2 = new MyPrism(scene,3)
+
+        this.leftWing2 = new MyPrism(scene, 3)
         this.leftWing2.scale(4, 0.2, 4)
-        this.leftWing2.rotate(-Math.PI/4,0,0,1)
+        this.leftWing2.rotate(-Math.PI / 4, 0, 0, 1)
         this.leftWing2.translate(8.6, -1.5, -2.5)
 
-        this.leftWingBase=new ObjectGroup(scene)
-        this.leftWingBase.addObjects(this.leftWing1,this.leftWing2)
+        this.leftWingBase = new ObjectGroup(scene)
+        this.leftWingBase.addObjects(this.leftWing1, this.leftWing2)
 
         this.leftFrontWingFeather1 = new MySphere(scene, 8, 15, 1)
         this.leftFrontWingFeather1.scale(1.2, 0.3, 4)
@@ -72,55 +72,55 @@ class MyBird extends ObjectGroup {
         this.leftFrontWingFeather2.translate(5, 0.5, -3.5)
 
         this.leftFrontWings = new ObjectGroup(scene)
-        this.leftFrontWings.addObjects(this.leftFrontWingFeather1,this.leftFrontWingFeather2)
+        this.leftFrontWings.addObjects(this.leftFrontWingFeather1, this.leftFrontWingFeather2)
 
         this.leftBackWingFeather1 = new MySphere(scene, 8, 15, 1)
         this.leftBackWingFeather1.scale(1.2, 0.3, 4)
-        this.leftBackWingFeather1.translate(0,0,-4)
+        this.leftBackWingFeather1.translate(0, 0, -4)
         this.leftBackWingFeather1.rotate(0, 1, 0, 0)
-        this.leftBackWingFeather1.translate(0,0,4)
+        this.leftBackWingFeather1.translate(0, 0, 4)
 
         this.leftBackWingFeather2 = new MySphere(scene, 8, 15, 1)
         this.leftBackWingFeather2.scale(1.2, 0.3, 4)
-        this.leftBackWingFeather2.translate(0,0,-4)
-        this.leftBackWingFeather2.rotate(-Math.PI/6,0, 1, 0)
-        this.leftBackWingFeather2.translate(0,0,4)
+        this.leftBackWingFeather2.translate(0, 0, -4)
+        this.leftBackWingFeather2.rotate(-Math.PI / 6, 0, 1, 0)
+        this.leftBackWingFeather2.translate(0, 0, 4)
 
         this.leftBackWingFeather3 = new MySphere(scene, 8, 15, 1)
         this.leftBackWingFeather3.scale(1.2, 0.3, 4)
-        this.leftBackWingFeather3.translate(0,0,-4)
-        this.leftBackWingFeather3.rotate(-Math.PI/3, 0, 1, 0)
-        this.leftBackWingFeather3.translate(0,0,4)
+        this.leftBackWingFeather3.translate(0, 0, -4)
+        this.leftBackWingFeather3.rotate(-Math.PI / 3, 0, 1, 0)
+        this.leftBackWingFeather3.translate(0, 0, 4)
 
         this.leftBackWings = new ObjectGroup(scene)
-        this.leftBackWings.addObjects(this.leftBackWingFeather1,this.leftBackWingFeather2,this.leftBackWingFeather3)
-        
-        this.leftBackWings.rotate(-Math.PI/4,0,0,1)
+        this.leftBackWings.addObjects(this.leftBackWingFeather1, this.leftBackWingFeather2, this.leftBackWingFeather3)
+
+        this.leftBackWings.rotate(-Math.PI / 4, 0, 0, 1)
         this.leftBackWings.translate(7, 0.2, -3.5)
 
         this.leftWingMainFeather = new MySphere(scene, 8, 15, 1)
         this.leftWingMainFeather.scale(1.3, 0.5, 4.5)
-        this.leftWingMainFeather.rotate(-Math.PI/2, 0, 1, 0)
-        this.leftWingMainFeather.translate(3,0.3,0)
+        this.leftWingMainFeather.rotate(-Math.PI / 2, 0, 1, 0)
+        this.leftWingMainFeather.translate(3, 0.3, 0)
 
         this.leftWing = new ObjectGroup(scene)
-        this.leftWing.addObjects(this.leftWingBase,this.leftFrontWings,this.leftBackWings,this.leftWingMainFeather)
-        this.leftWing.translate(1,0,0)
+        this.leftWing.addObjects(this.leftWingBase, this.leftFrontWings, this.leftBackWings, this.leftWingMainFeather)
+        this.leftWing.translate(1, 0, 0)
 
         //RightWing
 
         this.rightWing1 = new MyUnitCube(scene)
         this.rightWing1.scale(7, 0.2, 6)
         this.rightWing1.translate(-3, 0.5, -3)
-        
-        this.rightWing2 = new MyPrism(scene,3)
+
+        this.rightWing2 = new MyPrism(scene, 3)
         this.rightWing2.scale(4, 0.2, 4)
-        this.rightWing2.rotate(Math.PI,0,1,0)
-        this.rightWing2.rotate(Math.PI/4,0,0,1)
+        this.rightWing2.rotate(Math.PI, 0, 1, 0)
+        this.rightWing2.rotate(Math.PI / 4, 0, 0, 1)
         this.rightWing2.translate(-8.6, -1.5, -2.5)
 
-        this.rightWingBase=new ObjectGroup(scene)
-        this.rightWingBase.addObjects(this.rightWing1,this.rightWing2)
+        this.rightWingBase = new ObjectGroup(scene)
+        this.rightWingBase.addObjects(this.rightWing1, this.rightWing2)
 
         this.rightFrontWingFeather1 = new MySphere(scene, 8, 15, 1)
         this.rightFrontWingFeather1.scale(1.2, 0.3, 4)
@@ -133,44 +133,44 @@ class MyBird extends ObjectGroup {
         this.rightFrontWingFeather2.translate(-5, 0.5, -3.5)
 
         this.rightFrontWings = new ObjectGroup(scene)
-        this.rightFrontWings.addObjects(this.rightFrontWingFeather1,this.rightFrontWingFeather2)
+        this.rightFrontWings.addObjects(this.rightFrontWingFeather1, this.rightFrontWingFeather2)
 
         this.rightBackWingFeather1 = new MySphere(scene, 8, 15, 1)
         this.rightBackWingFeather1.scale(1.2, 0.3, 4)
-        this.rightBackWingFeather1.translate(0,0,-4)
+        this.rightBackWingFeather1.translate(0, 0, -4)
         this.rightBackWingFeather1.rotate(0, 1, 0, 0)
-        this.rightBackWingFeather1.translate(0,0,4)
+        this.rightBackWingFeather1.translate(0, 0, 4)
 
         this.rightBackWingFeather2 = new MySphere(scene, 8, 15, 1)
         this.rightBackWingFeather2.scale(1.2, 0.3, 4)
-        this.rightBackWingFeather2.translate(0,0,-4)
-        this.rightBackWingFeather2.rotate(+Math.PI/6,0, 1, 0)
-        this.rightBackWingFeather2.translate(0,0,4)
+        this.rightBackWingFeather2.translate(0, 0, -4)
+        this.rightBackWingFeather2.rotate(+Math.PI / 6, 0, 1, 0)
+        this.rightBackWingFeather2.translate(0, 0, 4)
 
         this.rightBackWingFeather3 = new MySphere(scene, 8, 15, 1)
         this.rightBackWingFeather3.scale(1.2, 0.3, 4)
-        this.rightBackWingFeather3.translate(0,0,-4)
-        this.rightBackWingFeather3.rotate(+Math.PI/3, 0, 1, 0)
-        this.rightBackWingFeather3.translate(0,0,4)
+        this.rightBackWingFeather3.translate(0, 0, -4)
+        this.rightBackWingFeather3.rotate(+Math.PI / 3, 0, 1, 0)
+        this.rightBackWingFeather3.translate(0, 0, 4)
 
         this.rightBackWings = new ObjectGroup(scene)
-        this.rightBackWings.addObjects(this.rightBackWingFeather1,this.rightBackWingFeather2,this.rightBackWingFeather3)
-        
-        this.rightBackWings.rotate(+Math.PI/4,0,0,1)
+        this.rightBackWings.addObjects(this.rightBackWingFeather1, this.rightBackWingFeather2, this.rightBackWingFeather3)
+
+        this.rightBackWings.rotate(+Math.PI / 4, 0, 0, 1)
         this.rightBackWings.translate(-7, 0.2, -3.5)
 
         this.rightWingMainFeather = new MySphere(scene, 8, 15, 1)
         this.rightWingMainFeather.scale(1.3, 0.5, 4.5)
-        this.rightWingMainFeather.rotate(-Math.PI/2, 0, 1, 0)
-        this.rightWingMainFeather.translate(-3,0.3,0)
+        this.rightWingMainFeather.rotate(-Math.PI / 2, 0, 1, 0)
+        this.rightWingMainFeather.translate(-3, 0.3, 0)
 
         this.rightWing = new ObjectGroup(scene)
-        this.rightWing.addObjects(this.rightWingBase,this.rightFrontWings,this.rightBackWings,this.rightWingMainFeather)
-        this.rightWing.translate(-1,0,0)
+        this.rightWing.addObjects(this.rightWingBase, this.rightFrontWings, this.rightBackWings, this.rightWingMainFeather)
+        this.rightWing.translate(-1, 0, 0)
 
 
         this.wings = new ObjectGroup(scene)
-        this.wings.addObjects(this.leftWing,this.rightWing)
+        this.wings.addObjects(this.leftWing, this.rightWing)
 
         this.objects = [this.head, this.body, this.beak, this.eyes, this.backFeathers, this.wings]
 
@@ -181,7 +181,7 @@ class MyBird extends ObjectGroup {
         this.hasStick = false
 
         this.pos = [0, 10, 0]
-        this.speed = 0.1  
+        this.speed = 0.1
         this.minSpeed = 0.05
         this.birdAngle = 0
         this.turnRate = 1
@@ -192,6 +192,9 @@ class MyBird extends ObjectGroup {
 
         this.wobleAngVel = Math.PI / 1024
         this.wobleAng = 0
+        this.wobleDir = -1
+
+        //this.turning = false
 
         this.sticks = sticks
         this.nest = nest
@@ -203,7 +206,7 @@ class MyBird extends ObjectGroup {
         this.updateBirdWoble()
         this.pos[0] += Math.sin(this.birdAngle) * this.speed * this.speedFactor;
         this.pos[2] += Math.cos(this.birdAngle) * this.speed * this.speedFactor;
-        this.beakPos =[this.pos[0] + Math.sin(this.birdAngle)*this.scaleFactor, this.pos[1]+this.scaleFactor*0.5, this.pos[2] + Math.cos(this.birdAngle)*this.scaleFactor] 
+        this.beakPos = [this.pos[0] + Math.sin(this.birdAngle) * this.scaleFactor, this.pos[1] + this.scaleFactor * 0.5, this.pos[2] + Math.cos(this.birdAngle) * this.scaleFactor]
     }
 
     changeHeight(v) {
@@ -211,6 +214,7 @@ class MyBird extends ObjectGroup {
     }
 
     turn(v) {
+        //this.turning = true
         this.birdAngle += v * this.speedFactor;
     }
 
@@ -225,12 +229,24 @@ class MyBird extends ObjectGroup {
     }
 
     onSpeedUpdate() {
-        this.wobleAngVel = Math.PI / 1024 * this.speedFactor * this.speed * 10;
+        this.wobleAngVel = Math.PI / 1024 * this.speedFactor * this.speed * 100;
         this.wingVelocity = 5 * this.speedFactor * this.speed * 10;
     }
 
     updateBirdWoble() {
-        this.changeHeight(this.wingAngVel*0.7)
+        /*
+        if (!this.turning) {
+            if (this.wobleAng >= Math.PI / 8) {
+                this.wobleDir = -1
+            }
+            if (this.wobleAng <= -Math.PI / 8) {
+                this.wobleDir = 1
+            }
+            this.wobleAng += this.wobleAngVel * this.wobleDir
+            this.moveAngle(this.wobleAngVel * this.wobleDir, 0, 0)
+        }
+        else this.turning = false
+        */
     }
 
     updateWingAngle() {
@@ -243,6 +259,7 @@ class MyBird extends ObjectGroup {
         this.rightWing.moveAngle(0, 0, this.wingAngVel)
         this.leftWing.moveAngle(0, 0, -this.wingAngVel)
         this.backFeathers.moveAngle(this.wingAngVel / 5, 0, 0);
+        this.changeHeight(this.wingAngVel * 0.7)
     }
 
     check(gui) {
@@ -272,15 +289,15 @@ class MyBird extends ObjectGroup {
                 }
                 if (this.pos[1] <= 5) {
                     if (this.hasStick) {
-                        if (this.nest.checkColision(this)){
+                        if (this.nest.checkColision(this)) {
                             this.hasStick = false
                             this.pickedStick.land()
                         }
                     }
                     else {
                         var sticksArray = this.sticks.getObjects()
-                        for(let i = 0, length = sticksArray.length ; i<length;i++){
-                            if (sticksArray[i].checkColision(this)){
+                        for (let i = 0, length = sticksArray.length; i < length; i++) {
+                            if (sticksArray[i].checkColision(this)) {
                                 this.hasStick = true
                                 this.pickedStick = sticksArray[i]
                                 break
