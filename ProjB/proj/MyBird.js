@@ -3,7 +3,7 @@ class MyBird extends ObjectGroup {
         super(scene);
 
         /* Head */
-        this.head = new MySphere(scene, 15, 15, 4) 
+        this.head = new MySphere(scene, 15, 15, 4)
         this.head.translate(0, 4, 4);
 
         /* Head */
@@ -19,13 +19,13 @@ class MyBird extends ObjectGroup {
 
         /* Head */
         this.leftEye = new MySphere(scene, 10, 10, 0.8)
-        this.leftEye.rotate(-Math.PI/5,1,0,0)
-        this.leftEye.rotate(2*Math.PI/5,0,1,0)  
+        this.leftEye.rotate(-Math.PI / 5, 1, 0, 0)
+        this.leftEye.rotate(2 * Math.PI / 5, 0, 1, 0)
         this.leftEye.translate(2, 6, 6.2)
 
         this.rightEye = new MySphere(scene, 10, 10, 0.8)
-        this.rightEye.rotate(-Math.PI/5,1,0,0)
-        this.rightEye.rotate(Math.PI/5,0,1,0)
+        this.rightEye.rotate(-Math.PI / 5, 1, 0, 0)
+        this.rightEye.rotate(Math.PI / 5, 0, 1, 0)
         this.rightEye.translate(-2, 6, 6.2)
 
         this.eyes = new ObjectGroup(scene)
@@ -63,8 +63,7 @@ class MyBird extends ObjectGroup {
 
         this.leftWing2 = new MyPrism(scene, 3)
         this.leftWing2.scale(4, 0.2, 4)
-        this.leftWing2.rotate(-Math.PI / 4, 0, 0, 1)
-        this.leftWing2.translate(8.6, -1.5, -2.5)
+        this.leftWing2.translate(8.6, 0, -2.5)
 
         this.leftWingBase = new ObjectGroup(scene)
         this.leftWingBase.addObjects(this.leftWing1, this.leftWing2)
@@ -100,11 +99,9 @@ class MyBird extends ObjectGroup {
         this.leftBackWingFeather3.rotate(-Math.PI / 3, 0, 1, 0)
         this.leftBackWingFeather3.translate(0, 0, 4)
 
-        this.leftBackWings = new ObjectGroup(scene)
-        this.leftBackWings.addObjects(this.leftBackWingFeather1, this.leftBackWingFeather2, this.leftBackWingFeather3)
-
-        this.leftBackWings.rotate(-Math.PI / 4, 0, 0, 1)
-        this.leftBackWings.translate(7, 0.2, -3.5)
+        this.leftBackWingFeathers = new ObjectGroup(scene)
+        this.leftBackWingFeathers.addObjects(this.leftBackWingFeather1, this.leftBackWingFeather2, this.leftBackWingFeather3)
+        this.leftBackWingFeathers.translate(7, 0.2, -3.5)
 
         this.leftWingMainFeather = new MySphere(scene, 8, 15, 1)
         this.leftWingMainFeather.scale(1.3, 0.5, 4.5)
@@ -112,8 +109,11 @@ class MyBird extends ObjectGroup {
         this.leftWingMainFeather.translate(3, 0.3, 0)
 
         this.leftWing = new ObjectGroup(scene)
-        this.leftWing.addObjects(this.leftWingBase, this.leftFrontWings, this.leftBackWings, this.leftWingMainFeather)
+        this.leftWing.addObjects(this.leftWingBase, this.leftFrontWings, this.leftBackWingFeathers, this.leftWingMainFeather)
         this.leftWing.translate(1, 0, 0)
+
+        this.leftBackWing = new ObjectGroup(scene)
+        this.leftBackWing.addObjects(this.leftBackWingFeathers,this.leftWing2)
 
         /* RightWing */
 
@@ -124,8 +124,7 @@ class MyBird extends ObjectGroup {
         this.rightWing2 = new MyPrism(scene, 3)
         this.rightWing2.scale(4, 0.2, 4)
         this.rightWing2.rotate(Math.PI, 0, 1, 0)
-        this.rightWing2.rotate(Math.PI / 4, 0, 0, 1)
-        this.rightWing2.translate(-8.6, -1.5, -2.5)
+        this.rightWing2.translate(-8.6, 0, -2.5)
 
         this.rightWingBase = new ObjectGroup(scene)
         this.rightWingBase.addObjects(this.rightWing1, this.rightWing2)
@@ -161,11 +160,9 @@ class MyBird extends ObjectGroup {
         this.rightBackWingFeather3.rotate(+Math.PI / 3, 0, 1, 0)
         this.rightBackWingFeather3.translate(0, 0, 4)
 
-        this.rightBackWings = new ObjectGroup(scene)
-        this.rightBackWings.addObjects(this.rightBackWingFeather1, this.rightBackWingFeather2, this.rightBackWingFeather3)
-
-        this.rightBackWings.rotate(+Math.PI / 4, 0, 0, 1)
-        this.rightBackWings.translate(-7, 0.2, -3.5)
+        this.rightBackWingFeathers = new ObjectGroup(scene)
+        this.rightBackWingFeathers.addObjects(this.rightBackWingFeather1, this.rightBackWingFeather2, this.rightBackWingFeather3)
+        this.rightBackWingFeathers.translate(-7, 0.2, -3.5)
 
         this.rightWingMainFeather = new MySphere(scene, 8, 15, 1)
         this.rightWingMainFeather.scale(1.3, 0.5, 4.5)
@@ -173,8 +170,12 @@ class MyBird extends ObjectGroup {
         this.rightWingMainFeather.translate(-3, 0.3, 0)
 
         this.rightWing = new ObjectGroup(scene)
-        this.rightWing.addObjects(this.rightWingBase, this.rightFrontWings, this.rightBackWings, this.rightWingMainFeather)
+        this.rightWing.addObjects(this.rightWingBase, this.rightFrontWings, this.rightBackWingFeathers, this.rightWingMainFeather)
         this.rightWing.translate(-1, 0, 0)
+
+        this.rightBackWing = new ObjectGroup(scene)
+        this.rightBackWing.addObjects(this.rightBackWingFeathers,this.rightWing2)
+
 
         this.wings = new ObjectGroup(scene)
         this.wings.addObjects(this.leftWing, this.rightWing)
@@ -208,7 +209,7 @@ class MyBird extends ObjectGroup {
         this.wobleAngVel = Math.PI / 1024
         this.wobleAng = 0
         this.wobleDir = -1
-
+        this.wingAngle =0
 
         this.sticks = sticks
         this.nest = nest
@@ -221,15 +222,16 @@ class MyBird extends ObjectGroup {
         this.pos[0] += Math.sin(this.birdAngle) * this.speed * this.speedFactor; //atualizar posicao do passaro com base na velocidade
         this.pos[2] += Math.cos(this.birdAngle) * this.speed * this.speedFactor;
         // coordenadas esfericas 
-        let beakAngle = this.wobleAng + this.verticalBeakAngle - Math.PI / 8; //angulo do bico em relacao ao passaro
+        //let beakAngle = this.wobleAng + this.verticalBeakAngle - Math.PI / 8; //angulo do bico em relacao ao passaro
+        this.beakAngle = Math.sin(this.wobleAng / 20) / 5 + this.verticalBeakAngle - Math.PI / 8
         let radius = this.scaleFactor * 1.15;
-        this.beakPos = [this.pos[0] + Math.sin(this.birdAngle) * Math.cos(beakAngle) * radius,  //posicao do bico-utilizado para sincronizar posicao de um ramo apanhado
-                        this.pos[1] - Math.sin(beakAngle) * radius, 
-                        this.pos[2] + Math.cos(this.birdAngle) * Math.cos(beakAngle) * radius];
+        this.beakPos = [this.pos[0] + Math.sin(this.birdAngle) * Math.cos(this.beakAngle) * radius,  //posicao do bico-utilizado para sincronizar posicao de um ramo apanhado
+        this.pos[1] - Math.sin(this.beakAngle) * radius,
+        this.pos[2] + Math.cos(this.birdAngle) * Math.cos(this.beakAngle) * radius];
     }
 
     changeHeight(v) { //mudar a posicao vertical
-        this.pos[1] += v; 
+        this.pos[1] += v;
     }
 
     turn(v) { //mudanca do angulo do passaro
@@ -247,30 +249,39 @@ class MyBird extends ObjectGroup {
     }
 
     onSpeedUpdate() {
-        this.wobleAngVel = Math.PI / 1024 * 10 * this.speedFactor //velocidade de abanamento do passaro (nao depende da velocidade)
-        this.wingVelocity = 5 * this.speedFactor * this.speed * 10; //velocidade das asas (depende da velocidade)
+        this.wobleAngVel = Math.PI * this.speedFactor //velocidade de abanamento do passaro (nao depende da velocidade)
+        this.wingVelocity = 50 * this.speedFactor * this.speed; //velocidade das asas (depende da velocidade)
     }
 
     updateBirdWoble() { //abanamento do passaro
-        if (this.wobleAng >= Math.PI / 16)  //angulo maximo
-            this.wobleDir = -1
-        if (this.wobleAng <= -Math.PI / 16) //angulo minimo
-            this.wobleDir = 1   
-        this.wobleAng += this.wobleAngVel * this.wobleDir; //guarda o angulo atual
-        this.moveAngle(this.wobleAngVel*this.wobleDir, null, null) //atualizacao do angulo
+
+        if (this.movementState == 'freeRoam') {
+            this.wobleAng += this.wobleAngVel
+            this.setAngle(Math.sin(this.wobleAng / 20) / 5, null, null) //atualizacao do angulo
+        }
+
     }
 
     updateWingAngle() { //batimento das asas
-        if (this.wingAngle >= Math.PI / 8) //angulo maximo
-            this.wingDir = -1
-        if (this.wingAngle <= -Math.PI / 8) //angulo minimo
-            this.wingDir = 1
-        this.wingAngVel = this.wingVelocity * this.wingDir / 70;
-        this.wingAngle += this.wingAngVel //guarda o angulo atual
-        this.rightWing.moveAngle(0, 0, this.wingAngVel); //atualizaçao dos angulos : asa direita
-        this.leftWing.moveAngle(0, 0, -this.wingAngVel); //                          asa esquera
-        this.backFeathers.moveAngle(this.wingAngVel / 5, 0, 0) //                    penas traseiras
-        this.changeHeight(this.wingAngVel * 0.7) //atualizacao do movimento para cima e para baixo de acordo com o movimento das asas
+
+        if (this.movementState != 'goingDown') {
+            this.wingAngle += Math.min(this.wingVelocity, 20) //guarda o angulo atual
+
+            this.rightBackWing.translate(7, -0.2,3.5)
+            this.rightBackWing.rotate(Math.sin(this.wingAngle / 20) / 1.5 - this.rightWing.zAngle ,0,0,1)
+            this.rightBackWing.translate(-7, 0.2, -3.5)
+
+
+            this.leftBackWing.translate(-7, -0.2,3.5)
+            this.leftBackWing.rotate(-(Math.sin(this.wingAngle / 20) / 1.5 + this.leftWing.zAngle) ,0,0,1)
+            this.leftBackWing.translate(7, 0.2, -3.5)
+
+            this.rightWing.setAngle(0, 0, Math.sin(this.wingAngle / 20) / 1.5)
+            this.leftWing.setAngle(0, 0, -Math.sin(this.wingAngle / 20) / 1.5)
+            if (this.movementState == 'freeRoam')
+                this.pos[1] = (Math.sin((this.wingAngle) / 20) / 4 + 10)
+        }
+
     }
 
     check(gui) {
@@ -286,7 +297,7 @@ class MyBird extends ObjectGroup {
                     this.turn(-0.12)
                 if (gui.isKeyPressed("KeyR"))
                     this.resetPos()
-                if (gui.isKeyPressed("KeyP")) 
+                if (gui.isKeyPressed("KeyP"))
                     this.switchToDown() //mudar de estado
                 break
             }
@@ -304,7 +315,7 @@ class MyBird extends ObjectGroup {
                         }
                     }
                     else { //caso nao tenha ramo , verifica se colidiu com algum ramo
-                        var sticksArray = this.sticks.getObjects() 
+                        var sticksArray = this.sticks.getObjects()
                         for (let i = 0, length = sticksArray.length; i < length; i++) { //verificar no array de ramos se colidiu
                             if (sticksArray[i].checkColision(this)) {
                                 this.hasStick = true    //atualiza estado caso tenha colidido
@@ -331,37 +342,37 @@ class MyBird extends ObjectGroup {
 
     }
 
-    switchToDown(){
-        let vertAngle = Math.atan(this.vertSpeed/this.speed)/2//calculo do angulo de aterrajem , que relaciona a velocidade horizontal com vertical
+    switchToDown() {
+        let vertAngle = Math.atan(this.vertSpeed / this.speed) / 2//calculo do angulo de aterrajem , que relaciona a velocidade horizontal com vertical
         this.verticalBeakAngle = vertAngle //atualizacao do angulo vertical do bico para ser utilizado na posicao do bico
-        this.moveAngle(vertAngle,null, null) //atualizacao do angulo passaro
+        this.moveAngle(vertAngle, null, null) //atualizacao do angulo passaro
         this.movementState = 'goingDown' //mudanca de estado
     }
 
-    switchToUp(){
-        let vertAngle = Math.atan(this.vertSpeed/this.speed)/2
+    switchToUp() {
+        let vertAngle = Math.atan(this.vertSpeed / this.speed) / 2
         this.verticalBeakAngle = -vertAngle
-        this.moveAngle(-2*vertAngle,null, null)
+        this.moveAngle(-2 * vertAngle, null, null)
         this.movementState = 'goingUp'
     }
-    
-    switchToFree(){
-        let vertAngle = Math.atan(this.vertSpeed/this.speed)/2
+
+    switchToFree() {
+        let vertAngle = Math.atan(this.vertSpeed / this.speed) / 2
         this.verticalBeakAngle = 0
-        this.moveAngle(vertAngle,null, null)
+        this.moveAngle(vertAngle, null, null)
         this.movementState = 'freeRoam'
     }
 
-    setFeathersTexture(texture){ //textura das penas
+    setFeathersTexture(texture) { //textura das penas
         this.wings.setTexture(texture)
         this.backFeathers.setTexture(texture)
         this.body.setTexture(texture)
         this.head.setTexture(texture)
     }
-    setEyesTexture(texture){ //textura dos olhos
+    setEyesTexture(texture) { //textura dos olhos
         this.eyes.setTexture(texture)
     }
-    setBeakTexture(texture){ //textura do bico
+    setBeakTexture(texture) { //textura do bico
         this.beak.setTexture(texture)
     }
 

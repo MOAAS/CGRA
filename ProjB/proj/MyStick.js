@@ -45,7 +45,8 @@ class MyStick extends ObjectGroup {
 	update() {
 		if (this.state == 'birded') {
 			this.setPos(this.bird.beakPos[0],this.bird.beakPos[1],this.bird.beakPos[2])
-			this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
+			//this.setAngle(this.bird.beakAngle,null,null)
+			this.setAngle(null, this.bird.birdAngle + Math.PI / 2, null)
 		}
 	}
 
