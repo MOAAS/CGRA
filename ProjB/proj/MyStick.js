@@ -10,18 +10,30 @@ class MyStick extends ObjectGroup {
 		super(scene);
 		this.x = x
 		this.z = z
-		this.cilinder = new MyCilinder(scene, 6);
-		this.cilinder.translate(0, -0.5, 0)
-		this.cilinder.scale(0.2, 1.5, 0.2);
-		this.cilinder.rotate(Math.PI / 2, 1, 0, 0)
+		this.mainBranch = new MyCilinder(scene, 6);
+		this.mainBranch.translate(0, -0.5, 0)
+		this.mainBranch.scale(0.2, 1.5, 0.2);
+		this.mainBranch.rotate(Math.PI / 2, 1, 0, 0)
+
+		this.secondaryBranch = new MyCilinder(scene,6)
+		this.secondaryBranch.scale(0.09, 0.75, 0.09);
+		this.secondaryBranch.rotate(Math.PI / 2, 1, 0, 0)
+		this.secondaryBranch.rotate(-Math.PI / 4, 0, 1, 0)
+
+		this.leaf = new MySphere(scene, 8, 15, 0.1)
+		this.leaf.scale(2, 0.3, 3)
+		this.leaf.rotate(-Math.PI/4,0,1,0)
+		this.leaf.translate(-0.7, 0, 0.7)
 
 		this.angle = Math.random() * Math.PI
 
-		let material = new MyCGFappearance(this.scene, 0.7, 0.8, 0.6)
+		/*let material = new MyCGFappearance(this.scene, 0.7, 0.8, 0.6)
 		material.setColor(70, 30, 30)
-		this.cilinder.setMaterial(material)
+		this.mainBranch.setMaterial(material)*/
 
-		this.addObjects(this.cilinder)
+		if(Math.random()>0.6)
+			this.addObjects(this.mainBranch,this.secondaryBranch,this.leaf)
+		else  this.addObjects(this.mainBranch)
 
 		this.bird = bird
 		this.state = 'grounded'
@@ -52,5 +64,13 @@ class MyStick extends ObjectGroup {
 		this.state = 'nested'
 		this.setPos(this.bird.beakPos[0], 4.5, this.bird.beakPos[2])
 		this.setAngle(0, this.bird.birdAngle + Math.PI / 2, 0)
+	}
+
+	setBranchTexture(texture){
+		this.mainBranch.setTexture(texture)
+		this.secondaryBranch.setTexture(texture)
+	}
+	setLeafTexture(texture){
+		this.leaf.setTexture(texture)
 	}
 }
