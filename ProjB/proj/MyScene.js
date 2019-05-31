@@ -105,7 +105,7 @@ class MyScene extends CGFscene {
 
         this.axiom = "X";
 
-        this.lightning = new MyLightning(this, this.axiom, -15, 15, 20, 25, -15, 15);
+        this.lightning = new MyLightning(this, this.axiom, -15, 15, 25, 30, -15, 15);
 
         this.objects = [this.bird, this.house, this.terrain, this.sticks, this.nest, this.lightning];
 
@@ -225,16 +225,21 @@ class MyScene extends CGFscene {
             this.skybox.display();
 
         this.pushMatrix()
-
-        this.translate(15, 0, 8);
+        this.translate(15, 4, 8);
+        this.scale(0.6, 0.6, 0.6);
         this.tree1.display();
+        this.popMatrix();
 
-        this.translate(-25, 0, -15);
+        this.pushMatrix()
+        this.translate(-18, 4, 6);
+        this.scale(0.6, 0.6, 0.6);
         this.tree2.display();
+        this.popMatrix();
 
-        this.translate(21, 0, -5);
+        this.pushMatrix()
+        this.translate(12, 4, -8);
+        this.scale(0.6, 0.6, 0.6);
         this.tree3.display();
-
         this.popMatrix();
 
         // ---- END Primitive drawing section

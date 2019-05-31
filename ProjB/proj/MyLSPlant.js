@@ -27,7 +27,7 @@ class MyLSPlant extends MyLSystem {
     }
 
     generate(axiom) {
-        let ruleF = "FF";
+        let ruleF = "F";
         let ruleX1 = "F[-X][X]F[-X]+FX";
         let ruleX2 = "F[-X][x]+X";
         let ruleX3 = "F[-X][x]+X";

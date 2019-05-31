@@ -26,7 +26,7 @@ class MyLightning extends MyLSystem {
     initGrammar(){
         this.grammar = {
             "F": new MyLightningLight(this.scene),
-            "X": null
+            "X": new MyLightningLight(this.scene)
         };
     }
 
@@ -40,10 +40,11 @@ class MyLightning extends MyLSystem {
         // Gera o axioma
         super.generate(this.startingAxiom,
         {
-          "F": ["FF"],
-          "X": ["F[-X][X]F[-X]+FX", "X+[X]-X-[X]",  "XX[F[/X][X]F[\\X]+XF-[F[/X][X]F[\\X]+XF-[/X][X]+X]+XX"]
-          //"X": ["F[-X][X]F[-X]+FX"]
-        },
+            "F": ["FF"],
+            "X": ["F[-X][X]F[-X]+FX", "XL[FXLX]FX[FRX]^R","XL[/FR&X]F[LX[FXXF\\]F]R", "X[[F]LFX/]FX[FR/FX]^R", "XL[FXLX]FX[FRX]^R","XL[/FR&X]F[LX[FXXF\\]F]R", "X[[F]LFX/]FX[FR/FX]^R"],
+            "L": ["+F"],
+            "R": ["-F"]
+            },
         25.0,
         3,
         0.5)
@@ -72,9 +73,9 @@ class MyLightning extends MyLSystem {
         this.scene.translate(this.lightX, this.lightY, this.lightZ);
         this.scene.rotate(this.lightAngle, 0, 1, 0);
         this.scene.rotate(Math.PI, 1, 0, 0);
-        this.scene.scale(this.scale * 10, this.scale * 10, this.scale * 10);
+        this.scene.scale(this.scale * 5, this.scale * 5, this.scale * 5);
 
-        // Conta o número de pushMatrix chamados
+        // Conta o número de pushMatrix chamados que nao tiveram pops
         let numPushes = 0;
 
         // percorre a cadeia de caracteres
