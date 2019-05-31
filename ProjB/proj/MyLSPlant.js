@@ -43,9 +43,15 @@ class MyLSPlant extends MyLSystem {
 
         super.generate(
             axiom,
+            /*
             {
                 "F": [ ruleF ],
                 "X": [ ruleX1, ruleX2, ruleX5, ruleX9 ]
+            },
+            */
+           {
+            "F": ["FF"],
+            "X": ["F[-X][X]F[-X]+FX", "F[-X][-X]F[+X]+X", "F[/X][X]F[\\X]+X", "F[^X][X]F[&X]^XX"]
             },
             angle,
             iterations,

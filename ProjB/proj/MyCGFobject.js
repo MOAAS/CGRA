@@ -83,9 +83,9 @@ class MyCGFobject extends CGFobject {
     }
 
     addScale(x, y, z) {
-        this.xScale += x;
-        this.yScale += y;
-        this.zScale += z;
+        this.xScale *= x;
+        this.yScale *= y;
+        this.zScale *= z;
     }
 
 
