@@ -43,9 +43,12 @@ class MyCGFobject extends CGFobject {
     }
 
     setPos(x, y, z) {
-        this.xpos = x;
-        this.ypos = y;
-        this.zpos = z;        
+        if (x != null)
+            this.xpos = x;
+        if (y != null)
+            this.ypos = y;
+        if (z != null)
+            this.zpos = z;        
     }
 
     movePos(x, y, z) {
@@ -89,16 +92,7 @@ class MyCGFobject extends CGFobject {
     }
 
 
-    // Displays the object, after applying all the transformations
-    display() {
-        this.scene.pushMatrix()
-        // Applies general transformations
-        this.scene.translate(this.xpos, this.ypos, this.zpos);
-        this.scene.rotate(this.zAngle, 0, 0, 1);
-        this.scene.rotate(this.yAngle, 0, 1, 0);
-        this.scene.rotate(this.xAngle, 1, 0, 0);
-        this.scene.scale(this.xScale, this.yScale, this.zScale)
-
+    applySceneTransformations() {
         // Applies ordered transformations from the array
         for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
@@ -112,6 +106,19 @@ class MyCGFobject extends CGFobject {
             }
             else console.log("Unknown transformation type!")
         }
+
+        // Applies general transformations
+        this.scene.translate(this.xpos, this.ypos, this.zpos);
+        this.scene.rotate(this.zAngle, 0, 0, 1);
+        this.scene.rotate(this.yAngle, 0, 1, 0);
+        this.scene.rotate(this.xAngle, 1, 0, 0);
+        this.scene.scale(this.xScale, this.yScale, this.zScale)        
+    }
+    
+    // Displays the object, after applying all the transformations
+    display() {
+        this.scene.pushMatrix()
+        this.applySceneTransformations();
 
         // Applies texture to scene
         if (this.material != null) {

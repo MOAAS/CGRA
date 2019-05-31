@@ -267,7 +267,7 @@ class MyBird extends ObjectGroup {
         if (this.movementState != 'goingDown') {
             this.wingAngle += Math.min(this.wingVelocity, 20) //guarda o angulo atual
 
-            this.rightBackWing.translate(7, -0.2,3.5)
+            this.rightBackWing.translate(7, -0.2, 3.5)
             this.rightBackWing.rotate(Math.sin(this.wingAngle / 20) / 1.5 - this.rightWing.zAngle ,0,0,1)
             this.rightBackWing.translate(-7, 0.2, -3.5)
 
@@ -284,26 +284,26 @@ class MyBird extends ObjectGroup {
 
     }
 
-    check(gui) {
+    checkKeys() {
         switch (this.movementState) {
             case 'freeRoam': { //em freeRoaming é possivel mudar a velocidade / fazer reset e iniciar a descida
-                if (gui.isKeyPressed("KeyW"))
+                if (this.scene.gui.isKeyPressed("KeyW"))
                     this.accelerate(0.02)
-                if (gui.isKeyPressed("KeyS"))
+                if (this.scene.gui.isKeyPressed("KeyS"))
                     this.accelerate(-0.02)
-                if (gui.isKeyPressed("KeyA"))
+                if (this.scene.gui.isKeyPressed("KeyA"))
                     this.turn(0.12)
-                if (gui.isKeyPressed("KeyD"))
+                if (this.scene.gui.isKeyPressed("KeyD"))
                     this.turn(-0.12)
-                if (gui.isKeyPressed("KeyR"))
+                if (this.scene.gui.isKeyPressed("KeyR"))
                     this.resetPos()
-                if (gui.isKeyPressed("KeyP"))
+                if (this.scene.gui.isKeyPressed("KeyP"))
                     this.switchToDown() //mudar de estado
                 break
             }
 
             case 'goingDown': {     //fase de descida
-                if (gui.isKeyPressed("Space")) {    //cancelar a descida indo logo para a fase de subida
+                if (this.gui.isKeyPressed("Space")) {    //cancelar a descida indo logo para a fase de subida
                     switchToUp() //mudar de estado 
                     break
                 }

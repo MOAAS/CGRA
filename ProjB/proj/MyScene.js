@@ -108,11 +108,10 @@ class MyScene extends CGFscene {
         this.house.setPos(-3, 3.2, 5)
 
         this.person = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
-        this.person.setPos(1, 3.8, 5);
+        this.person.setPos(1, 4, 5);
         this.person.setScale(0.3, 0.3, 0.3);
 
-        this.spinner = new MySpinner(this);
-        this.spinner.setPos(1, 3.8, 5);
+        this.spinner = new MySpinner(this, 1, 3.8, 5);
 
         this.rings = new MyRingList(this, 8, 4, -30, 30, 6, 12, -30, 30);
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
@@ -142,7 +141,7 @@ class MyScene extends CGFscene {
                 this.stick.setLeafTexture(this.leafTex) 
                 this.sticks.addObjects(this.stick)
             }
-            else i--
+            else i--;
         }
     }
 
@@ -176,7 +175,7 @@ class MyScene extends CGFscene {
         this.bird.update()
         this.sticks.update()
         this.lightning.update(t)
-        this.spinner.update(t);
+        this.spinner.update(t, this.person);
         this.rings.update(this.bird.pos[0], this.bird.pos[1], this.bird.pos[2]);
 
         if (this.selectedView == 0) {
@@ -212,7 +211,21 @@ class MyScene extends CGFscene {
 
     checkKeys(t) {
         // Check for key codes e.g. in ​https://keycode.info/
-        this.bird.check(this.gui)
+        this.bird.checkKeys();
+
+        if (this.gui.isKeyPressed("ControlRight"))
+            this.spinner.lift();
+        if (this.gui.isKeyPressed("ShiftRight"))
+            this.spinner.descend();
+        if (this.gui.isKeyPressed("ArrowUp"))
+            this.spinner.front();
+        if (this.gui.isKeyPressed("ArrowLeft"))
+            this.spinner.left();
+        if (this.gui.isKeyPressed("ArrowDown"))
+            this.spinner.back();
+        if (this.gui.isKeyPressed("ArrowRight"))
+            this.spinner.right();
+
 
         if (this.gui.isKeyPressed("KeyL"))
             this.lightning.startAnimation(t);

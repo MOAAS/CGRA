@@ -14,12 +14,7 @@ class ObjectGroup extends MyCGFobject {
 	
 	display() {
         this.scene.pushMatrix()
-        // Applies general transformations
-        this.scene.translate(this.xpos, this.ypos, this.zpos);
-        this.scene.rotate(this.zAngle, 0, 0, 1);
-        this.scene.rotate(this.yAngle, 0, 1, 0);
-        this.scene.rotate(this.xAngle, 1, 0, 0);
-        this.scene.scale(this.xScale, this.yScale, this.zScale)
+        this.applySceneTransformations();
 
         // Displays each component individually
         for (var i = 0; i < this.objects.length; i++) {
