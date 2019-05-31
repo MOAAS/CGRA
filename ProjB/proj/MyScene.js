@@ -67,6 +67,13 @@ class MyScene extends CGFscene {
         this.leafTex = new CGFtexture(this, 'images/leaf.jpg')
 
         this.nestTex = new CGFtexture(this, 'images/nest.png');
+
+        this.skinTex = new CGFtexture(this, 'images/skin.png')
+		this.faceTex = new CGFtexture(this, 'images/face.png')
+		this.hairTex = new CGFtexture(this, 'images/hair.jpg')
+        this.shirtTex = new CGFtexture(this, 'images/shirt.jpg')
+        this.pantsTex = new CGFtexture(this, 'images/pants.jpg') 
+        this.shoeTex = new CGFtexture(this, 'images/shoe.jpg')
     }
 
     initObjects() {
@@ -82,7 +89,7 @@ class MyScene extends CGFscene {
         this.nest.setTexture(this.nestTex)
 
         this.sticks = new ObjectGroup(this)
-        this.stickRandomizer(8)
+        this.stickRandomizer(8);
 
 
         this.bird = new MyBird(this, this.sticks, this.nest)
@@ -98,8 +105,16 @@ class MyScene extends CGFscene {
         this.house.setRoofTexture(this.houseRoof)
         this.house.setPillarTexture(this.pillarTexture)
 
-        this.house.setPos(-3, 3, 5)
+        this.house.setPos(-3, 3.2, 5)
 
+        this.person = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
+        this.person.setPos(1, 3.8, 5);
+        this.person.setScale(0.3, 0.3, 0.3);
+
+        this.spinner = new MySpinner(this);
+        this.spinner.setPos(1, 3.8, 5);
+
+        this.rings = new MyRingList(this, 8, 4, -30, 30, 6, 12, -30, 30);
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
@@ -107,7 +122,7 @@ class MyScene extends CGFscene {
 
         this.lightning = new MyLightning(this, this.axiom, -15, 15, 25, 30, -15, 15);
 
-        this.objects = [this.bird, this.house, this.terrain, this.sticks, this.nest, this.lightning];
+        this.objects = [this.bird, this.house, this.terrain, this.sticks, this.nest, this.lightning, this.person, this.spinner, this.rings];
 
         this.tree1 = new MyLSPlant(this, this.branchTex, this.leafTex);
         this.tree2 = new MyLSPlant(this, this.branchTex, this.leafTex);
@@ -161,6 +176,8 @@ class MyScene extends CGFscene {
         this.bird.update()
         this.sticks.update()
         this.lightning.update(t)
+        this.spinner.update(t);
+        this.rings.update(this.bird.pos[0], this.bird.pos[1], this.bird.pos[2]);
 
         if (this.selectedView == 0) {
             let cameraPos = [this.bird.pos[0], this.bird.pos[1] - 1, this.bird.pos[2]]
@@ -199,6 +216,8 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyL"))
             this.lightning.startAnimation(t);
+        if (this.gui.isKeyPressed("KeyR"))
+            this.rings.reset();
     }
 
     display() {

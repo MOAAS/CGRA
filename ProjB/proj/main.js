@@ -32,7 +32,10 @@ serialInclude([
     'MyLightningLight.js',
     'MyNest.js',
     'MyStick.js',
-
+    'MyPerson.js',
+    'MySpinner.js',
+    'MyRing.js',
+    'MyRingList.js',
 main=function()
 {
     var app = new CGFapplication(document.body);

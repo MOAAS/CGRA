@@ -94,10 +94,10 @@ class MyCGFobject extends CGFobject {
         this.scene.pushMatrix()
         // Applies general transformations
         this.scene.translate(this.xpos, this.ypos, this.zpos);
-        this.scene.scale(this.xScale, this.yScale, this.zScale)
         this.scene.rotate(this.zAngle, 0, 0, 1);
         this.scene.rotate(this.yAngle, 0, 1, 0);
         this.scene.rotate(this.xAngle, 1, 0, 0);
+        this.scene.scale(this.xScale, this.yScale, this.zScale)
 
         // Applies ordered transformations from the array
         for (var i = this.transformations.length - 1; i >= 0; i--) {
