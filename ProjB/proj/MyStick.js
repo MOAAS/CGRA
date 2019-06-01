@@ -27,10 +27,6 @@ class MyStick extends ObjectGroup {
 
 		this.angle = Math.random() * Math.PI
 
-		/*let material = new MyCGFappearance(this.scene, 0.7, 0.8, 0.6)
-		material.setColor(70, 30, 30)
-		this.mainBranch.setMaterial(material)*/
-
 		if(Math.random()>0.6)
 			this.addObjects(this.mainBranch,this.secondaryBranch,this.leaf)
 		else  this.addObjects(this.mainBranch)
@@ -45,7 +41,6 @@ class MyStick extends ObjectGroup {
 	update() {
 		if (this.state == 'birded') {
 			this.setPos(this.bird.beakPos[0],this.bird.beakPos[1],this.bird.beakPos[2])
-			//this.setAngle(this.bird.beakAngle,null,null)
 			this.setAngle(null, this.bird.birdAngle + Math.PI / 2, null)
 		}
 	}
