@@ -9,7 +9,6 @@ class MyRingList extends ObjectGroup {
         this.maxY = maxY;
         this.minZ = minZ;
         this.maxZ = maxZ;
-        this.reset()
 
         let sound1 = new Audio('sounds/bling.mp3');
         let sound2 = new Audio('sounds/blingbling.mp3');

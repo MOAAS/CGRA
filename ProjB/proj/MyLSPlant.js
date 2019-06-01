@@ -4,10 +4,13 @@
  * @param scene - Reference to MyScene object
  */
 class MyLSPlant extends MyLSystem {
-	constructor(scene, branchText, leafText) {
+	constructor(scene, branchText, leafText, x, y, z) {
         super(scene);
         this.branchText = branchText;
         this.leafText = leafText;
+        this.x = x;
+        this.y = y;
+        this.z = z;
         this.init();
 
 
@@ -27,36 +30,36 @@ class MyLSPlant extends MyLSystem {
     }
 
     generate(axiom) {
-        let ruleF = "F";
-        let ruleX1 = "F[-X][X]F[-X]+FX";
-        let ruleX2 = "F[-X][x]+X";
-        let ruleX3 = "F[-X][x]+X";
-        let ruleX4 = "F[/X][X]F[\\X]+X";
-        let ruleX5 = "F[\\X][X]/X";
-        let ruleX6 = "F[/X]\\X";
-        let ruleX7 = "F[^X][X]F[&X]^X";
-        let ruleX8 = "F[^X][X]F[&X]^X";
-        let ruleX9 = "F[&X]^X";
-        let angle = 60.0;
+        let angle = 35.0;
         let iterations = 4;
-        let scaleFactor = 1;
+        let scaleFactor = 0.3;
 
         super.generate(
             axiom,
-            /*
-            {
-                "F": [ ruleF ],
-                "X": [ ruleX1, ruleX2, ruleX5, ruleX9 ]
-            },
-            */
+           /*
            {
             "F": ["FF"],
-            "X": ["F[-X][X]F[-X]+FX", "F[-X][-X]F[+X]+X", "F[/X][X]F[\\X]+X", "F[^X][X]F[&X]^XX"]
+            "X": ["F[RX][LX][LX]F[RX]FX", "F[RX][RX]F[LX][RX]FX", "F[RX][LX]F[LX]FX"],// "F[^X][X]F[&X]^XX"],
+            "L": ["+<", "\\<"],
+            "R" : ["-<", "/<"]
             },
+            */
+
+           {
+            "F": ["FF"],
+            "X": ["F[+<X]F[/<X][-<X]FX", "F[/<X][\\<X]F[+<X]FX", "F[-<X][\\<X]F[\\<X]FX", "F[+<X][\\<X]F[/<X]FX"],// "B[RX]B[RX][RX][RX]BX"],// "F[^X][X]F[&X]^XX"],
+            },
+
             angle,
             iterations,
             scaleFactor
         );
+    }
 
+    display() {
+        this.scene.pushMatrix();
+        this.scene.translate(this.x, this.y, this.z);
+        super.display();
+        this.scene.popMatrix();
     }
 }

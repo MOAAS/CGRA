@@ -32,6 +32,7 @@ class MyScene extends CGFscene {
         this.speedFactor = 1;
         this.firstPerson = false;
         this.enableSound = false;
+        this.enableRings = false;
 
         this.selectedView = 1;
         this.viewList = {
@@ -82,7 +83,7 @@ class MyScene extends CGFscene {
         this.skybox = new MySkyBox(this);
         this.skybox.setMaterial(new MyCGFappearance(this, 1, 1, 1, 1));
         this.skybox.setTexture(new CGFtexture(this, 'images/skybox.jpg'));
-        this.skybox.scale(200, 200, 200);
+        this.skybox.scale(60, 60, 60);
         this.skybox.translate(0, 30, 0);
 
         this.nest = new MyNest(this,-4,-8.5)
@@ -112,7 +113,7 @@ class MyScene extends CGFscene {
 
         this.spinner = new MySpinner(this, -3, 3.8, 9);
 
-        this.rings = new MyRingList(this, 8, 4, -25, 25, 6, 12, -25, 25);
+        this.rings = new MyRingList(this, 7, 4, -25, 25, 6, 12, -20, 20);
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
@@ -120,14 +121,14 @@ class MyScene extends CGFscene {
 
         this.lightning = new MyLightning(this, this.axiom, -15, 15, 25, 30, -15, 15);
 
-        this.objects = [this.bird, this.house, this.terrain, this.sticks, this.nest, this.lightning, this.person, this.spinner, this.rings];
-
-        this.tree1 = new MyLSPlant(this, this.branchTex, this.leafTex);
-        this.tree2 = new MyLSPlant(this, this.branchTex, this.leafTex);
-        this.tree3 = new MyLSPlant(this, this.branchTex, this.leafTex);
+        this.tree1 = new MyLSPlant(this, this.branchTex, this.leafTex, 15, 4, 8);
+        this.tree2 = new MyLSPlant(this, this.branchTex, this.leafTex, -18, 4, 6);
+        this.tree3 = new MyLSPlant(this, this.branchTex, this.leafTex, 12, 4, -8)
         this.tree1.generate(this.axiom);
         this.tree2.generate(this.axiom);
         this.tree3.generate(this.axiom);
+
+        this.objects = [this.bird, this.house, this.terrain, this.sticks, this.nest, this.lightning, this.person, this.spinner, this.rings, this.tree1, this.tree2, this.tree3];
     }
 
     stickRandomizer(s) {
@@ -203,6 +204,12 @@ class MyScene extends CGFscene {
         this.enableTextures(this.enableTex);
     }
 
+    updateRings() {
+        if (this.enableRings)
+            this.rings.reset();
+        else this.rings.clear();
+    }
+
     updateCamera() {
         if (this.selectedView == 1)
             this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
@@ -228,8 +235,10 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyL"))
             this.lightning.startAnimation(t);
-        if (this.gui.isKeyPressed("KeyR"))
-            this.rings.reset();
+        if (this.gui.isKeyPressed("KeyR")) {
+            if (this.enableRings)
+                this.rings.reset();
+        }
     }
 
     display() {
@@ -254,24 +263,6 @@ class MyScene extends CGFscene {
 
         if (this.enableSkybox)
             this.skybox.display();
-
-        this.pushMatrix()
-        this.translate(15, 4, 8);
-        this.scale(0.6, 0.6, 0.6);
-        this.tree1.display();
-        this.popMatrix();
-
-        this.pushMatrix()
-        this.translate(-18, 4, 6);
-        this.scale(0.6, 0.6, 0.6);
-        this.tree2.display();
-        this.popMatrix();
-
-        this.pushMatrix()
-        this.translate(12, 4, -8);
-        this.scale(0.6, 0.6, 0.6);
-        this.tree3.display();
-        this.popMatrix();
 
         // ---- END Primitive drawing section
     }

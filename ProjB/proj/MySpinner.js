@@ -110,18 +110,18 @@ class MySpinner extends ObjectGroup {
     }
 
     front() {
-        this.spinnerX -= this.rotSpeed / 10.0;
+        this.spinnerX -= this.rotSpeed / 15.0;
     }
 
     back() {
-        this.spinnerX += this.rotSpeed / 10.0;
+        this.spinnerX += this.rotSpeed / 15.0;
     }
 
     left() {
-        this.spinnerZ += this.rotSpeed / 10.0;
+        this.spinnerZ += this.rotSpeed / 15.0;
     }
 
     right() {
-        this.spinnerZ -= this.rotSpeed / 10.0;
+        this.spinnerZ -= this.rotSpeed / 15.0;
     }
 }

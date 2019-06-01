@@ -37,8 +37,11 @@ class MyLSystem extends CGFobject {
         // numero de iteracoes
         this.iterations = _iterations;
 
-        // escalamento dos elementos dependente do numero de iteracoes
-        this.scale = Math.pow(_scale, this.iterations-1);
+        // escalamento dos elementos 
+        this.scale = _scale;
+
+        // guarda o valor de escalamento para as regras
+        this.scaleAmount = 1 + this.scale / 1.5;
 
         // desenvolve a sequencia de desenvolvimento do Sistema L
         this.iterate()
@@ -109,6 +112,13 @@ class MyLSystem extends CGFobject {
 
                 case "/":
                     this.scene.rotate(-this.angle, 1, 0, 0);
+                    break;
+
+                case ">":
+                    this.scene.scale(this.scaleAmount, 1, this.scaleAmount);
+                    break;
+                case "<":
+                    this.scene.scale(1.0 / this.scaleAmount, 1, 1.0 / this.scaleAmount);
                     break;
 
                 case "^":
