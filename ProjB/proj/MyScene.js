@@ -108,12 +108,11 @@ class MyScene extends CGFscene {
         this.house.setPos(-3, 3.2, 5)
 
         this.person = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
-        this.person.setPos(1, 4, 5);
         this.person.setScale(0.3, 0.3, 0.3);
 
-        this.spinner = new MySpinner(this, 1, 3.8, 5);
+        this.spinner = new MySpinner(this, -3, 3.8, 9);
 
-        this.rings = new MyRingList(this, 8, 4, -30, 30, 6, 12, -30, 30);
+        this.rings = new MyRingList(this, 8, 4, -25, 25, 6, 12, -25, 25);
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 

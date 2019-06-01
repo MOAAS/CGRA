@@ -303,7 +303,7 @@ class MyBird extends ObjectGroup {
             }
 
             case 'goingDown': {     //fase de descida
-                if (this.gui.isKeyPressed("Space")) {    //cancelar a descida indo logo para a fase de subida
+                if (this.scene.gui.isKeyPressed("Space")) {    //cancelar a descida indo logo para a fase de subida
                     switchToUp() //mudar de estado 
                     break
                 }
