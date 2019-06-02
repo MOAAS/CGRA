@@ -87,41 +87,55 @@ class MySpinner extends ObjectGroup {
     }
     
     update(t, person) {
-        let diff = t - this.lastTime;
+        // Verifica o tempo em s que passou
+        let diff = (t - this.lastTime) / 1000;
+
+        // Guarda o tempo atual
         this.lastTime = t;
 
+        // Se a velocidade de rotacao for maior do que a velocidade minima de levantar voo
+        // Aumenta a altura proporcionalmente a velocidade de rotacao
+        // Caso contrario diminui a altura proporcionalmente a velocidade de rotacao
         if (this.rotSpeed >= this.minLiftRotSpeed)
-            this.spinnerY = Math.min(this.spinnerY + (this.rotSpeed - this.minLiftRotSpeed) / 100.0, this.maxHeight);
-        else this.spinnerY = Math.max(this.spinnerY + (this.rotSpeed -this.minLiftRotSpeed) / 100.0, this.minHeight);
+            this.spinnerY = Math.min(this.spinnerY + (this.rotSpeed - this.minLiftRotSpeed) * diff / 5, this.maxHeight);
+        else this.spinnerY = Math.max(this.spinnerY + (this.rotSpeed - this.minLiftRotSpeed) * diff / 5, this.minHeight);
 
-        this.moveAngle(0, this.rotSpeed * diff / 1000.0, 0);
+        // Roda o angulo e altera a posicao
+        this.moveAngle(0, this.rotSpeed * diff, 0);
         this.setPos(this.spinnerX, this.spinnerY, this.spinnerZ);
 
-        person.moveAngle(0, this.rotSpeed * diff / 1000.0, 0);
+        // Altera a posicao e rotacao da pessoa para condizer
+        person.moveAngle(0, this.rotSpeed * diff, 0);
         person.setPos(this.spinnerX, this.spinnerY + 0.2, this.spinnerZ);
     }
 
     lift() {
+        // Aumenta a velocidade de rotacao (nao maior que o maximo)
         this.rotSpeed = Math.min(this.rotSpeed + 0.2, this.maxRotSpeed);
     }
 
     descend() {
+        // Diminui a velocidade de rotacao (nao menor que o minimo)
         this.rotSpeed = Math.max(this.rotSpeed - 0.2, this.minRotSpeed);
     }
 
     front() {
-        this.spinnerX -= this.rotSpeed / 15.0;
+        // Anda para a frente (sentido negativo dos XX)
+        this.spinnerX -= this.rotSpeed / 75.0;
     }
 
     back() {
-        this.spinnerX += this.rotSpeed / 15.0;
+        // Anda para tras (sentido positivo dos XX)
+        this.spinnerX += this.rotSpeed / 75.0;
     }
 
     left() {
-        this.spinnerZ += this.rotSpeed / 15.0;
+        // Anda para a esquerda (sentido positivo dos ZZ)
+        this.spinnerZ += this.rotSpeed / 75.0;
     }
 
     right() {
-        this.spinnerZ -= this.rotSpeed / 15.0;
+        // Anda para a direita (sentido negativo dos ZZ)
+        this.spinnerZ -= this.rotSpeed / 75.0;
     }
 }

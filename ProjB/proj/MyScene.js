@@ -46,16 +46,19 @@ class MyScene extends CGFscene {
         // Objects and textures
         this.initTextures();
         this.initObjects();
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(10);
     }
 
     initTextures() {
+        // Textura da skybox
         this.skyTex = new CGFtexture(this, 'images/skybox.jpg');
 
+        // Texturas do terreno: imagem, heightmap, gradiente
         this.terrainTex = new CGFtexture(this, 'images/terrain.jpg');
         this.terrainMap = new CGFtexture(this, 'images/heightmap.jpg');
         this.terrainAlt = new CGFtexture(this, 'images/altimetry.png');
 
+        // Texturas da casa
         this.houseFront = new CGFtexture(this, 'images/houseFront.png')
         this.houseSide = new CGFtexture(this, 'images/houseSide.png')
         this.houseBack = new CGFtexture(this, 'images/houseBack.png')
@@ -63,16 +66,20 @@ class MyScene extends CGFscene {
         this.houseFloor = new CGFtexture(this, 'images/houseBot.png')
         this.pillarTexture = new CGFtexture(this, 'images/stone.jpg')
 
+        // Texturas do passaro
         this.featherTexture = new CGFtexture(this, 'images/feather.jpg')
         this.beakTexture = new CGFtexture(this,'images/beak.jpg')
         this.eyeTexture = new CGFtexture(this,'images/eye.jpg')
 
+        // Texturas de arvores e ramos
         this.branchTex = new CGFtexture(this, 'images/branch.jpg')
         this.branchTex2 = new CGFtexture(this, 'images/branch2.jpg')
         this.leafTex = new CGFtexture(this, 'images/leaf.jpg')
 
+        // Textura do ninho
         this.nestTex = new CGFtexture(this, 'images/nest.png');
 
+        // Texturas da pessoa
         this.skinTex = new CGFtexture(this, 'images/skin.png')
 		this.faceTex = new CGFtexture(this, 'images/face.png')
 		this.hairTex = new CGFtexture(this, 'images/hair.jpg')
@@ -120,7 +127,9 @@ class MyScene extends CGFscene {
         this.person.setScale(0.3, 0.3, 0.3);
         this.spinner = new MySpinner(this, -3, 3.8, 9);
 
-        // Cria o conjunto de aneis
+        // Cria o conjunto de aneis (8 aneis de largura 2)
+        // Parametros seguintes correspondem aos valores que as coordenadas podem tomar
+        // X : [-15, 15], Y : [5, 9], Z : [-15, 15]
         this.rings = new MyRingList(this, 8, 2, -15, 15, 5, 9, -15, 15);
 
         // Cria o terreno
@@ -130,9 +139,12 @@ class MyScene extends CGFscene {
         // Cria os objetos gerados procedimentalmente
         this.axiom = "BBX";
 
+        // Cria o trovao, passando valores que coordenadas podem tomar
+        // X : [-15, 15], Y : [25, 30], Z : [-15, 15]
         this.lightning = new MyLightning(this, this.axiom, -15, 15, 25, 30, -15, 15, this.lights[1]);
         this.lights[1] = this.lightning.light;
 
+        // Cria as arvores, passando a posicao x, y, z
         this.tree1 = new MyLSPlant(this, this.branchTex, this.leafTex, 15, 4, 8);
         this.tree2 = new MyLSPlant(this, this.branchTex, this.leafTex, -18, 4, 6);
         this.tree3 = new MyLSPlant(this, this.branchTex, this.leafTex, 12, 4, -6)
