@@ -117,7 +117,7 @@ class MyScene extends CGFscene {
 
         this.spinner = new MySpinner(this, -3, 3.8, 9);
 
-        this.rings = new MyRingList(this, 7, 2, -15, 15, 5, 9, -15, 15);
+        this.rings = new MyRingList(this, 8, 2, -15, 15, 5, 9, -15, 15);
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 

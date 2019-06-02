@@ -1,16 +1,6 @@
 class MyRing extends ObjectGroup {
     constructor(scene, x, y, z, width, angle) {
         super(scene);
-        /*
-        this.minX = x - width / 2 + width / 20;
-        this.minY = y - width / 2 + width / 20;
-        this.minZ = z - 0.5;
-
-        this.maxX = x + width / 2 - width / 20;
-        this.maxY = y + width / 2 - width / 20;
-        this.maxZ = z + 0.5;
-        */
-
        this.minX = x - (width / 2 + width / 20) * Math.sin(angle);
        this.minY = y - width / 2 + width / 20;
        this.minZ = z - (width / 2 + width / 20) * Math.cos(angle);
@@ -23,10 +13,10 @@ class MyRing extends ObjectGroup {
         this.angle = angle;
 
         // cria os cantos
-        this.topLeft = new MySphere(scene, 8, 8, width / 6);
-        this.topRight = new MySphere(scene, 8, 8, width / 6);
-        this.botLeft = new MySphere(scene, 8, 8, width / 6);
-        this.botRight = new MySphere(scene, 8, 8, width / 6);
+        this.topLeft = new MySphere(scene, 8, 8, width / 6.5);
+        this.topRight = new MySphere(scene, 8, 8, width / 6.5);
+        this.botLeft = new MySphere(scene, 8, 8, width / 6.5);
+        this.botRight = new MySphere(scene, 8, 8, width / 6.5);
         this.spheres = new ObjectGroup(scene);
         this.spheres.addObjects(this.topLeft, this.topRight, this.botLeft, this.botRight);
 
@@ -46,7 +36,7 @@ class MyRing extends ObjectGroup {
 
         // reduz o tamanho dos cilindros e centra-os
         this.cilinders.translate(0, -0.5, 0);
-        this.cilinders.scale(width / 10, width, width / 10);
+        this.cilinders.scale(width / 15, width, width / 15);
 
         // Forma um quadrado de cilindros (lado = width), rodando e movendo os objetos
         this.top.rotate(Math.PI / 2, 0, 0, 1);
@@ -62,13 +52,13 @@ class MyRing extends ObjectGroup {
         this.translate(x, y, z);
 
         // Creates a yellow material and applies it
-        let yellowApp = new MyCGFappearance(scene, 0.6, 0.8, 0.6, 10);
-        yellowApp.setColor(190, 230, 20);
-        let blackApp = new MyCGFappearance(scene, 0.8, 0.8, 0, 10);
-        blackApp.setColor(10, 10, 10);
+        let yellowApp = new MyCGFappearance(scene, 0.5, 0.7, 0.8, 10);
+        yellowApp.setColor(200, 230, 20);
+        let redApp = new MyCGFappearance(scene, 0.8, 0.8, 0, 10);
+        redApp.setColor(180, 40, 25);
 
         this.cilinders.setMaterial(yellowApp);
-        this.spheres.setMaterial(blackApp);
+        this.spheres.setMaterial(redApp);
     }
 
     isInside(x, y, z) {
