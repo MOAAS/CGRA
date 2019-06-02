@@ -9,9 +9,9 @@ class MyBranch extends ObjectGroup {
 	constructor(scene, texture) {
 		super(scene);
 		this.cilinder = new MyCilinder(scene, 8);
-		//this.cilinder.scale(0.8, 1, 0.8);
 		this.cilinder.setTexture(texture);
 		this.addObjects(this.cilinder)
+		this.setMaterial(new MyCGFappearance(scene, 0.2, 0.6, 0.2))
 	}
 }
 

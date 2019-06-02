@@ -27,10 +27,9 @@ class MyHouse extends ObjectGroup {
         this.pillar4.translate(-houseLength / 1.5, 0, -houseWidth / 1.5)
 
 
-
-        this.pillarMaterial = new MyCGFappearance(scene, 0.3, 0.8, 0, 10)
-        this.roofMaterial = new MyCGFappearance(scene, 0.3, 0.8, 0, 10)
-        this.wallMaterial = new MyCGFappearance(scene, 0.3, 0.6, 0.5, 10)
+        this.pillarMaterial = new MyCGFappearance(scene, 0.3, 0.8, 0.2, 10)
+        this.roofMaterial = new MyCGFappearance(scene, 0.3, 0.9, 0.2, 10)
+        this.wallMaterial = new MyCGFappearance(scene, 0.3, 0.7, 0.6, 10)
 
         this.pillars.setMaterial(this.pillarMaterial)
         this.roof.setMaterial(this.roofMaterial)

@@ -9,6 +9,8 @@ class MyTerrain extends CGFobject {
 
         this.appearance = new MyCGFappearance(this.scene, 0.3, 0.7, 0, 120);
         this.appearance.setTexture(texture);
+
+
     }
 
     display() {

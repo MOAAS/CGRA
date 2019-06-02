@@ -19,6 +19,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
+        this.setGlobalAmbientLight(0.8, 0.8, 0.8, 1.0);
 
         //Objects connected to MyInterface
         this.sceneScale = 1;
@@ -29,7 +30,7 @@ class MyScene extends CGFscene {
         this.firstPerson = false;
         this.enableSound = false;
         this.enableRings = false;
-
+        this.enableLight = true;
         this.selectedView = 1;
         this.viewList = {
             'First Person': 0,
@@ -42,6 +43,7 @@ class MyScene extends CGFscene {
         this.terrainShader.setUniformsValues({ uSampler2: 1 });
         this.terrainShader.setUniformsValues({ uSampler3: 2 });
 
+        // Objects and textures
         this.initTextures();
         this.initObjects();
         this.setUpdatePeriod(50);
@@ -83,7 +85,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
 
         this.skybox = new MySkyBox(this);
-        this.skybox.setMaterial(new MyCGFappearance(this, 1, 1, 1, 1));
+        this.skybox.setMaterial(new MyCGFappearance(this, 0.4, 0.6, 0, 10));
         this.skybox.setTexture(this.skyTex);
         this.skybox.scale(60, 60, 60);
         this.skybox.translate(0, 30, 0);
@@ -119,13 +121,14 @@ class MyScene extends CGFscene {
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
-        this.axiom = "X";
+        this.axiom = "BBX";
 
-        this.lightning = new MyLightning(this, this.axiom, -15, 15, 25, 30, -15, 15);
+        this.lightning = new MyLightning(this, this.axiom, -15, 15, 25, 30, -15, 15, this.lights[1]);
+        this.lights[1] = this.lightning.light;
 
         this.tree1 = new MyLSPlant(this, this.branchTex, this.leafTex, 15, 4, 8);
         this.tree2 = new MyLSPlant(this, this.branchTex, this.leafTex, -18, 4, 6);
-        this.tree3 = new MyLSPlant(this, this.branchTex, this.leafTex, 12, 4, -8)
+        this.tree3 = new MyLSPlant(this, this.branchTex, this.leafTex, 12, 4, -6)
         this.tree1.generate(this.axiom);
         this.tree2.generate(this.axiom);
         this.tree3.generate(this.axiom);
@@ -141,6 +144,7 @@ class MyScene extends CGFscene {
                 this.stick = new MyStick(this, x, z)
                 this.stick.setBranchTexture(this.branchTex2)
                 this.stick.setLeafTexture(this.leafTex) 
+                this.stick.setMaterial(new MyCGFappearance(this, 0.2, 0.6, 0.2))
                 this.sticks.addObjects(this.stick)
             }
             else i--;
@@ -148,12 +152,25 @@ class MyScene extends CGFscene {
     }
 
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
-        this.lights[0].setAmbient(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].setSpecular(1, 1, 1, 1.0);
+        // Luz normal
+        this.lights[0].setPosition(0, 25, 0, 1);
+        this.lights[0].setDiffuse(1.0, 0.85, 0.6, 1.0); // cor quentinha
+        this.lights[0].setSpecular(1.0, 0.85, 0.3, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
+        this.lights[0].setConstantAttenuation(1);
+        this.lights[0].setLinearAttenuation(0);
+        this.lights[0].setQuadraticAttenuation(0);
+
+        // Luz de relampago
+        this.lights[1].setDiffuse(0.8, 1.0, 1.0, 1.0); // relampago
+        this.lights[1].setSpecular(0.8, 1.0, 1.0, 1.0);
+        this.lights[1].disable();
+        this.lights[1].setVisible(false);
+        this.lights[1].update();
+        this.lights[1].setConstantAttenuation(1);
+        this.lights[1].setLinearAttenuation(0);
+        this.lights[1].setQuadraticAttenuation(0);
     }
 
     initCameras() {
@@ -251,6 +268,10 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+
+        // Update light
+        this.lights[0].update();
+        this.lights[1].update();
 
         // Draw axis
         //this.axis.display();

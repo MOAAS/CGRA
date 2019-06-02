@@ -29,7 +29,7 @@ class MyStick extends ObjectGroup {
 
 		if(Math.random()>0.6)
 			this.addObjects(this.mainBranch,this.secondaryBranch,this.leaf)
-		else  this.addObjects(this.mainBranch)
+		else this.addObjects(this.mainBranch)
 
 		this.bird = bird
 		this.state = 'grounded'

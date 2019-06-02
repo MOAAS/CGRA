@@ -24,13 +24,14 @@ class MyLSPlant extends MyLSystem {
     // cria o lexico da gramática
     initGrammar(){
         this.grammar = {
-            "F": new MyBranch(this.scene, this.branchText),
+            "B": new MyBranch(this.scene, this.branchText),
+            //"F": new MyBranch(this.scene, this.branchText),
             "X": new MyLeaf(this.scene, this.leafText)
         };
     }
 
     generate(axiom) {
-        let angle = 35.0;
+        let angle = 40.0;
         let iterations = 4;
         let scaleFactor = 0.3;
 
@@ -46,9 +47,15 @@ class MyLSPlant extends MyLSystem {
             */
 
            {
-            "F": ["FF"],
+            "B": ["B"],
+            "F": ["BBB"],
           //  "X": ["F[+<X]F[/-<X][-<X]FX", "F[/<X][\\<X]F[+<X]FX", "F[-<X][+<X]F[&<X]FX", "F[^<X][\\<X]F[/<X]FX"],// "B[RX]B[RX][RX][RX]BX"],// "F[^X][X]F[&X]^XX"],
-            "X": ["F[+\\<X]F[/-<X][-<X]FX", "F[/&<X][\\<X]F[+^<X]FX", "F[-/<X]F[&<X][+<X]FX", "F[^<X][\\<X][+&<X]F[/<X]FX"],// "B[RX]B[RX][RX][RX]BX"],// "F[^X][X]F[&X]^XX"],
+            "X": [
+                "[+\\<FX]B[/-<FX]FX", 
+                "[/&<FX]BB[+^<FX]FX", 
+                "[-/<FX]BB[+<FX]FX", 
+                "[\\<FX]B[-\\<FX]FX",
+            ],
 
         },
 

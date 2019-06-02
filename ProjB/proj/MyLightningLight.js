@@ -6,7 +6,7 @@ class MyLightningLight extends ObjectGroup {
         this.addObjects(this.square);
         
         this.mat = new MyCGFappearance(scene, 1, 1, 1, 1);
-        this.mat.setColor(255, 255, 0)
+        this.mat.setColor(200, 255, 255)
         this.setMaterial(this.mat);
     }
 }

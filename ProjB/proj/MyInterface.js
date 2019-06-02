@@ -17,6 +17,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'enableSkybox').name('Enable Sky Box');
         this.gui.add(this.scene, 'enableSound').name('Enable Sound Effects');
         this.gui.add(this.scene, 'sceneScale', 0.1, 2).name('Scene scale');
+        this.gui.add(this.scene.lights[0], 'enabled').name("Enable Light 0");
 
         this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Bird scale').onChange(this.scene.updateBirdFactors.bind(this.scene))
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Bird speed').onChange(this.scene.updateBirdFactors.bind(this.scene))
