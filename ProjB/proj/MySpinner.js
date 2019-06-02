@@ -37,7 +37,7 @@ class MySpinner extends ObjectGroup {
         this.edge2.translate(Math.sin(angle2) * 0.75, 0, Math.cos(angle2) * 0.7);
         this.edge3.translate(Math.sin(angle3) * 0.75, 0, Math.cos(angle3) * 0.7);
 
-        // cria os 3 circulos a volta
+        // Cria os 3 circulos verdes nas pontas
         this.spinner1 = new MyCilinder(scene, 12);
         this.spinner2 = new MyCilinder(scene, 12);
         this.spinner3 = new MyCilinder(scene, 12);
@@ -53,18 +53,18 @@ class MySpinner extends ObjectGroup {
 
         this.addObjects(this.edges, this.spinners);
 
-        // Spinners inner
+        // Spinners inner: circulos pretos nas pontas
         this.inner1 = new MyCilinder(scene, 12);
         this.inner2 = new MyCilinder(scene, 12);
         this.inner3 = new MyCilinder(scene, 12);
         this.inners = new ObjectGroup(scene);
         this.inners.addObjects(this.inner1, this.inner2, this.inner3);
 
-        this.inners.scale(0.5, 0.2, 0.5);
+        this.inners.scale(0.5, 0.25, 0.5);
         this.inner1.translate(Math.sin(angle1) * 1.5, 0, Math.cos(angle1) *  1.5);
         this.inner2.translate(Math.sin(angle2) * 1.5, 0, Math.cos(angle2) *  1.5);
         this.inner3.translate(Math.sin(angle3) * 1.5, 0, Math.cos(angle3) *  1.5);
-        this.inners.translate(0, -0.05, 0);
+        this.inners.translate(0, -0.125, 0);
         this.inners.setMaterial(this.blackApp);
 
         this.addObjects(this.center, this.edges, this.spinners, this.inners);

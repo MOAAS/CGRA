@@ -331,9 +331,9 @@ class MyBird extends ObjectGroup {
 
     checkKeys() {
         if (this.scene.gui.isKeyPressed("KeyA"))
-            this.turn(0.025)
+            this.turn(0.05)
         if (this.scene.gui.isKeyPressed("KeyD"))
-            this.turn(-0.025)
+            this.turn(-0.05)
         switch (this.movementState) {
             case 'freeRoam': { //em freeRoaming é possivel mudar a velocidade / fazer reset e iniciar a descida
                 if (this.scene.gui.isKeyPressed("KeyW"))
