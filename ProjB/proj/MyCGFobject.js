@@ -42,6 +42,10 @@ class MyCGFobject extends CGFobject {
         this.transformations.push(new Scaling(x,y,z))
     }
 
+    addTransformation(t) {
+        this.transformations.push(t);
+    }
+
     setPos(x, y, z) {
         if (x != null)
             this.xpos = x;

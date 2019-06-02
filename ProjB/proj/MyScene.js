@@ -117,7 +117,7 @@ class MyScene extends CGFscene {
 
         this.spinner = new MySpinner(this, -3, 3.8, 9);
 
-        this.rings = new MyRingList(this, 7, 2, -25, 25, 4, 9, -20, 20);
+        this.rings = new MyRingList(this, 7, 2, -15, 15, 5, 9, -15, 15);
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
@@ -155,7 +155,7 @@ class MyScene extends CGFscene {
         // Luz normal
         this.lights[0].setPosition(0, 25, 0, 1);
         this.lights[0].setDiffuse(1.0, 0.85, 0.6, 1.0); // cor quentinha
-        this.lights[0].setSpecular(1.0, 0.85, 0.3, 1.0);
+        this.lights[0].setSpecular(1.0, 0.85, 0.6, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
         this.lights[0].setConstantAttenuation(1);
