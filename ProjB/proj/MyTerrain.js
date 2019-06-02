@@ -18,6 +18,7 @@ class MyTerrain extends CGFobject {
         this.gradient.bind(2);
         this.appearance.apply();
 
+        // ativa o shader do terreno
         this.scene.setActiveShader(this.scene.terrainShader);        
         
         this.scene.pushMatrix();
@@ -26,6 +27,7 @@ class MyTerrain extends CGFobject {
         this.plane.display();
         this.scene.popMatrix();
 
+        // volta a por o shader normal
         this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

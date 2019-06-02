@@ -24,7 +24,7 @@ class MyCGFobject extends CGFobject {
     }
 
     translate(x, y, z) {
-        // if last transformation is Translation, adds to its values
+        // se a ultima transformacao foi uma translacao, adiciona aos valores dela
         let length = this.transformations.length;
         if (length > 0 && this.transformations[length - 1] instanceof Translation) {
             this.transformations[length - 1].x += x;
@@ -74,7 +74,7 @@ class MyCGFobject extends CGFobject {
         this.xAngle += x;
         this.yAngle += y;
         this.zAngle += z;
-        // Normalizes the angles
+        // normaliza os angulos para [0, 2PI]
         while (this.xAngle > 2 * Math.PI)    
             this.xAngle -= 2 * Math.PI;
         while (this.yAngle > 2 * Math.PI)    
@@ -97,10 +97,10 @@ class MyCGFobject extends CGFobject {
 
 
     applySceneTransformations() {
-        // Applies ordered transformations from the array
+        // aplica as transformacoes do array de transformacoes por ordem contraria
         for (var i = this.transformations.length - 1; i >= 0; i--) {
             var transformation = this.transformations[i];
-            // Applies transformation to the screen depending on its type
+            // aplica a transformacao a cena dependendo da classe a que se refere
             if (transformation instanceof Translation)
                 this.scene.translate(transformation.x, transformation.y, transformation.z);
             else if (transformation instanceof Rotation)
@@ -119,7 +119,7 @@ class MyCGFobject extends CGFobject {
         this.scene.scale(this.xScale, this.yScale, this.zScale)        
     }
     
-    // Displays the object, after applying all the transformations
+    // Aplica as transformacoes necessarias e mostra o objeto
     display() {
         this.scene.pushMatrix()
         this.applySceneTransformations();
@@ -134,9 +134,9 @@ class MyCGFobject extends CGFobject {
         }
         else console.log("NULL material!");
 
-        // Applies texture slide if enabled
+        // aplica deslizamento de textura se ativado
         if (this.textureSlide) {
-            // Moves the texture if slide enabled
+            // movimenta as coordenadas de textura
             for (var i = 0; i < this.texCoords.length; i += 2) {
                 this.texCoords[i] -= this.scene.wind.x / 1000;
                 this.texCoords[i + 1] -= this.scene.wind.y / 1000;
@@ -152,11 +152,13 @@ class MyCGFobject extends CGFobject {
     // --- Lighting, Materials, Textures -- //
 
     enableTextureSlide(amount) {
+        // ativa deslizamento de textura
         this.textureSlide = true;
         this.textureSlideAmount = amount;
     }
 
     scaleTexCoords(s, t) {
+        // Escala coordenadas de textura
         for (var i = 0; i < this.texCoords.length; i += 2) {
             this.texCoords[i] *= s;
             this.texCoords[i + 1] *= t;

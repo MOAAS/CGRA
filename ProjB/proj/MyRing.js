@@ -1,14 +1,14 @@
 class MyRing extends ObjectGroup {
     constructor(scene, x, y, z, width, angle) {
         super(scene);
-       this.minX = x - (width / 2 + width / 20) * Math.sin(angle);
-       this.minY = y - width / 2 + width / 20;
-       this.minZ = z - (width / 2 + width / 20) * Math.cos(angle);
+        // Calcula os valores de x,y,z baseado no angulo fornecido
+        this.minX = x - (width / 2 + width / 20) * Math.sin(angle);
+        this.minY = y - width / 2 + width / 20;
+        this.minZ = z - (width / 2 + width / 20) * Math.cos(angle);
 
-       this.maxX = x + (width / 2 + width / 20) * Math.sin(angle);
-       this.maxY = y + width / 2 - width / 20;
-       this.maxZ = z + (width / 2 + width / 20) * Math.cos(angle);
-
+        this.maxX = x + (width / 2 + width / 20) * Math.sin(angle);
+        this.maxY = y + width / 2 - width / 20;
+        this.maxZ = z + (width / 2 + width / 20) * Math.cos(angle);
 
         this.angle = angle;
 
@@ -46,12 +46,14 @@ class MyRing extends ObjectGroup {
         this.left.translate(- width / 2.0, 0, 0);
         this.right.translate(width / 2.0, 0, 0);
 
-        
+        // Adiciona as esferas e cilindros para serem mostrados
         this.addObjects(this.spheres, this.cilinders);
+
+        // Roda no angulo fornecido e poe na posicao indicada
         this.rotate(angle, 0, 1, 0);
         this.translate(x, y, z);
 
-        // Creates a yellow material and applies it
+        // Cria materiais e aplicaos
         let yellowApp = new MyCGFappearance(scene, 0.5, 0.7, 0.8, 10);
         yellowApp.setColor(200, 230, 20);
         let redApp = new MyCGFappearance(scene, 0.8, 0.8, 0, 10);
@@ -62,6 +64,7 @@ class MyRing extends ObjectGroup {
     }
 
     isInside(x, y, z) {
+        // Verifica se x,y,z está dentro do paralelepipedo
         return x >= this.minX && y >= this.minY && z >= this.minZ && x <= this.maxX && y <= this.maxY && z <= this.maxZ;// && Math.abs(Math.atan2(x, z) - this.angle) <= Math.PI / 2;
     }
 }

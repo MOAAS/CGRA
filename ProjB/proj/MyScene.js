@@ -84,24 +84,28 @@ class MyScene extends CGFscene {
     initObjects() {
         this.axis = new CGFaxis(this);
 
+        // Cria a skybox
         this.skybox = new MySkyBox(this);
         this.skybox.setMaterial(new MyCGFappearance(this, 0.4, 0.6, 0, 10));
         this.skybox.setTexture(this.skyTex);
         this.skybox.scale(60, 60, 60);
         this.skybox.translate(0, 30, 0);
 
+        // Cria o nest
         this.nest = new MyNest(this,-4,-8.5)
         this.nest.setTexture(this.nestTex)
 
+        // Cria os galhos
         this.sticks = new ObjectGroup(this)
         this.stickRandomizer(8);
 
-
+        // Cria o passaro
         this.bird = new MyBird(this, this.sticks, this.nest)
         this.bird.setFeathersTexture(this.featherTexture)
         this.bird.setBeakTexture(this.beakTexture)
         this.bird.setEyesTexture(this.eyeTexture)
 
+        // Cria a Casa
         this.house = new MyHouse(this, 2.5, 2, 3, 0.3)
         this.house.setWallTexture(this.houseSide)
         this.house.setDoorTexture(this.houseFront)
@@ -109,18 +113,21 @@ class MyScene extends CGFscene {
         this.house.setFloorTexture(this.houseFloor)
         this.house.setRoofTexture(this.houseRoof)
         this.house.setPillarTexture(this.pillarTexture)
-
         this.house.setPos(-3, 3.2, 5)
 
+        // Cria a pessoa e o spinner
         this.person = new MyPerson(this, this.skinTex, this.faceTex, this.hairTex, this.shirtTex, this.pantsTex, this.shoeTex);
         this.person.setScale(0.3, 0.3, 0.3);
-
         this.spinner = new MySpinner(this, -3, 3.8, 9);
 
+        // Cria o conjunto de aneis
         this.rings = new MyRingList(this, 8, 2, -15, 15, 5, 9, -15, 15);
+
+        // Cria o terreno
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
+        // Cria os objetos gerados procedimentalmente
         this.axiom = "BBX";
 
         this.lightning = new MyLightning(this, this.axiom, -15, 15, 25, 30, -15, 15, this.lights[1]);
@@ -133,11 +140,12 @@ class MyScene extends CGFscene {
         this.tree2.generate(this.axiom);
         this.tree3.generate(this.axiom);
 
+        // Inicializa o vetor de objetos
         this.objects = [this.bird, this.house, this.terrain, this.sticks, this.nest, this.lightning, this.person, this.spinner, this.rings, this.tree1, this.tree2, this.tree3];
     }
 
-    stickRandomizer(s) {
-        for (let i = 0; i < s; i++) {
+    stickRandomizer(numSticks) {
+        for (let i = 0; i < numSticks; i++) {
             let x = Math.random() * 18         //x entre  0   a  18
             let z = Math.random() * 18.5 - 6.5 //z entre -6,5 a  11
             if (!(x < 8 && z < 2)) {    //impedir sticks na area do lago(x[0,8],z[-6.5,2])
@@ -198,6 +206,7 @@ class MyScene extends CGFscene {
         this.spinner.update(t, this.person);
         this.rings.update(this.bird.pos[0], this.bird.pos[1], this.bird.pos[2]);
 
+        // Camara first person: poe a camara na posicao do passaro
         if (this.selectedView == 0) {
             let cameraPos = [this.bird.pos[0], this.bird.pos[1] - 1, this.bird.pos[2]]
             this.camera.fov = 1.2
@@ -205,6 +214,7 @@ class MyScene extends CGFscene {
             this.camera.setTarget(vec3.fromValues(cameraPos[0] + Math.sin(this.bird.birdAngle), cameraPos[1], cameraPos[2] + Math.cos(this.bird.birdAngle)));
         }
 
+        // Camara third person: poe a camara na posicao do passaro um bocadinho atras e acima
         else if (this.selectedView == 2) {
             this.camera.fov = 1.2
             let cameraPos = [this.bird.pos[0] - 8 * Math.sin(this.bird.birdAngle), this.bird.pos[1] + 2, this.bird.pos[2] - 8 * Math.cos(this.bird.birdAngle)]
@@ -215,6 +225,7 @@ class MyScene extends CGFscene {
     }
 
     updateBirdFactors() {
+        // Atualiza os valores speed/scale factor de bird
         this.bird.speedFactor = this.speedFactor;
         this.bird.scaleFactor = this.scaleFactor;
     }
@@ -238,20 +249,25 @@ class MyScene extends CGFscene {
         // Check for key codes e.g. in ​https://keycode.info/
         this.bird.checkKeys();
 
-        if (this.gui.isKeyPressed("ControlRight"))
+        // Controlos do spinner
+        if (this.gui.isKeyPressed("ControlRight")) 
             this.spinner.lift();
         if (this.gui.isKeyPressed("ShiftRight"))
             this.spinner.descend();
         if (this.gui.isKeyPressed("ArrowUp"))
             this.spinner.front();
         if (this.gui.isKeyPressed("ArrowLeft"))
-            this.spinner.left();
+            this.spinner.left();        
         if (this.gui.isKeyPressed("ArrowDown"))
             this.spinner.back();
         if (this.gui.isKeyPressed("ArrowRight"))
             this.spinner.right();
+
+        // Ativa o trovao
         if (this.gui.isKeyPressed("KeyL"))
             this.lightning.startAnimation(t);
+        
+        // Reset aos aneis
         if (this.gui.isKeyPressed("KeyR")) {
             if (this.enableRings)
                 this.rings.reset();
@@ -272,9 +288,6 @@ class MyScene extends CGFscene {
         // Update light
         this.lights[0].update();
         this.lights[1].update();
-
-        // Draw axis
-        //this.axis.display();
 
         this.scale(this.sceneScale, this.sceneScale, this.sceneScale);
 

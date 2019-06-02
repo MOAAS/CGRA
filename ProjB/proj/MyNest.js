@@ -14,14 +14,12 @@ class MyNest extends ObjectGroup {
                 this.branches.push(this.branch)
             }
         }
-        this.base = new MyCilinder(scene, 10) //base do cilindro
+        this.base = new MyCilinder(scene, 10) //base do ninho
         this.base.scale(1, 0.2, 1)
         this.base.translate(0, 0.4, 0)
-        this.scale(0.3,0.3,0.3)
-        this.addObjects(...this.branches)
-        this.addObjects(this.base)
-        this.scale(1,0.7,1)
-        this.setPos(x,4,z)
+        this.addObjects(...this.branches, this.base)
+        this.scale(1, 0.7, 1)
+        this.translate(x, 4, z)
     }
 
     checkColision(bird) {
