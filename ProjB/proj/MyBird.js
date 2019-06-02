@@ -176,6 +176,25 @@ class MyBird extends ObjectGroup {
         this.rightBackWing = new ObjectGroup(scene)
         this.rightBackWing.addObjects(this.rightBackWingFeathers,this.rightWing2)
 
+        // Criação de transformaçoes que permitem que as asas dobrem
+
+        // Asa direita
+        this.rightWingFoldT1 = new Translation(7, -0.2, 3.5);
+        this.rightWingFoldR = new Rotation(0, 0, 0, 1);
+        this.rightWingFoldT2 = new Translation(-7, 0.2, -3.5);
+
+        this.rightBackWing.addTransformation(this.rightWingFoldT1);
+        this.rightBackWing.addTransformation(this.rightWingFoldR);
+        this.rightBackWing.addTransformation(this.rightWingFoldT2);
+
+        // Asa esquerda
+        this.leftWingFoldT1 = new Translation(-7, -0.2,3.5);
+        this.leftWingFoldR = new Rotation(0 ,0,0,1);
+        this.leftWingFoldT2 = new Translation(7, 0.2, -3.5);
+
+        this.leftBackWing.addTransformation(this.leftWingFoldT1);
+        this.leftBackWing.addTransformation(this.leftWingFoldR);
+        this.leftBackWing.addTransformation(this.leftWingFoldT2);
 
         this.wings = new ObjectGroup(scene)
         this.wings.addObjects(this.leftWing, this.rightWing)
@@ -300,15 +319,9 @@ class MyBird extends ObjectGroup {
 
         if (this.movementState != 'goingDown') {
             this.wingAngle += Math.min(this.wingVelocity * diff, 20) //guarda o angulo atual
-
-            this.rightBackWing.translate(7, -0.2, 3.5)
-            this.rightBackWing.rotate(Math.sin(this.wingAngle / 20) / 1.5 - this.rightWing.zAngle ,0,0,1)
-            this.rightBackWing.translate(-7, 0.2, -3.5)
-
-
-            this.leftBackWing.translate(-7, -0.2,3.5)
-            this.leftBackWing.rotate(-(Math.sin(this.wingAngle / 20) / 1.5 + this.leftWing.zAngle) ,0,0,1)
-            this.leftBackWing.translate(7, 0.2, -3.5)
+            
+            this.rightWingFoldR.angle +=  Math.sin(this.wingAngle / 20) / 1.5 - this.rightWing.zAngle;
+            this.leftWingFoldR.angle += - Math.sin(this.wingAngle / 20) / 1.5 - this.leftWing.zAngle;
 
             this.rightWing.setAngle(0, 0, Math.sin(this.wingAngle / 20) / 1.5)
             this.leftWing.setAngle(0, 0, -Math.sin(this.wingAngle / 20) / 1.5)

@@ -43,16 +43,16 @@ class ObjectGroup extends MyCGFobject {
         }		
     }
     
-    addObjects(...args) {
-        this.objects.push(...args);
-    }
-    
-	updateComplexity(complexity) {
+    addTransformation(t) {
         for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].updateComplexity(complexity);
+            this.objects[i].addTransformation(t);
         }		
     }
     
+    addObjects(...args) {
+        this.objects.push(...args);
+    }
+
     update() {
         for (var i = 0; i < this.objects.length; i++) {
             this.objects[i].update();
