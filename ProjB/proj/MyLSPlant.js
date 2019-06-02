@@ -47,8 +47,10 @@ class MyLSPlant extends MyLSystem {
 
            {
             "F": ["FF"],
-            "X": ["F[+<X]F[/<X][-<X]FX", "F[/<X][\\<X]F[+<X]FX", "F[-<X][\\<X]F[\\<X]FX", "F[+<X][\\<X]F[/<X]FX"],// "B[RX]B[RX][RX][RX]BX"],// "F[^X][X]F[&X]^XX"],
-            },
+          //  "X": ["F[+<X]F[/-<X][-<X]FX", "F[/<X][\\<X]F[+<X]FX", "F[-<X][+<X]F[&<X]FX", "F[^<X][\\<X]F[/<X]FX"],// "B[RX]B[RX][RX][RX]BX"],// "F[^X][X]F[&X]^XX"],
+            "X": ["F[+\\<X]F[/-<X][-<X]FX", "F[/&<X][\\<X]F[+^<X]FX", "F[-/<X]F[&<X][+<X]FX", "F[^<X][\\<X][+&<X]F[/<X]FX"],// "B[RX]B[RX][RX][RX]BX"],// "F[^X][X]F[&X]^XX"],
+
+        },
 
             angle,
             iterations,

@@ -19,10 +19,6 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-        this.setUpdatePeriod(50);
-
-        this.initTextures();
-        this.initObjects();
 
         //Objects connected to MyInterface
         this.sceneScale = 1;
@@ -45,9 +41,15 @@ class MyScene extends CGFscene {
         this.terrainShader = new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
         this.terrainShader.setUniformsValues({ uSampler2: 1 });
         this.terrainShader.setUniformsValues({ uSampler3: 2 });
+
+        this.initTextures();
+        this.initObjects();
+        this.setUpdatePeriod(50);
     }
 
     initTextures() {
+        this.skyTex = new CGFtexture(this, 'images/skybox.jpg');
+
         this.terrainTex = new CGFtexture(this, 'images/terrain.jpg');
         this.terrainMap = new CGFtexture(this, 'images/heightmap.jpg');
         this.terrainAlt = new CGFtexture(this, 'images/altimetry.png');
@@ -82,7 +84,7 @@ class MyScene extends CGFscene {
 
         this.skybox = new MySkyBox(this);
         this.skybox.setMaterial(new MyCGFappearance(this, 1, 1, 1, 1));
-        this.skybox.setTexture(new CGFtexture(this, 'images/skybox.jpg'));
+        this.skybox.setTexture(this.skyTex);
         this.skybox.scale(60, 60, 60);
         this.skybox.translate(0, 30, 0);
 
@@ -113,7 +115,7 @@ class MyScene extends CGFscene {
 
         this.spinner = new MySpinner(this, -3, 3.8, 9);
 
-        this.rings = new MyRingList(this, 7, 4, -25, 25, 6, 12, -20, 20);
+        this.rings = new MyRingList(this, 7, 2, -25, 25, 4, 9, -20, 20);
         this.terrain = new MyTerrain(this, 60, this.terrainTex, this.terrainMap, this.terrainAlt)
 
 
@@ -168,11 +170,12 @@ class MyScene extends CGFscene {
     playSound(sound) {
         if (this.enableSound)
             sound.play();
+        else sound.pause();
     }
 
     update(t) {
         this.checkKeys(t);
-        this.bird.update()
+        this.bird.update(t)
         this.sticks.update()
         this.lightning.update(t)
         this.spinner.update(t, this.person);
@@ -197,7 +200,6 @@ class MyScene extends CGFscene {
     updateBirdFactors() {
         this.bird.speedFactor = this.speedFactor;
         this.bird.scaleFactor = this.scaleFactor;
-        this.bird.onSpeedUpdate();
     }
 
     updateTexEnable() {
@@ -205,7 +207,7 @@ class MyScene extends CGFscene {
     }
 
     updateRings() {
-        if (this.enableRings)
+        if (this.enableRings) 
             this.rings.reset();
         else this.rings.clear();
     }
@@ -231,8 +233,6 @@ class MyScene extends CGFscene {
             this.spinner.back();
         if (this.gui.isKeyPressed("ArrowRight"))
             this.spinner.right();
-
-
         if (this.gui.isKeyPressed("KeyL"))
             this.lightning.startAnimation(t);
         if (this.gui.isKeyPressed("KeyR")) {
@@ -253,7 +253,7 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        //this.axis.display();
 
         this.scale(this.sceneScale, this.sceneScale, this.sceneScale);
 
